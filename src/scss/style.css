@@ -112,6 +112,144 @@ header > hr {
   color: #B92770;
 }
 
+.benefit-cards {
+  background-color: #504E4A;
+  background-image: url("../assets/img/images/vector_lines.png");
+  background-repeat: repeat;
+  background-position: center;
+  background-size: auto;
+  padding: 30px 200px;
+}
+.benefit-cards h3 {
+  color: white;
+}
+.benefit-cards ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.benefit-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+}
+.benefit-card img {
+  margin-right: 12px;
+}
+.benefit-card p {
+  margin: 0;
+  color: white;
+  font-weight: 400;
+}
+
+.footer-info {
+  padding: 100px 200px;
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.footer-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.footer-columns {
+  display: flex;
+  gap: 60px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-column h4 {
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+.footer-column a {
+  color: #666;
+  text-decoration: none;
+  font-weight: 400;
+}
+.footer-column a:hover {
+  color: #B92770;
+}
+
+.shipping-info h4 {
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+.shipping-info p {
+  margin: 0;
+  color: #666;
+  font-weight: 400;
+}
+
+.footer-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.contact-section h4 {
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+.contact-section p {
+  margin: 0;
+  color: #666;
+  font-weight: 400;
+}
+
+.contact-columns {
+  display: flex;
+  gap: 40px;
+}
+
+.contact-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.contact-item img {
+  width: 20px;
+  height: 20px;
+}
+.contact-item a {
+  color: #666;
+  text-decoration: none;
+  font-weight: 400;
+}
+.contact-item a:hover {
+  color: #B92770;
+}
+
+.copyright {
+  text-align: center;
+}
+.copyright p {
+  margin: 0;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.3490196078);
+}
+
 body {
   font-family: "Montserrat", Arial, sans-serif;
   font-weight: 400; /* or 700, 900 */

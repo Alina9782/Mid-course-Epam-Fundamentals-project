@@ -1,0 +1,154 @@
+.benefit-cards {
+  background-color: #504E4A;
+  background-image: url('../assets/img/images/vector_lines.png');
+  background-repeat: repeat;
+  background-position: center;
+  background-size: auto;
+  padding: 30px 200px;
+
+  h3 {
+    color: white;
+  }
+
+  ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+}
+
+.benefit-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+
+  img {
+    margin-right: 12px;
+  }
+
+  p {
+    margin: 0;
+    color: white;
+    font-weight: 400;
+  }
+}
+
+.footer-info {
+  padding: 100px 200px;
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.footer-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.footer-columns {
+  display: flex;
+  gap: 60px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  h4 {
+    margin: 0 0 16px 0;
+    font-weight: 700;
+  }
+
+  a {
+    color: #666;
+    text-decoration: none;
+    font-weight: 400;
+
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
+
+.shipping-info {
+  h4 {
+    margin: 0 0 16px 0;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+    font-weight: 400;
+  }
+}
+
+.footer-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.contact-section {
+  h4 {
+    margin: 0 0 16px 0;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+    font-weight: 400;
+  }
+}
+
+.contact-columns {
+  display: flex;
+  gap: 40px;
+}
+
+.contact-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+  a {
+    color: #666;
+    text-decoration: none;
+    font-weight: 400;
+
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
+
+.copyright {
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-weight: 400;
+    color: #00000059;
+  }
+}
