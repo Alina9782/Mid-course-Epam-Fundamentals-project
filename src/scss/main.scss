@@ -1,0 +1,23 @@
+// Imports
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+@import "base/fonts";
+@import "base/reset";
+
+@import "components/buttons";
+@import "components/forms";
+@import "components/product-card";
+
+@import "layouts/header";
+@import "layouts/footer";
+
+@import "pages/about";
+@import "pages/cart";
+@import "pages/catalog";
+@import "pages/product-details";
+
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 400; /* or 700, 900 */
+}
