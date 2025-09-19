@@ -19,15 +19,6 @@
   font-style: normal;
   font-display: swap;
 }
-header > hr {
-  width: 1300px;
-  height: 0;
-  margin: 0 auto;
-  border: 1px;
-  border-top: 1px solid #727174;
-  opacity: 0.2;
-}
-
 /* Header top row layout: socials | logo | account/cart */
 header {
   display: flex;
@@ -38,13 +29,22 @@ header {
   margin: 50px 200px 0 200px;
 }
 
+header > hr {
+  flex-basis: 100%;
+  width: 1300px;
+  height: 0;
+  margin: 0 auto;
+  border: 1px;
+  border-top: 1px solid #727174;
+  opacity: 0.2;
+}
+
 /* Left: Socials */
 .header-socials {
   flex: 1 1 0;
   display: flex;
   justify-content: flex-start;
 }
-
 .header-socials ul {
   display: flex;
   align-items: center;
@@ -67,7 +67,6 @@ header {
   display: flex;
   justify-content: flex-end;
 }
-
 .header-actions ul {
   display: flex;
   align-items: center;
@@ -77,16 +76,10 @@ header {
   list-style: none;
 }
 
-/* HR spans full width under top row */
-header > hr {
-  flex-basis: 100%;
-}
-
-/* Navigation centered in a row */
+/* Navigation */
 .main-nav {
   flex-basis: 100%;
 }
-
 .main-nav .main-menu {
   display: flex;
   justify-content: center;
@@ -96,11 +89,13 @@ header > hr {
   padding: 0;
   list-style: none;
 }
-
 .main-nav .main-menu a {
   color: #000;
   text-decoration: none;
   font-weight: 700;
+}
+.main-nav .main-menu img {
+  margin-left: 10px;
 }
 
 .main-nav .main-menu .active > a,
@@ -122,6 +117,7 @@ header > hr {
 }
 .benefit-cards h3 {
   color: white;
+  font-weight: 700;
 }
 .benefit-cards ul {
   display: flex;
@@ -132,17 +128,16 @@ header > hr {
   padding: 0;
   list-style: none;
 }
-
-.benefit-card {
+.benefit-cards .benefit-card {
   display: flex;
   flex-direction: row;
   align-items: center;
   text-align: left;
 }
-.benefit-card img {
+.benefit-cards .benefit-card img {
   margin-right: 12px;
 }
-.benefit-card p {
+.benefit-cards .benefit-card p {
   margin: 0;
   color: white;
   font-weight: 400;
@@ -200,6 +195,7 @@ header > hr {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  padding-left: 200px;
 }
 
 .contact-section h4 {

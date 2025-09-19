@@ -1,12 +1,3 @@
-header > hr {
-  width: 1300px;
-  height: 0;
-  margin: 0 auto;
-  border: 1px;
-  border-top: 1px solid #727174;
-  opacity: 0.2;
-}
-
 /* Header top row layout: socials | logo | account/cart */
 header {
   display: flex;
@@ -17,20 +8,30 @@ header {
   margin: 50px 200px 0 200px;
 }
 
+header > hr {
+  flex-basis: 100%;
+  width: 1300px;
+  height: 0;
+  margin: 0 auto;
+  border: 1px;
+  border-top: 1px solid #727174;
+  opacity: 0.2;
+}
+
 /* Left: Socials */
 .header-socials {
   flex: 1 1 0;
   display: flex;
   justify-content: flex-start;
-}
 
-.header-socials ul {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 }
 
 /* Center: Logo */
@@ -45,42 +46,43 @@ header {
   flex: 1 1 0;
   display: flex;
   justify-content: flex-end;
+
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 }
 
-.header-actions ul {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* HR spans full width under top row */
-header > hr {
-  flex-basis: 100%;
-}
-
-/* Navigation centered in a row */
+/* Navigation */
 .main-nav {
   flex-basis: 100%;
+
+  .main-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    img {
+      margin-left: 10px;
+    }
+  }
+  
 }
 
-.main-nav .main-menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.main-nav .main-menu a {
-  color: #000;
-  text-decoration: none;
-  font-weight: 700;
-}
 
 .main-nav .main-menu .active > a,
 .main-nav .main-menu a:hover {
