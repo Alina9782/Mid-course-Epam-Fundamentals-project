@@ -18,7 +18,705 @@
 @import "pages/product-details";
 @import "pages/contact";
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Montserrat', Arial, sans-serif;
     font-weight: 400; /* or 700, 900 */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Hero Container */
+.hero-container {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 0;
+    position: relative;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin-bottom: 50px;
+    
+    // First section - full width with light grey background
+    .hero-main-section {
+        background-color: #f8f9fa;
+        padding: 150px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 60px;
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
+    }
+    
+    // Left side - text and button
+    .hero-content {
+        h1 {
+            font-weight: 900;
+            font-size: clamp(32px, 5vw, 48px);
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        p {
+            font-weight: 400;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            align-self: flex-start;
+        }
+    }
+    
+    // Right side - image
+    .hero-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+    }
+    
+    // Second section - overlay with shadow
+    .hero-overlay-section {
+        background-color: white;
+        margin: -100px 200px 100px 200px;
+        padding: 0;
+        box-shadow: 0 15px 40px 5px rgba(0, 0, 0, 0.2);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: start;
+        position: relative;
+        z-index: 2;
+    }
+    
+    // First part - avatar, text, and content
+    .hero-profile {
+        padding: 40px 0px 0px 40px;
+        
+        // Avatar and name/title in a row
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px;
+            float: left;
+        }
+        
+        h4 {
+            font-weight: 700;
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 5px;
+            margin-top: 0;
+        }
+        
+        p:first-of-type {
+            font-weight: 400;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        // Clear float and add main content
+        h2 {
+            font-weight: 900;
+            font-size: clamp(28px, 4vw, 36px);
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            clear: both;
+        }
+        
+        p:last-child {
+            font-weight: 400;
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+    }
+    
+    // Second part - discount section with background
+    .hero-discount {
+        background-image: url('../assets/img/images/hero-card-suitcases.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 60px 40px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 400px;
+        
+        // Black overlay with 40% opacity
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        // Content on top of overlay
+        h2, p, .btn {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        
+        h2 {
+            font-weight: 900;
+            font-size: clamp(28px, 4vw, 36px);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        p {
+            font-weight: 400;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            align-self: flex-start;
+            background-color: $brand-color;
+            color: white;
+            
+            &:hover {
+                background-color: $brand-color-hover;
+            }
+        }
+    }
+}
+
+/* Travel Container */
+.travel-container {
+    padding: 0px 200px 80px 200px;
+    
+    .travel-header {
+        text-align: center;
+        margin-bottom: 60px;
+        
+        h2 {
+            font-weight: 900;
+            font-size: clamp(28px, 4vw, 40px);
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-weight: 400;
+            font-size: 18px;
+            color: #666;
+        }
+    }
+    
+    .travel-cards {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+    }
+    
+    .travel-card {
+        flex: 1;
+        min-height: 600px;
+        padding: 30px 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: relative;
+        border-radius: 8px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+        // Black overlay with 40% opacity
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            z-index: 1;
+        }
+        
+        // Content on top of overlay
+        h4, p {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        
+        h4 {
+            font-weight: 700;
+            font-size: 19px;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        p {
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+    }
+    
+    // Background images for each card
+    .travel-card-1 {
+        background-image: url('../assets/img/images/travel-card-1.png');
+    }
+    
+    .travel-card-2 {
+        background-image: url('../assets/img/images/travel-card-2.png');
+    }
+
+    .travel-card-3 {
+        background-image: url('../assets/img/images/travel-card-3.png');
+    }
+    
+    .travel-card-4 {
+        background-image: url('../assets/img/images/travel-card-4.png');
+    }
+}
+
+/* Selected Container */
+.selected-container {
+    padding: 0px 200px 80px 200px;
+    
+    .selected-header {
+        text-align: center;
+        margin-bottom: 60px;
+        
+        h2 {
+            font-weight: 900;
+            font-size: clamp(28px, 4vw, 40px);
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-weight: 400;
+            font-size: 18px;
+            color: #666;
+        }
+    }
+    
+    .selected-container-carousel {
+        .selected-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .selected-card {
+            flex: 1;
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            // border-radius: 8px;
+            background-color: white;
+        
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                // border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            h4 {
+                font-weight: 700;
+                font-size: 19px;
+                color: #333;
+                margin: 20px 0 10px 0;
+                padding: 0 20px;
+            }
+            
+            p {
+                font-weight: 400;
+                font-size: 19px;
+                color: #504E4A;
+                margin: 0 0 20px 0;
+            }
+            
+            .btn {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+// Responsive design
+@media (max-width: 1440px) {
+    .hero-container {
+        .hero-overlay-section {
+            margin: -100px 100px 100px 100px;
+        }
+    }
+
+    .selected-container {
+        padding: 0px 100px 80px 100px;
+    }
+}
+
+/* New Arrivals Container */
+.new-arrivals-container {
+    padding: 0px 200px 80px 200px;
+    
+    .new-arrivals-header {
+        text-align: center;
+        margin-bottom: 60px;
+        
+        h2 {
+            font-weight: 900;
+            font-size: clamp(28px, 4vw, 40px);
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-weight: 400;
+            font-size: 18px;
+            color: #666;
+        }
+    }
+    
+    .new-arrivals-container-carousel {
+        .new-arrivals-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .new-arrivals-card {
+            flex: 1;
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            background-color: white;
+        
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            h4 {
+                font-weight: 700;
+                font-size: 19px;
+                color: #333;
+                margin: 20px 0 10px 0;
+                padding: 0 20px;
+            }
+            
+            p {
+                font-weight: 400;
+                font-size: 19px;
+                color: #504E4A;
+                margin: 0 0 20px 0;
+            }
+            
+            .btn {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+/* Testimonials Container */
+.testimonials-container {
+    padding: 0px 200px 80px 200px;
+    
+    .testimonials-header {
+        text-align: center;
+        margin-bottom: 60px;
+        
+        h2 {
+            font-weight: 900;
+            font-size: clamp(28px, 4vw, 40px);
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-weight: 400;
+            font-size: 18px;
+            color: #666;
+        }
+    }
+    
+    .testimonials-cards {
+        ul {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .testimonials-card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            padding: 40px 30px;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            min-height: 400px;
+            
+            img {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 20px;
+            }
+            
+            p {
+                font-weight: 400;
+                font-size: 17px;
+                color: #666;
+                margin-bottom: 15px;
+                line-height: 1.5;
+            }
+            
+            h4 {
+                font-weight: 700;
+                font-size: 17px;
+                color: $brand-color;
+                margin: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero-container {
+        .hero-main-section {
+            grid-template-columns: 1fr;
+            gap: 40px;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        // Hide suitcase image on tablet
+        .hero-image {
+            display: none;
+        }
+        
+        .hero-overlay-section {
+            margin: -50px 50px 50px 50px;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .hero-profile {
+            padding: 40px 20px;
+        }
+    }
+    
+    .travel-container {
+        padding: 0px 50px 60px 50px;
+        
+        .travel-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .travel-card {
+            min-height: 600px;
+        }
+    }
+    
+    .selected-container {
+        padding: 0px 50px 60px 50px;
+        
+        .selected-container-carousel {
+            .selected-cards {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .selected-card {
+                min-height: 400px;
+            }
+        }
+    }
+    
+    .new-arrivals-container {
+        padding: 0px 50px 60px 50px;
+        
+        .new-arrivals-container-carousel {
+            .new-arrivals-cards {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .new-arrivals-card {
+                min-height: 400px;
+            }
+        }
+    }
+    
+    .testimonials-container {
+        padding: 0px 50px 60px 50px;
+        
+        .testimonials-cards {
+            ul {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .testimonials-card {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-container {
+        .hero-main-section {
+            padding: 40px 20px;
+        }
+        
+        // Hide suitcase image on mobile
+        .hero-image {
+            display: none;
+        }
+        
+        .hero-overlay-section {
+            margin: -20px 20px 20px 20px;
+            padding: 0;
+        }
+        
+        .hero-profile {
+            padding: 30px 20px;
+        }
+    }
+    
+    .travel-container {
+        padding: 0px 20px 40px 20px;
+        
+        .travel-header {
+            margin-bottom: 40px;
+        }
+        
+        .travel-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .travel-card {
+            min-height: 300px;
+            padding: 25px 20px;
+        }
+    }
+    
+    .selected-container {
+        padding: 0px 20px 40px 20px;
+        
+        .selected-header {
+            margin-bottom: 40px;
+        }
+        
+        .selected-container-carousel {
+            .selected-cards {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .selected-card {
+                min-height: 300px;
+            }
+        }
+    }
+    
+    .new-arrivals-container {
+        padding: 0px 20px 40px 20px;
+        
+        .new-arrivals-header {
+            margin-bottom: 40px;
+        }
+        
+        .new-arrivals-container-carousel {
+            .new-arrivals-cards {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .new-arrivals-card {
+                min-height: 300px;
+            }
+        }
+    }
+    
+    .testimonials-container {
+        padding: 0px 20px 40px 20px;
+        
+        .testimonials-header {
+            margin-bottom: 40px;
+        }
+        
+        .testimonials-cards {
+            ul {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .testimonials-card {
+                padding: 30px 20px;
+            }
+        }
+    }
 }
