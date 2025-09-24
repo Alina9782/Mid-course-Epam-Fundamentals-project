@@ -10,35 +10,121 @@
 </head>
 <body>
     <header>
-        <div class="header-socials">
-            <ul>
-                <li><a href="#"><img src="../assets/img/icons/facebook.svg" alt="Facebook icon"></a></li>
-                <li><a href="#"><img src="../assets/img/icons/twitter.svg" alt="Twitter icon"></a></li>
-                <li><a href="#"><img src="../assets/img/icons/instagram.svg" alt="Instagram icon"></a></li>
-            </ul>
-        </div>
-        <div class="header-logo">
-            <a href="index.html"><img src="../assets/img/logo/logo.png" alt="Best Shop"></a>
-        </div>
-        <div class="header-actions">
-            <ul>
-                <li><a href="#"><img src="../assets/img/icons/user.svg" alt="Account icon"></a></li>
-                <li><a href="#"><img src="../assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
-            </ul>
+        <!-- Desktop Header -->
+        <div class="header-desktop">
+            <div class="header-socials">
+                <ul>
+                    <li><a href="#"><img src="../assets/img/icons/facebook.svg" alt="Facebook icon"></a></li>
+                    <li><a href="#"><img src="../assets/img/icons/twitter.svg" alt="Twitter icon"></a></li>
+                    <li><a href="#"><img src="../assets/img/icons/instagram.svg" alt="Instagram icon"></a></li>
+                </ul>
+            </div>
+            <div class="header-logo">
+                <a href="../index.html"><img src="../assets/img/logo/logo.png" alt="Best Shop"></a>
+            </div>
+            <div class="header-actions">
+                <ul>
+                    <li><a href="#"><img src="../assets/img/icons/user.svg" alt="Account icon"></a></li>
+                    <li><a href="#"><img src="../assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
+                </ul>
+            </div>
         </div>
 
-		<hr>
-		<nav class="main-nav">
+        <!-- Mobile Header -->
+        <div class="header-mobile">
+            <button class="hamburger-btn" id="hamburger-btn">
+                <img src="../assets/img/icons/hamburger-icon-black.svg" alt="Menu" class="hamburger-icon">
+            </button>
+            <div class="header-logo-mobile">
+                <a href="../index.html"><img src="../assets/img/logo/logo.png" alt="Best Shop"></a>
+            </div>
+            <div class="header-actions-mobile">
+                <ul>
+                    <li><a href="#"><img src="../assets/img/icons/user.svg" alt="Account icon"></a></li>
+                    <li><a href="#"><img src="../assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+        
+        <!-- Desktop Navigation -->
+        <nav class="main-nav">
             <ul class="main-menu">
-				<li class="navItem"><a href="../index.html">Home</a></li>
+                <li class="navItem"><a href="../index.html">Home</a></li>
                 <li class="navItem"><a href="../pages/catalog.html">Catalog</a><img src="../assets/img/icons/arrow-down.svg" alt="arrow-down"></li>
                 <li class="navItem"><a href="../pages/about.html">About Us</a></li>
                 <li class="navItem active"><a href="../pages/contact.html">Contact Us</a></li>
             </ul>
         </nav>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobile-nav">
+            <ul class="mobile-menu">
+                <li class="navItem"><a href="../index.html">Home</a></li>
+                <li class="navItem catalog-item"><a href="../pages/catalog.html">Catalog</a><img src="../assets/img/icons/arrow-down.svg" alt="arrow-down"></li>
+                <li class="navItem"><a href="../pages/about.html">About Us</a></li>
+                <li class="navItem active"><a href="../pages/contact.html">Contact Us</a></li>
+                <li class="mobile-socials">
+                    <a href="#"><img src="../assets/img/icons/facebook.svg" alt="Facebook icon"></a>
+                    <a href="#"><img src="../assets/img/icons/twitter.svg" alt="Twitter icon"></a>
+                    <a href="#"><img src="../assets/img/icons/instagram.svg" alt="Instagram icon"></a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <main>
+        <div class="contact-us-head-section">
+            <h2>Contact Us</h2>
+            <p>Duis vestibulum elit vel neque pharetra vulputate. <br>Duis rutrum non risus in imperdiet. </p>
+        </div>
+
+        <div class="contact-us-info-section">
+            <ul>
+                <li>
+                    <img src="../assets/img/icons/geo-pink-icon.svg" alt="Location icon">
+                    <h4>Our Location</h4>
+                    <p>123 Main St, Anytown, USA</p>
+                </li>
+                <li>
+                    <img src="../assets/img/icons/phone-pink-icon.svg" alt="Phone icon">
+                    <h4>Our Phone</h4>
+                    <p>+1234567890</p>
+                </li>
+                <li>
+                    <img src="../assets/img/icons/mail-pink-icon.svg" alt="Email icon">
+                    <h4>Our Email</h4>
+                    <p>info@bestshop.com</p>
+                </li>
+                <li>
+                    <img src="../assets/img/icons/clock-pink-icon.svg" alt="Clock icon">
+                    <h4>Our Hours</h4>
+                    <p>Mon-Fri: 10am - 6pm<br>Sat-Sun: 10am - 4pm</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="contact-us-form-section">
+            <div class="contact-us-form-image">
+                <img src="../assets/img/images/feedback-photo.png" alt="Feedback photo of a suitcase">
+            </div>
+            <div class="contact-us-form-content">
+                <h3>Your Feedback Is Much Appreciated</h3>
+                <p>We will contact you when you complete the following form!</p>
+                <form action="">
+                    <label for="name">Your Name <span>*</span></label>
+                    <input type="text" id="name" placeholder="Name">
+                    <label for="email">Your Email Address <span>*</span></label>
+                    <input type="email" id="email" placeholder="Email">
+                    <label for="subject">Topic <span>*</span></label>
+                    <input type="text" id="subject" placeholder="Topic">
+                    <label for="message">Your Message <span>*</span></label>
+                    <textarea id="message" placeholder="Message"></textarea>
+                    <button type="submit" class="btn btn--small">Send</button>
+                </form>
+            </div>
+        </div>
 
     </main>
 

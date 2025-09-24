@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best Shop</title>
-    <link rel="icon" href="assets/img/logo/favicon.png" type="image/png">
-    <link rel="stylesheet" href="scss/style.css">
-    <script async defer src="js/main.js"></script>
-</head>
-<body>
-    <header>
+<header>
+    <!-- Desktop Header -->
+    <div class="header-desktop">
         <div class="header-socials">
             <ul>
                 <li><a href="#"><img src="assets/img/icons/facebook.svg" alt="Facebook icon"></a></li>
@@ -26,16 +17,48 @@
                 <li><a href="#"><img src="assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
             </ul>
         </div>
+    </div>
 
-		<hr>
-		<nav class="main-nav">
-            <ul class="main-menu">
-				<li class="navItem active"><a href="index.html">Home</a></li>
-                <li class="navItem"><a href="pages/catalog.html">Catalog</a><img src="assets/img/icons/arrow-down.svg" alt="arrow-down"></li>
-                <li class="navItem"><a href="pages/about.html">About Us</a></li>
-                <li class="navItem"><a href="pages/contact.html">Contact Us</a></li>
+    <!-- Mobile Header -->
+    <div class="header-mobile">
+        <button class="hamburger-btn" id="hamburger-btn">
+            <img src="assets/img/icons/hamburger-icon-black.svg" alt="Menu" class="hamburger-icon">
+        </button>
+        <div class="header-logo-mobile">
+            <a href="index.html"><img src="assets/img/logo/logo.png" alt="Best Shop"></a>
+        </div>
+        <div class="header-actions-mobile">
+            <ul>
+                <li><a href="#"><img src="assets/img/icons/user.svg" alt="Account icon"></a></li>
+                <li><a href="#"><img src="assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
             </ul>
-        </nav>
-    </header>
-</body>
-</html>
+        </div>
+    </div>
+
+    <hr>
+    
+    <!-- Desktop Navigation -->
+    <nav class="main-nav">
+        <ul class="main-menu">
+            <li class="navItem active"><a href="index.html">Home</a></li>
+            <li class="navItem"><a href="pages/catalog.html">Catalog</a><img src="assets/img/icons/arrow-down.svg" alt="arrow-down"></li>
+            <li class="navItem"><a href="pages/about.html">About Us</a></li>
+            <li class="navItem"><a href="pages/contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <ul class="mobile-menu">
+            <li class="navItem active"><a href="index.html">Home</a></li>
+            <li class="navItem catalog-item"><a href="pages/catalog.html">Catalog</a><img src="assets/img/icons/arrow-down.svg" alt="arrow-down"></li>
+            <li class="navItem"><a href="pages/about.html">About Us</a></li>
+            <li class="navItem"><a href="pages/contact.html">Contact Us</a></li>
+            <li class="mobile-socials">
+                <a href="#"><img src="assets/img/icons/facebook.svg" alt="Facebook icon"></a>
+                <a href="#"><img src="assets/img/icons/twitter.svg" alt="Twitter icon"></a>
+                <a href="#"><img src="assets/img/icons/instagram.svg" alt="Instagram icon"></a>
+            </li>
+        </ul>
+    </nav>
+</header>

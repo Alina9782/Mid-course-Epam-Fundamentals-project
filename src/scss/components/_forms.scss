@@ -1,0 +1,62 @@
+// Form styles
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// Label styles
+label {
+  color: black;
+  font-weight: 700;
+  font-size: 18px;
+  font-family: inherit;
+  display: block;
+  margin-top: 20px;
+
+  span {
+    color: $brand-color;
+  }
+}
+
+// Input styles
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea,
+select {
+  padding: 12px 16px;
+  border: 2px solid $brand-color;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 16px;
+  background-color: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: $brand-color-hover;
+    box-shadow: 0 0 0 3px rgba($brand-color, 0.1);
+  }
+  
+  &::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+}
+
+// Textarea specific styles
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+// Form validation states
+input:invalid {
+  border-color: #e74c3c;
+}
+
+// input:valid {
+//   border-color: #27ae60;
+// }

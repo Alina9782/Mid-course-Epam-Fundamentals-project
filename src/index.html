@@ -10,30 +10,66 @@
 </head>
 <body>
     <header>
-        <div class="header-socials">
-            <ul>
-                <li><a href="#"><img src="assets/img/icons/facebook.svg" alt="Facebook icon"></a></li>
-                <li><a href="#"><img src="assets/img/icons/twitter.svg" alt="Twitter icon"></a></li>
-                <li><a href="#"><img src="assets/img/icons/instagram.svg" alt="Instagram icon"></a></li>
-            </ul>
-        </div>
-        <div class="header-logo">
-            <a href="index.html"><img src="assets/img/logo/logo.png" alt="Best Shop"></a>
-        </div>
-        <div class="header-actions">
-            <ul>
-                <li><a href="#"><img src="assets/img/icons/user.svg" alt="Account icon"></a></li>
-                <li><a href="#"><img src="assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
-            </ul>
+        <!-- Desktop Header -->
+        <div class="header-desktop">
+            <div class="header-socials">
+                <ul>
+                    <li><a href="#"><img src="assets/img/icons/facebook.svg" alt="Facebook icon"></a></li>
+                    <li><a href="#"><img src="assets/img/icons/twitter.svg" alt="Twitter icon"></a></li>
+                    <li><a href="#"><img src="assets/img/icons/instagram.svg" alt="Instagram icon"></a></li>
+                </ul>
+            </div>
+            <div class="header-logo">
+                <a href="index.html"><img src="assets/img/logo/logo.png" alt="Best Shop"></a>
+            </div>
+            <div class="header-actions">
+                <ul>
+                    <li><a href="#"><img src="assets/img/icons/user.svg" alt="Account icon"></a></li>
+                    <li><a href="#"><img src="assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
+                </ul>
+            </div>
         </div>
 
-		<hr>
-		<nav class="main-nav">
+        <!-- Mobile Header -->
+        <div class="header-mobile">
+            <button class="hamburger-btn" id="hamburger-btn">
+                <img src="assets/img/icons/hamburger-icon-black.svg" alt="Menu" class="hamburger-icon">
+            </button>
+            <div class="header-logo-mobile">
+                <a href="index.html"><img src="assets/img/logo/logo.png" alt="Best Shop"></a>
+            </div>
+            <div class="header-actions-mobile">
+                <ul>
+                    <li><a href="#"><img src="assets/img/icons/user.svg" alt="Account icon"></a></li>
+                    <li><a href="#"><img src="assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+        
+        <!-- Desktop Navigation -->
+        <nav class="main-nav">
             <ul class="main-menu">
-				<li class="navItem active"><a href="index.html">Home</a></li>
+                <li class="navItem active"><a href="index.html">Home</a></li>
                 <li class="navItem"><a href="pages/catalog.html">Catalog</a><img src="assets/img/icons/arrow-down.svg" alt="arrow-down"></li>
                 <li class="navItem"><a href="pages/about.html">About Us</a></li>
                 <li class="navItem"><a href="pages/contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobile-nav">
+            <ul class="mobile-menu">
+                <li class="navItem active"><a href="index.html">Home</a></li>
+                <li class="navItem catalog-item"><a href="pages/catalog.html">Catalog</a><img src="assets/img/icons/arrow-down.svg" alt="arrow-down"></li>
+                <li class="navItem"><a href="pages/about.html">About Us</a></li>
+                <li class="navItem"><a href="pages/contact.html">Contact Us</a></li>
+                <li class="mobile-socials">
+                    <a href="#"><img src="assets/img/icons/facebook.svg" alt="Facebook icon"></a>
+                    <a href="#"><img src="assets/img/icons/twitter.svg" alt="Twitter icon"></a>
+                    <a href="#"><img src="assets/img/icons/instagram.svg" alt="Instagram icon"></a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -44,7 +80,7 @@
                 <div>
                     <h1>Smart Styles For Every Destination</h1>
                     <p>Phasellus risus turpis, pretium sit amet magna non, molestie ultricies enim. Nullam pulvinar felis at metus.</p>
-                    <button>View all items</button>
+                    <button class="btn btn--large">View all items</button>
                 </div>
                 <div>
                     <img src="assets/img/images/suitcase_image.png" alt="A suitcase">
@@ -64,7 +100,7 @@
                 <div>
                     <h2>25% Discount</h2>
                     <p>Curabitur vulputate arcu odio, ac facilisis diam accumsan ut. Ut imperdiet et leo in vulputate. </p>
-                    <button>Get Discount</button>
+                    <button class="btn btn--large">Get Discount</button>
                 </div>
             </div>
         </div>
@@ -103,31 +139,31 @@
                         <img src="assets/img/images/selected-product.png" alt="Selected product">
                         <h4>Global Explorer Max Comfort Suitcase Pro</h4>
                         <p>$250</p>
-                        <button>Add to Cart</button>
+                        <button class="btn">Add to Cart</button>
                     </li>
                     <li class="selected-container-carousel-card">
                         <img src="assets/img/images/selected-product.png" alt="Selected product">
                         <h4>Luxury Lightweight Travel Suitcase</h4>
                         <p>$280</p>
-                        <button>Add to Cart</button>
+                        <button class="btn">Add to Cart</button>
                     </li>
                     <li class="selected-container-carousel-card">
                         <img src="assets/img/images/selected-product.png" alt="Selected product">
                         <h4>Urban Compact Travel Suitcase</h4>
                         <p>$310</p>
-                        <button>Add to Cart</button>
+                        <button class="btn">Add to Cart</button>
                     </li>
                     <li class="selected-container-carousel-card">
                         <img src="assets/img/images/selected-product.png" alt="Selected product">
                         <h4>Traveller's Comfort Weekender Suitcase</h4>
                         <p>$240</p>
-                        <button>Add to Cart</button>
+                        <button class="btn">Add to Cart</button>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="banner-container">
+        <div class="banner-section">
             <div>
                 <h2>50%</h2>
                 <p>Curabitur vulputate arcu odio, ac facilisis diam.</p>
@@ -135,7 +171,7 @@
             <div>
                 <h3>Offer Of The Month</h3>
                 <p>Curabitur vulputate arcu odio, ac facilisis diam.</p>
-                <button>Get Offer Today</button>
+                <button class="btn btn--large">Get Offer Today</button>
             </div>
         </div>
 
@@ -148,25 +184,25 @@
                         <img src="assets/img/images/new-arrivals-product.png" alt="New arrival product">
                         <h4>Global Explorer Max Comfort Suitcase Pro</h4>
                         <p>$250</p>
-                        <button>View Product</button>
+                        <button class="btn">View Product</button>
                     </li>
                     <li class="new-arrivals-container-carousel-card">
                         <img src="assets/img/images/new-arrivals-product.png" alt="New arrival product">
                         <h4>Luxury Lightweight Travel Suitcase</h4>
                         <p>$280</p>
-                        <button>View Product</button>
+                        <button class="btn">View Product</button>
                     </li>
                     <li class="new-arrivals-container-carousel-card">
                         <img src="assets/img/images/new-arrivals-product.png" alt="New arrival product">
                         <h4>Urban Compact Travel Suitcase</h4>
                         <p>$310</p>
-                        <button>View Product</button>
+                        <button class="btn">View Product</button>
                     </li>
                     <li class="new-arrivals-container-carousel-card">
                         <img src="assets/img/images/new-arrivals-product.png" alt="New arrival product">
                         <h4>Traveller's Comfort Weekender Suitcase</h4>
                         <p>$240</p>
-                        <button>View Product</button>
+                        <button class="btn">View Product</button>
                     </li>
                 </ul>
             </div>

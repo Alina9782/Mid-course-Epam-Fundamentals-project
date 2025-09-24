@@ -1,2 +1,336 @@
+// About Us section styles
+.about-us-head-section {
+  position: relative;
+  background-image: url('../assets/img/images/about-us-background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 80px 20px;
+  text-align: center;
+  margin-bottom: 50px;
+  
+  // Black overlay with 40% opacity
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+  
+  // Content positioning
+  h2, p {
+    position: relative;
+    z-index: 2;
+  }
+  
+  h2 {
+    font-weight: 700;
+    font-size: 50px;
+    color: white;
+    color: white;
+    font-family: inherit;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-weight: 400;
+    font-size: 17px;
+    color: white;
+    font-family: inherit;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+}
 
+// About Us Benefits section styles
+.about-us-benefits-section {
+  padding: 60px 20px;
+  margin: 0 200px;
+  margin-bottom: 50px;
+  
+  ul {
+    display: grid;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-items: center;
+    
+    // Force 4 columns on large screens
+    @media (min-width: 1440px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    // Force 2x2 grid on medium screens
+    @media (min-width: 1024px) and (max-width: 1439px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    // Force single column on small screens
+    @media (max-width: 1023px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    
+    img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+    }
+    
+    h4 {
+      font-weight: 700;
+      font-size: 20px;
+      font-family: inherit;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    p {
+      font-weight: 400;
+      font-size: 17px;
+      font-family: inherit;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+}
 
+// About Us Arrivals section styles
+.about-us-arrivals-section {
+  display: flex;
+  min-height: 500px;
+  margin: 0 200px;
+  margin-bottom: 50px;
+}
+
+// Text content block
+.arrivals-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 40px;
+  background-color: #f8f9fa;
+  
+  h3 {
+    font-weight: 900;
+    font-size: 40px;
+    font-family: inherit;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  
+  p {
+    font-weight: 400;
+    font-size: 17px;
+    font-family: inherit;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    
+    &:last-of-type {
+      margin-bottom: 30px;
+    }
+  }
+  
+  .btn {
+    align-self: flex-start;
+  }
+}
+
+// Image block
+.arrivals-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// About Us Team section styles
+.about-us-team-section {
+  padding: 80px 20px;
+  text-align: center;
+  margin: 0 200px;
+  margin-bottom: 50px;
+  h3 {
+    font-weight: 900;
+    font-size: 40px;
+    font-family: inherit;
+    color: #333;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+  
+  hr {
+    border: none;
+    height: 0;
+    border-top: 2px solid $brand-color;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 60px auto;
+  }
+}
+
+// Team members list
+.team-members {
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+// Individual team member card
+.team-member-card {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  
+  img {
+    width: 410px;
+    height: 340px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    display: block;
+  }
+  
+  h4 {
+    font-weight: 700;
+    font-size: 22px;
+    font-family: inherit;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-weight: 400;
+    font-size: 17px;
+    font-family: inherit;
+    color: #666;
+    margin: 0;
+  }
+}
+
+// Banner section styles
+.banner-section {
+  position: relative;
+  background-image: url('../assets/img/images/banner-background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0px auto 200px auto;
+  display: flex;
+  min-height: 300px;
+  aspect-ratio: 1300/370;
+  
+  // Black overlay with 40% opacity
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+  
+  // Content positioning
+  > div {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+// Discount section (first block)
+.banner-discount {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px 15px;
+  
+  h2 {
+    display: inline-block;
+    font-weight: 700;
+    font-size: clamp(80px, 15vw, 220px);
+    font-family: inherit;
+    color: white;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    line-height: 1;
+  }
+  
+  p {
+    font-weight: 400;
+    font-size: clamp(14px, 2vw, 20px);
+    font-family: inherit;
+    color: white;
+    margin: 0;
+  }
+}
+
+// Offer section (second block)
+.banner-offer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 15px;
+  
+  h3 {
+    font-weight: 700;
+    font-size: clamp(24px, 4vw, 40px);
+    font-family: inherit;
+    color: white;
+    margin-bottom: 15px;
+  }
+  
+  p {
+    font-weight: 400;
+    font-size: clamp(14px, 2vw, 17px);
+    font-family: inherit;
+    color: white;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .btn {
+    align-self: flex-start;
+    font-size: clamp(12px, 1.5vw, 16px);
+    padding: clamp(8px, 1.5vw, 12px) clamp(16px, 3vw, 24px);
+  }
+}

@@ -1,16 +1,15 @@
-/* Header top row layout: socials | logo | account/cart */
+/* Header responsive layout */
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  row-gap: 12px;
-  margin: 50px 200px 0 200px;
+  margin: 50px 200px 20px 200px;
+  
+  @media (max-width: 1023px) {
+    margin: 20px;
+  }
 }
 
 header > hr {
-  flex-basis: 100%;
-  width: 1300px;
+  width: 100%;
+  max-width: 1300px;
   height: 0;
   margin: 0 auto;
   border: 1px;
@@ -18,7 +17,32 @@ header > hr {
   opacity: 0.2;
 }
 
-/* Left: Socials */
+/* Desktop Header (1024px+) */
+.header-desktop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 12px;
+  
+  @media (max-width: 1023px) {
+    display: none;
+  }
+}
+
+/* Mobile Header (under 1024px) */
+.header-mobile {
+  display: none;
+  
+  @media (max-width: 1023px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+  }
+}
+
+/* Desktop: Left - Socials */
 .header-socials {
   flex: 1 1 0;
   display: flex;
@@ -34,14 +58,19 @@ header > hr {
   }
 }
 
-/* Center: Logo */
+/* Desktop: Center - Logo */
 .header-logo {
   flex: 0 0 auto;
   display: flex;
   justify-content: center;
+
+  img {
+    min-width: 150px;
+    max-width: 230px;
+  }
 }
 
-/* Right: Account/Cart */
+/* Desktop: Right - Account/Cart */
 .header-actions {
   flex: 1 1 0;
   display: flex;
@@ -57,9 +86,50 @@ header > hr {
   }
 }
 
-/* Navigation */
+/* Mobile: Hamburger Button */
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  
+  .hamburger-icon {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+  }
+}
+
+/* Mobile: Logo */
+.header-logo-mobile {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  
+  img {
+    max-width: 120px;
+    height: auto;
+  }
+}
+
+/* Mobile: Actions */
+.header-actions-mobile {
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+/* Desktop Navigation */
 .main-nav {
-  flex-basis: 100%;
+  @media (max-width: 1023px) {
+    display: none;
+  }
+  padding-top: 20px; 
 
   .main-menu {
     display: flex;
@@ -80,13 +150,120 @@ header > hr {
       margin-left: 10px;
     }
   }
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  display: none;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+
+.mobile-nav.open {
+  display: block;
+}
+
+.mobile-nav .mobile-menu {
+  margin: 0;
+  padding: 20px 0;
+  list-style: none;
   
+  li {
+    padding: 12px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      display: block;
+      
+      &:hover {
+        color: $brand-color;
+      }
+    }
+    
+    // Special styling for catalog item with arrow
+    &.catalog-item {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      
+      a {
+        display: inline !important;
+        flex: 1 !important;
+        width: auto !important;
+        margin-right: 8px !important;
+      }
+      
+      img {
+        width: 16px !important;
+        height: 16px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        flex-shrink: 0 !important;
+        display: inline-block !important;
+        order: 2 !important;
+      }
+    }
+  }
+  
+  // Force catalog item layout - more specific selector
+  .mobile-nav .mobile-menu li.catalog-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+  }
+  
+  .mobile-nav .mobile-menu li.catalog-item a {
+    display: inline !important;
+    flex: 1 !important;
+    width: auto !important;
+    margin-right: 8px !important;
+  }
+  
+  .mobile-nav .mobile-menu li.catalog-item img {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+    display: inline-block !important;
+    order: 2 !important;
+  }
+  
+  .mobile-socials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: none;
+    
+    a {
+      display: inline-block;
+      
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
 }
 
 
+/* Active and hover states */
 .main-nav .main-menu .active > a,
-.main-nav .main-menu a:hover {
-  color: $brand-color-hover;
+.main-nav .main-menu a:hover,
+.mobile-nav .mobile-menu .active > a {
+  color: $brand-color;
 }
 
 .main-nav .main-menu .active > a {

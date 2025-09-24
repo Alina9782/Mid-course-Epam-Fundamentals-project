@@ -10,36 +10,147 @@
 </head>
 <body>
     <header>
-        <div class="header-socials">
-            <ul>
-                <li><a href="#"><img src="../assets/img/icons/facebook.svg" alt="Facebook icon"></a></li>
-                <li><a href="#"><img src="../assets/img/icons/twitter.svg" alt="Twitter icon"></a></li>
-                <li><a href="#"><img src="../assets/img/icons/instagram.svg" alt="Instagram icon"></a></li>
-            </ul>
-        </div>
-        <div class="header-logo">
-            <a href="index.html"><img src="../assets/img/logo/logo.png" alt="Best Shop"></a>
-        </div>
-        <div class="header-actions">
-            <ul>
-                <li><a href="#"><img src="../assets/img/icons/user.svg" alt="Account icon"></a></li>
-                <li><a href="#"><img src="../assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
-            </ul>
+        <!-- Desktop Header -->
+        <div class="header-desktop">
+            <div class="header-socials">
+                <ul>
+                    <li><a href="#"><img src="../assets/img/icons/facebook.svg" alt="Facebook icon"></a></li>
+                    <li><a href="#"><img src="../assets/img/icons/twitter.svg" alt="Twitter icon"></a></li>
+                    <li><a href="#"><img src="../assets/img/icons/instagram.svg" alt="Instagram icon"></a></li>
+                </ul>
+            </div>
+            <div class="header-logo">
+                <a href="../index.html"><img src="../assets/img/logo/logo.png" alt="Best Shop"></a>
+            </div>
+            <div class="header-actions">
+                <ul>
+                    <li><a href="#"><img src="../assets/img/icons/user.svg" alt="Account icon"></a></li>
+                    <li><a href="#"><img src="../assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
+                </ul>
+            </div>
         </div>
 
-		<hr>
-		<nav class="main-nav">
+        <!-- Mobile Header -->
+        <div class="header-mobile">
+            <button class="hamburger-btn" id="hamburger-btn">
+                <img src="../assets/img/icons/hamburger-icon-black.svg" alt="Menu" class="hamburger-icon">
+            </button>
+            <div class="header-logo-mobile">
+                <a href="../index.html"><img src="../assets/img/logo/logo.png" alt="Best Shop"></a>
+            </div>
+            <div class="header-actions-mobile">
+                <ul>
+                    <li><a href="#"><img src="../assets/img/icons/user.svg" alt="Account icon"></a></li>
+                    <li><a href="#"><img src="../assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+        
+        <!-- Desktop Navigation -->
+        <nav class="main-nav">
             <ul class="main-menu">
-				<li class="navItem"><a href="../index.html">Home</a></li>
+                <li class="navItem"><a href="../index.html">Home</a></li>
                 <li class="navItem"><a href="../pages/catalog.html">Catalog</a><img src="../assets/img/icons/arrow-down.svg" alt="arrow-down"></li>
                 <li class="navItem active"><a href="../pages/about.html">About Us</a></li>
                 <li class="navItem"><a href="../pages/contact.html">Contact Us</a></li>
             </ul>
         </nav>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobile-nav">
+            <ul class="mobile-menu">
+                <li class="navItem"><a href="../index.html">Home</a></li>
+                <li class="navItem catalog-item"><a href="../pages/catalog.html">Catalog</a><img src="../assets/img/icons/arrow-down.svg" alt="arrow-down"></li>
+                <li class="navItem active"><a href="../pages/about.html">About Us</a></li>
+                <li class="navItem"><a href="../pages/contact.html">Contact Us</a></li>
+                <li class="mobile-socials">
+                    <a href="#"><img src="../assets/img/icons/facebook.svg" alt="Facebook icon"></a>
+                    <a href="#"><img src="../assets/img/icons/twitter.svg" alt="Twitter icon"></a>
+                    <a href="#"><img src="../assets/img/icons/instagram.svg" alt="Instagram icon"></a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <main>
+        <div class="about-us-head-section">
+            <h2>About Us</h2>
+            <p>Duis vestibulum elit vel neque pharetra vulputate. <br>Duis rutrum non risus in imperdiet. </p>
+        </div>
 
+        <div class="about-us-benefits-section">
+            <ul>
+                <li>
+                    <img src="../assets/img/icons/accuracy-icon.svg" alt="Accuracy icon">
+                    <h4>Superior Accuracy</h4>
+                    <p>Qewist vestibulum elit vel neque pharetra vulputate scelerisque nisi urna..</p>
+                </li>
+                <li>
+                    <img src="../assets/img/icons/awards-icon.svg" alt="Awards icon">
+                    <h4>Awards</h4>
+                    <p>Vestibulum elit vel neque pharetra vulputate. Quisque scelerisque nisi urna.</p>
+                </li>
+                <li>
+                    <img src="../assets/img/icons/ecological-icon.svg" alt="Ecological icon">
+                    <h4>Ecological</h4>
+                    <p>Elit vel neque duis vestibulum pharetra vulputateuisque scelerisque nisi urna.</p>
+                </li>
+                <li>
+                    <img src="../assets/img/icons/shipping-icon.svg" alt="Shipping icon">
+                    <h4>Shipping Worldwide</h4>
+                    <p>Quisque scelerisque nisi urna. Duis vestibulum elit vel neque pharetra vulputate.</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="about-us-arrivals-section">
+            <div class="arrivals-content">
+                <h3>New Arrivals Every Week</h3>
+                <p>Phasellus risus turpis, pretium sit amet magna non, molestie ultricies enim. Nullam pulvinar felis at metus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p>
+                <button class="btn btn--large">See All Models</button>
+            </div>
+            <div class="arrivals-image">
+                <img src="../assets/img/images/new-arrivals-photo.png" alt="New arrivals photo">
+            </div>
+        </div>
+
+        <div class="about-us-team-section">
+            <h3>Our Incredible Team</h3>
+            <hr>
+            <ul class="team-members">
+                <li class="team-member-card">
+                    <img src="../assets/img/images/team-member-1.png" alt="Team photo 1">
+                    <h4>NATALIIA FOSTER</h4>
+                    <p>Product Manage</p>
+                </li>
+                <li class="team-member-card">
+                    <img src="../assets/img/images/team-member-2.png" alt="Team photo 2">
+                    <h4>ALEXANDRA THOMPSON</h4>
+                    <p>Graphic Designer</p>
+                </li>
+                <li class="team-member-card">
+                    <img src="../assets/img/images/team-member-3.png" alt="Team photo 3">
+                    <h4>IRYNA BROOKS</h4>
+                    <p>Head Of Marketing</p>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="banner-section">
+            <div class="banner-discount">
+                <h2>50%</h2>
+                <p>Curabitur vulputate arcu odio, ac facilisis diam.</p>
+            </div>
+            <div class="banner-offer">
+                <h3>Offer Of The Month</h3>
+                <p>Curabitur vulputate arcu odio, ac facilisis diam 
+                    accumsan ut. Ut imperdiet et leo in vulputate. </p>
+                <button class="btn btn--large">Get Offer Today</button>
+            </div>
+        </div>
     </main>
 
     <footer>
