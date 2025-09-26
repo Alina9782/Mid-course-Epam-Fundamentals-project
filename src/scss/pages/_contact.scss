@@ -67,12 +67,12 @@
       }
       
       // Force 2x2 grid on medium screens
-      @media (min-width: 1024px) and (max-width: 1439px) {
+      @media (min-width: 768px) and (max-width: 1439px) {
         grid-template-columns: repeat(2, 1fr);
       }
       
       // Force single column on small screens
-      @media (max-width: 1023px) {
+      @media (max-width: 767px) {
         grid-template-columns: 1fr;
       }
     }
@@ -175,6 +175,111 @@
     align-self: flex-start;
     width: auto;
     padding: 12px 24px;
+  }
+}
+
+// Responsive styles
+@media (max-width: 1440px) {
+  .contact-us-form-section {
+    margin: 0px 100px;
+    margin-bottom: 80px;
+  }
+  
+  .contact-us-form-image {
+    min-width: 300px;
+    max-width: 600px;
+    
+    img {
+      min-width: 300px;
+      max-width: 600px;
+    }
+  }
+  
+  .contact-us-form-content {
+    padding: 0px 30px;
+    
+    h3 {
+      font-size: clamp(28px, 4vw, 40px);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .contact-us-info-section {
+    margin: 0px 100px;
+  }
+
+  .contact-us-form-section {
+    flex-direction: column;
+    margin: 0px 50px;
+    margin-bottom: 60px;
+    min-height: auto;
+  }
+  
+  .contact-us-form-image {
+    min-width: auto;
+    max-width: none;
+    min-height: 300px;
+    max-height: 400px;
+    order: 1;
+    
+    img {
+      min-width: auto;
+      max-width: none;
+      min-height: 300px;
+      max-height: 400px;
+    }
+  }
+  
+  .contact-us-form-content {
+    padding: 30px 20px;
+    order: 2;
+    
+    h3 {
+      font-size: clamp(24px, 5vw, 32px);
+      text-align: center;
+    }
+    
+    p {
+      text-align: center;
+    }
+    
+    .btn {
+      align-self: center;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-us-info-section {
+    margin: 0px 50px;
+  }
+
+  .contact-us-form-section {
+    margin: 0px 20px;
+    margin-bottom: 40px;
+  }
+  
+  .contact-us-form-image {
+    min-height: 250px;
+    max-height: 300px;
+    
+    img {
+      min-height: 250px;
+      max-height: 300px;
+    }
+  }
+  
+  .contact-us-form-content {
+    padding: 20px 15px;
+    
+    h3 {
+      font-size: clamp(20px, 6vw, 28px);
+    }
+    
+    p {
+      font-size: 16px;
+    }
   }
 }
 

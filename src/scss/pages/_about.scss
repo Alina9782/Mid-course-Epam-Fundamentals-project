@@ -67,12 +67,12 @@
     }
     
     // Force 2x2 grid on medium screens
-    @media (min-width: 1024px) and (max-width: 1439px) {
+    @media (min-width: 768px) and (max-width: 1439px) {
       grid-template-columns: repeat(2, 1fr);
     }
     
     // Force single column on small screens
-    @media (max-width: 1023px) {
+    @media (max-width: 767px) {
       grid-template-columns: 1fr;
     }
   }
@@ -170,11 +170,94 @@
   }
 }
 
+// Responsive styles for arrivals section
+@media (max-width: 1440px) {
+  .about-us-arrivals-section {
+    margin: 0 100px;
+    margin-bottom: 40px;
+  }
+  
+  .arrivals-content {
+    padding: 50px 30px;
+    
+    h3 {
+      font-size: clamp(32px, 4vw, 40px);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .about-us-arrivals-section {
+    flex-direction: column;
+    margin: 0 50px;
+    margin-bottom: 30px;
+    min-height: auto;
+  }
+  
+  .arrivals-content {
+    padding: 40px 30px;
+    order: 1;
+    
+    h3 {
+      font-size: clamp(28px, 5vw, 36px);
+      text-align: center;
+    }
+    
+    p {
+      text-align: center;
+    }
+    
+    .btn {
+      align-self: center;
+    }
+  }
+  
+  .arrivals-image {
+    order: 2;
+    min-height: 300px;
+    max-height: 400px;
+    
+    img {
+      min-height: 300px;
+      max-height: 400px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .about-us-arrivals-section {
+    margin: 0 20px;
+    margin-bottom: 20px;
+  }
+  
+  .arrivals-content {
+    padding: 30px 20px;
+    
+    h3 {
+      font-size: clamp(24px, 6vw, 32px);
+    }
+    
+    p {
+      font-size: 16px;
+    }
+  }
+  
+  .arrivals-image {
+    min-height: 250px;
+    max-height: 300px;
+    
+    img {
+      min-height: 250px;
+      max-height: 300px;
+    }
+  }
+}
+
 // About Us Team section styles
 .about-us-team-section {
   padding: 80px 20px;
   text-align: center;
-  margin: 0 200px;
+  margin: 0 100px;
   margin-bottom: 50px;
   h3 {
     font-weight: 900;
@@ -199,7 +282,7 @@
 .team-members {
   display: flex;
   justify-content: space-around;
-  gap: 30px;
+  gap: 40px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -240,6 +323,122 @@
   }
 }
 
+// Responsive styles for team section
+@media (max-width: 1440px) {
+  .about-us-team-section {
+    margin: 0 50px;
+    margin-bottom: 40px;
+    padding: 60px 20px;
+    
+    h3 {
+      font-size: clamp(32px, 4vw, 40px);
+    }
+    
+    hr {
+      max-width: 300px;
+      margin-bottom: 40px;
+    }
+  }
+  
+  .team-members {
+    gap: 20px;
+  }
+  
+  .team-member-card {
+    min-width: 200px;
+    max-width: 250px;
+    
+    img {
+      width: 300px;
+      height: 250px;
+    }
+    
+    h4 {
+      font-size: 20px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .about-us-team-section {
+    margin: 0 50px;
+    margin-bottom: 30px;
+    padding: 40px 20px;
+    
+    h3 {
+      font-size: clamp(28px, 5vw, 36px);
+    }
+    
+    hr {
+      max-width: 250px;
+      margin-bottom: 30px;
+    }
+  }
+  
+  .team-members {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .team-member-card {
+    min-width: auto;
+    max-width: 300px;
+    width: 100%;
+    
+    img {
+      width: 250px;
+      height: 200px;
+    }
+    
+    h4 {
+      font-size: 18px;
+    }
+    
+    p {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .about-us-team-section {
+    margin: 0 20px;
+    margin-bottom: 20px;
+    padding: 30px 15px;
+    
+    h3 {
+      font-size: clamp(24px, 6vw, 32px);
+    }
+    
+    hr {
+      max-width: 200px;
+      margin-bottom: 25px;
+    }
+  }
+  
+  .team-members {
+    gap: 25px;
+  }
+  
+  .team-member-card {
+    max-width: 280px;
+    
+    img {
+      width: 200px;
+      height: 160px;
+    }
+    
+    h4 {
+      font-size: 16px;
+    }
+    
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
 // Banner section styles
 .banner-section {
   position: relative;
@@ -247,12 +446,13 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 100%;
+  width: calc(100% - 400px);
   max-width: 1300px;
-  margin: 0px auto 200px auto;
+  margin: 0px 200px 200px 200px;
   display: flex;
   min-height: 300px;
   aspect-ratio: 1300/370;
+  box-sizing: border-box;
   
   // Black overlay with 40% opacity
   &::before {
@@ -332,5 +532,73 @@
     align-self: flex-start;
     font-size: clamp(12px, 1.5vw, 16px);
     padding: clamp(8px, 1.5vw, 12px) clamp(16px, 3vw, 24px);
+  }
+}
+
+@media (max-width: 1440px) {
+  .banner-section {
+    width: calc(100% - 200px);
+    margin: 0px 100px 100px 100px;
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .about-us-benefits-section {
+    margin: 0px 100px;
+  }
+
+  .banner-section {
+    width: calc(100% - 100px);
+    margin: 0px 50px 50px 50px;
+    max-width: 100%;
+    flex-direction: column;
+    min-height: auto;
+    aspect-ratio: unset;
+    
+    .banner-discount {
+      padding: 40px 20px;
+      
+      h2 {
+        font-size: clamp(60px, 12vw, 120px);
+      }
+    }
+    
+    .banner-offer {
+      padding: 40px 20px;
+      align-items: center;
+      text-align: center;
+      
+      .btn {
+        align-self: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .about-us-benefits-section {
+    margin: 0px 50px;
+  }
+
+  .banner-section {
+    width: calc(100% - 40px);
+    margin: 0px 20px 40px 20px;
+    
+    .banner-discount {
+      padding: 30px 15px;
+      
+      h2 {
+        font-size: clamp(40px, 10vw, 80px);
+      }
+    }
+    
+    .banner-offer {
+      padding: 30px 15px;
+      
+      h3 {
+        font-size: clamp(20px, 5vw, 28px);
+      }
+    }
   }
 }
