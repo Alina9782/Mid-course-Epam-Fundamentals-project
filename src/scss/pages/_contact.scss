@@ -251,6 +251,21 @@
 }
 
 @media (max-width: 768px) {
+  .contact-us-head-section {
+    max-height: 200px;
+    padding: 55px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+    
+    h2 {
+        font-size: 30px;
+        margin: 0;
+    }
+  }
+
   .contact-us-info-section {
     margin: 0px 50px;
   }

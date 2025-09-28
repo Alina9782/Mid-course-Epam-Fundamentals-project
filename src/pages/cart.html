@@ -25,7 +25,7 @@
             <div class="header-actions">
                 <ul>
                     <li><a href="#"><img src="../assets/img/icons/user.svg" alt="Account icon"></a></li>
-                    <li><a href="#"><img src="../assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
+                    <li><a href="../pages/cart.html" class="cart-link"><img src="../assets/img/icons/shopping-cart.svg" alt="Cart icon"><span class="cart-counter">3</span></a></li>
                 </ul>
             </div>
         </div>
@@ -41,7 +41,7 @@
             <div class="header-actions-mobile">
                 <ul>
                     <li><a href="#"><img src="../assets/img/icons/user.svg" alt="Account icon"></a></li>
-                    <li><a href="#"><img src="../assets/img/icons/shopping-cart.svg" alt="Cart icon"></a></li>
+                    <li><a href="../pages/cart.html" class="cart-link"><img src="../assets/img/icons/shopping-cart.svg" alt="Cart icon"><span class="cart-counter">3</span></a></li>
                 </ul>
             </div>
         </div>
@@ -75,7 +75,83 @@
     </header>
 
     <main>
+        <div class="cart-head-section">
+            <h2>My Cart</h2>
+        </div>
 
+        <div class="cart-items-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>IMAGE</th>
+                        <th>PRODUCT NAME</th>
+                        <th>PRICE</th>
+                        <th>QUANTITY</th>
+                        <th>TOTAL</th>
+                        <th>DELETE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="../assets/img/images/products/suitcase-red.png" alt="Product Image"></td>
+                        <td>Nomad Haven</td>
+                        <td>$250</td>
+                        <td>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="number" id="quantity" value="1" min="1">
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                        </td>
+                        <td>$250</td>
+                        <td><button><img src="../assets/img/icons/bin-icon.svg" alt="Delete icon"></button></td>
+                    </tr>
+                    <tr>
+                        <td><img src="../assets/img/images/products/suitcase-red.png" alt="Product Image"></td>
+                        <td>Nomad Haven</td>
+                        <td>$250</td>
+                        <td>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="number" id="quantity" value="1" min="1">
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                        </td>
+                        <td>$250</td>
+                        <td><button><img src="../assets/img/icons/bin-icon.svg" alt="Delete icon"></button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6"><button class="btn">CONTINUE SHOPPING</button><button class="btn">CLEAR SHOPPING CART</button></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="cart-checkout-section">
+            <div class="checkout-row">
+                <h4>Sub Total</h4>
+                <p>$1000</p>
+            </div>
+            <hr>
+            <div class="checkout-row discount-row">
+                <h4>Discount</h4>
+                <p>$100</p>
+            </div>
+            <hr class="discount-hr">
+            <div class="checkout-row">
+                <h4>Shipping</h4>
+                <p>$30</p>
+            </div>
+            <hr>
+            <div class="checkout-row total-row">
+                <h4>Total</h4>
+                <p>$930</p>
+            </div>
+            <hr>
+            <button class="btn">CHECKOUT</button>
+        </div>
     </main>
 
     <footer>
