@@ -1,4 +1,4 @@
-// Hamburger Menu Functionality - Bulletproof Version
+// Hamburger Menu Functionality
 console.log('JavaScript file loaded!');
 
 // Wait for DOM to be ready
@@ -689,6 +689,251 @@ function initAuthModals() {
     console.log('Auth modals initialized successfully');
 }
 
+// Contact Form functionality
+function initContactForm() {
+    console.log('Initializing contact form...');
+    
+    const contactForm = document.querySelector('.contact-us-form-content form');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+    const successSendMessageModal = document.getElementById('successSendMessageModal');
+    const successSendMessageOkBtn = document.getElementById('successSendMessageOkBtn');
+    
+    console.log('Found elements:', {
+        contactForm: !!contactForm,
+        sendMessageBtn: !!sendMessageBtn,
+        successSendMessageModal: !!successSendMessageModal,
+        successSendMessageOkBtn: !!successSendMessageOkBtn
+    });
+    
+    if (!contactForm || !sendMessageBtn || !successSendMessageModal || !successSendMessageOkBtn) {
+        console.log('Contact form elements not found, skipping initialization');
+        console.log('Missing elements:', {
+            contactForm: !contactForm,
+            sendMessageBtn: !sendMessageBtn,
+            successSendMessageModal: !successSendMessageModal,
+            successSendMessageOkBtn: !successSendMessageOkBtn
+        });
+        return;
+    }
+    
+    // Function to close success modal
+    function closeSuccessModal() {
+        successSendMessageModal.classList.remove('active');
+        document.body.style.overflow = '';
+        console.log('Success send message modal closed');
+    }
+    
+    // Function to open success modal
+    function openSuccessModal() {
+        successSendMessageModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        console.log('Success send message modal opened');
+    }
+    
+    // Contact form submission handler
+    contactForm.addEventListener('submit', function(e) {
+        console.log('Form submission event triggered!');
+        e.preventDefault();
+        console.log('Default form submission prevented');
+        
+        // Get form inputs
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const subjectInput = document.getElementById('subject');
+        const messageInput = document.getElementById('message');
+        
+        console.log('Form inputs found:', {
+            nameInput: !!nameInput,
+            emailInput: !!emailInput,
+            subjectInput: !!subjectInput,
+            messageInput: !!messageInput
+        });
+        
+        // Check if all required fields are valid
+        const isNameValid = nameInput.checkValidity();
+        const isEmailValid = emailInput.checkValidity();
+        const isSubjectValid = subjectInput.checkValidity();
+        const isMessageValid = messageInput.checkValidity();
+        
+        console.log('Form validation status:', {
+            isNameValid,
+            isEmailValid,
+            isSubjectValid,
+            isMessageValid
+        });
+        
+        if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
+            // Simulate successful message sending
+            console.log('Message sent successfully');
+            openSuccessModal();
+            
+            // Reset form
+            contactForm.reset();
+        } else {
+            console.log('Form validation failed');
+            // Focus on first invalid field
+            if (!isNameValid) nameInput.focus();
+            else if (!isEmailValid) emailInput.focus();
+            else if (!isSubjectValid) subjectInput.focus();
+            else if (!isMessageValid) messageInput.focus();
+        }
+    });
+    
+    // Success modal OK button handler
+    successSendMessageOkBtn.addEventListener('click', function() {
+        closeSuccessModal();
+    });
+    
+    // Close modal when clicking overlay
+    const modalOverlay = successSendMessageModal.querySelector('.auth-overlay');
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', closeSuccessModal);
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && successSendMessageModal.classList.contains('active')) {
+            closeSuccessModal();
+        }
+    });
+    
+    // Backup: Direct button click handler
+    sendMessageBtn.addEventListener('click', function(e) {
+        console.log('Send button clicked directly!');
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Get form inputs
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const subjectInput = document.getElementById('subject');
+        const messageInput = document.getElementById('message');
+        
+        // Check if all required fields are valid
+        const isNameValid = nameInput.checkValidity();
+        const isEmailValid = emailInput.checkValidity();
+        const isSubjectValid = subjectInput.checkValidity();
+        const isMessageValid = messageInput.checkValidity();
+        
+        console.log('Button click validation status:', {
+            isNameValid,
+            isEmailValid,
+            isSubjectValid,
+            isMessageValid
+        });
+        
+        if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
+            console.log('Message sent successfully via button click');
+            openSuccessModal();
+            contactForm.reset();
+        } else {
+            console.log('Form validation failed via button click');
+            // Focus on first invalid field
+            if (!isNameValid) nameInput.focus();
+            else if (!isEmailValid) emailInput.focus();
+            else if (!isSubjectValid) subjectInput.focus();
+            else if (!isMessageValid) messageInput.focus();
+        }
+    });
+    
+    console.log('Contact form initialized successfully');
+}
+
+// Catalog pagination functionality
+function initCatalogPagination() {
+    console.log('Initializing catalog pagination...');
+    
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const paginationNumbers = document.querySelectorAll('.pagination-number');
+    const catalogProducts = document.querySelectorAll('.catalog-product');
+    
+    if (!prevBtn || !nextBtn || paginationNumbers.length === 0) {
+        console.log('Catalog pagination elements not found, skipping initialization');
+        return;
+    }
+    
+    let currentPage = 1;
+    const productsPerPage = 12;
+    const totalProducts = catalogProducts.length;
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+    
+    // Function to show/hide products based on current page
+    function showProductsForPage(page) {
+        const startIndex = (page - 1) * productsPerPage;
+        const endIndex = startIndex + productsPerPage;
+        
+        catalogProducts.forEach((product, index) => {
+            if (index >= startIndex && index < endIndex) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    }
+    
+    // Function to update pagination UI
+    function updatePaginationUI() {
+        // Update page numbers
+        paginationNumbers.forEach((btn, index) => {
+            const pageNum = index + 1;
+            btn.classList.toggle('active', pageNum === currentPage);
+            btn.style.display = pageNum <= totalPages ? 'block' : 'none';
+        });
+        
+        // Update prev/next buttons
+        prevBtn.style.display = currentPage === 1 ? 'none' : 'block';
+        nextBtn.style.display = currentPage === totalPages ? 'none' : 'block';
+        
+        // Update results text
+        const resultsText = document.querySelector('.catalog-header p');
+        if (resultsText) {
+            const startResult = (currentPage - 1) * productsPerPage + 1;
+            const endResult = Math.min(currentPage * productsPerPage, totalProducts);
+            resultsText.textContent = `Showing ${startResult}-${endResult} Of ${totalProducts} Results`;
+        }
+    }
+    
+    // Event listeners for pagination numbers
+    paginationNumbers.forEach((btn, index) => {
+        btn.addEventListener('click', function() {
+            const pageNum = index + 1;
+            if (pageNum <= totalPages) {
+                currentPage = pageNum;
+                showProductsForPage(currentPage);
+                updatePaginationUI();
+                console.log('Switched to page:', currentPage);
+            }
+        });
+    });
+    
+    // Event listener for previous button
+    prevBtn.addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            showProductsForPage(currentPage);
+            updatePaginationUI();
+            console.log('Previous page:', currentPage);
+        }
+    });
+    
+    // Event listener for next button
+    nextBtn.addEventListener('click', function() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            showProductsForPage(currentPage);
+            updatePaginationUI();
+            console.log('Next page:', currentPage);
+        }
+    });
+    
+    // Initialize
+    showProductsForPage(currentPage);
+    updatePaginationUI();
+    
+    console.log('Catalog pagination initialized successfully');
+}
+
 // Initialize when ready
 ready(function() {
     console.log('DOM ready, initializing features...');
@@ -698,4 +943,6 @@ ready(function() {
     initRatingStars();
     initStyledPlaceholders();
     initAuthModals();
+    initContactForm();
+    initCatalogPagination();
 });

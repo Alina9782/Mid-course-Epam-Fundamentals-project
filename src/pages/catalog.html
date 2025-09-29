@@ -193,8 +193,261 @@
         </div>
     </div>
 
-    <main>
+    <main class="catalog-main">
+        <section class="catalog-section">
+            <div class="search-bar hidden">
+                <input type="text" placeholder="Search">
+                <button type="submit">
+                    <img src="../assets/img/icons/search-icon.svg" alt="Search icon">
+                </button>
+            </div>
 
+            <div class="catalog-header">
+                <p>Showing 1-12 Of 15 Results</p>
+                <div class="catalog-controls">
+                    <div class="catalog-filters">
+                        <button class="btn btn--small">FILTERS</button>
+                    </div>
+                    <div class="catalog-sort">
+                        <select name="sort" id="sort">
+                            <option value="default">Default Sorting</option>
+                            <option value="popularity">Popularity</option>
+                            <option value="price-asc">Price (asc)</option>
+                            <option value="price-desc">Price (desc)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-filters-container hidden">
+                <hr>
+                <div class="catalog-filters-row">
+                    <div class="catalog-filter">
+                        <h3>Size</h3>
+                        <select name="size" id="size" placeholder="Choose option">
+                            <option value="all">All</option>
+                            <option value="s">S</option>
+                            <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
+                        </select>
+                    </div>
+                    <div class="catalog-filter">
+                        <h3>Color</h3>
+                        <select name="category" id="category" placeholder="Choose option">
+                            <option value="all">All</option>
+                            <option value="red">Red</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="black">Black</option>
+                            <option value="grey">Grey</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="pink">Pink</option>
+                        </select>
+                    </div>
+                    <div class="catalog-filter">
+                        <h3>Category</h3>
+                        <select name="category" id="category" placeholder="Choose option">
+                            <option value="all">All</option>
+                            <option value="suitcases">Suitcases</option>
+                            <option value="luggage sets">Luggage Sets</option>
+                            <option value="kids' luggage">Kids' Luggage</option>
+                        </select>
+                    </div>
+                    <div class="catalog-filter">
+                        <h3>Sales</h3>
+                        <input type="radio" name="sales" id="sales">
+                    </div>
+                </div>
+                <hr>
+                <div class="filter-controls">
+                    <button class="btn btn--small">CLEAR FILTERS</button>
+                    <button class="btn btn--small">HIDE FILTERS</button>
+                </div>
+            </div>
+
+            <!-- Catalog Products -->
+            <div class="catalog-container">
+                <div class="catalog-products">
+                    <!-- Product 1 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Global Explorer Max Comfort Suitcase Pro</h4>
+                        <p>$250</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Luxury Lightweight Travel Suitcase</h4>
+                        <p>$280</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Urban Compact Travel Suitcase</h4>
+                        <p>$310</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 4 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Traveller's Comfort Weekender Suitcase</h4>
+                        <p>$240</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 5 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Premium Business Travel Suitcase</h4>
+                        <p>$350</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 6 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Adventure Explorer Hardshell Suitcase</h4>
+                        <p>$290</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 7 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Family Size Travel Suitcase</h4>
+                        <p>$400</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 8 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Compact Carry-On Suitcase</h4>
+                        <p>$220</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 9 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Executive Travel Suitcase</h4>
+                        <p>$380</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 10 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Sport Travel Suitcase</h4>
+                        <p>$260</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 11 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Vintage Style Travel Suitcase</h4>
+                        <p>$320</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 12 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Modern Minimalist Suitcase</h4>
+                        <p>$270</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 13 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Travel Suitcase with Expandable Compartment</h4>
+                        <p>$230</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 14 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Travel Suitcase with Expandable Compartment</h4>
+                        <p>$230</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                    <!-- Product 15 -->
+                    <div class="catalog-product">
+                        <img src="../assets/img/images/selected-product.png" alt="Product image">
+                        <h4>Travel Suitcase with Expandable Compartment</h4>
+                        <p>$230</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="catalog-pagination">
+                <button class="pagination-btn pagination-prev" id="prevBtn" style="display: none;">< PREVIOUS</button>
+                <div class="pagination-numbers">
+                    <button class="pagination-number active" data-page="1">1</button>
+                    <button class="pagination-number" data-page="2">2</button>
+                </div>
+                <button class="pagination-btn pagination-next" id="nextBtn">NEXT ></button>
+            </div>
+        </section>
+
+        <aside class="catalog-aside">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <button type="submit">
+                    <img src="../assets/img/icons/search-icon.svg" alt="Search icon">
+                </button>
+            </div>
+
+            <div class="top-categories">
+                <h2>Top Best Sets</h2>
+                <ul>
+                    <li>
+                        <div class="category-item">
+                            <img src="../assets/img/images/products/suitcase-set-black.png" alt="Black suitcase set">
+                            <div class="category-info">
+                                <h4>Black Suitcase Set</h4>
+                                <div class="product-stars">
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                </div>
+                                <p>$450</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="category-item">
+                            <img src="../assets/img/images/products/suitcase-set-grey.png" alt="Grey suitcase set">
+                            <div class="category-info">
+                                <h4>Grey Suitcase Set</h4>
+                                <div class="product-stars">
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star">★</span>
+                                </div>
+                                <p>$420</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="category-item">
+                            <img src="../assets/img/images/products/suitcase-set-red.png" alt="Red suitcase set">
+                            <div class="category-info">
+                                <h4>Red Suitcase Set</h4>
+                                <div class="product-stars">
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                </div>
+                                <p>$480</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
     </main>
 
     <footer>
