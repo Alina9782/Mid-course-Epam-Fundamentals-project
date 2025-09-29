@@ -74,6 +74,125 @@
         </nav>
     </header>
 
+    <!-- Login Modal -->
+    <div class="auth-modal" id="loginModal">
+        <div class="auth-overlay"></div>
+        <div class="auth-container">
+            <form action="" class="login-form">
+                <label for="login-email">Email Address <span>*</span></label>
+                <input type="email" id="login-email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                
+                <label for="login-password">Password <span>*</span></label>
+                <div class="password-input-wrapper">
+                    <input type="password" id="login-password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&/\\#^+=])[A-Za-z\d@$!%*?&/\\#^+=]{8,}$" minlength="8">
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        <img src="../assets/img/icons/eye-opened-icon.svg" alt="Show password" class="eye-icon">
+                    </button>
+                </div>
+                
+                <div class="login-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Your Password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn--small auth-btn" id="loginBtn">LOG IN</button>
+            </form>
+            <div class="auth-link-container">
+                <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="auth-modal" id="signupModal">
+        <div class="auth-overlay"></div>
+        <div class="auth-container">
+            <form action="" class="signup-form">
+                <label for="signup-email">Email Address <span>*</span></label>
+                <input type="email" id="signup-email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                
+                <label for="signup-password">Password <span>*</span></label>
+                <input type="password" id="signup-password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&/\\#^+=])[A-Za-z\d@$!%*?&/\\#^+=]{8,}$" minlength="8">
+                
+                <label for="confirm-password">Confirm Password <span>*</span></label>
+                <input type="password" id="confirm-password" required>
+                
+                <div class="signup-options">
+                    <div class="terms-agreement">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn--small auth-btn disabled" id="signupBtn">SIGN UP</button>
+                <div class="password-requirements">
+                    <p>Password must be at least 8 characters with uppercase, lowercase, number, and special character (@$!%*?&/\#^+=)</p>
+                </div>
+            </form>
+            <div class="auth-link-container">
+                <p>Already have an account? <a href="#" class="login-link">Log in</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="auth-modal" id="forgotPasswordModal">
+        <div class="auth-overlay"></div>
+        <div class="auth-container">
+            <form action="" class="forgot-password-form">
+                <h2>Forgot Password</h2>
+                <p>Enter your email address to reset your password</p>
+                
+                <label for="forgot-password-email">Email Address <span>*</span></label>
+                <input type="email" id="forgot-password-email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                
+                <button type="submit" class="btn btn--small auth-btn" id="forgotPasswordBtn">RESET PASSWORD</button>
+            </form>
+            <div class="auth-link-container">
+                <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Sign Up Modal -->
+    <div class="auth-modal" id="successModal">
+        <div class="auth-overlay"></div>
+        <div class="auth-container">
+            <div class="success-content">
+                <h2>Success!</h2>
+                <p>Your account has been created successfully</p>
+                <button type="button" class="btn btn--small auth-btn" id="successSignupOkBtn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Log In Modal -->
+    <div class="auth-modal" id="successLogInModal">
+        <div class="auth-overlay"></div>
+        <div class="auth-container">
+            <div class="success-content">
+                <h2>Success!</h2>
+                <p>You have been logged in successfully</p>
+                <button type="button" class="btn btn--small auth-btn" id="successLoginOkBtn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div class="auth-modal" id="resetPasswordModal">
+        <div class="auth-overlay"></div>
+        <div class="auth-container">
+            <div class="success-content">
+                <h2>Reset Password</h2>
+                <p>The instructions to reset your password have been sent to your email.</p>
+                <button type="button" class="btn btn--small auth-btn" id="resetPasswordOkBtn">OK</button>
+            </div>
+        </div>
+    </div>
+
     <main>
         <div class="product-container">
             <div class="product">

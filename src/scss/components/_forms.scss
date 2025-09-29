@@ -54,3 +54,303 @@ textarea {
 input:invalid {
   border-color: #e74c3c;
 }
+
+// Authentication Modal Styles
+.auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: none;
+  
+  &.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.auth-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.auth-container {
+  position: relative;
+  z-index: 1001;
+  background-color: white;
+  max-width: 480px;
+  width: 90%;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  
+  h2 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+  }
+  
+  > p {
+    margin: 0 0 24px 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+    text-align: center;
+  }
+  
+  form {
+    margin-bottom: 20px;
+    
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      color: #333;
+      margin-bottom: 8px;
+      margin-top: 0;
+      
+      span {
+        color: $brand-color;
+      }
+    }
+    
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid $brand-color;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-bottom: 16px;
+      
+      &:focus {
+        outline: none;
+        border-color: $brand-color;
+        box-shadow: 0 0 0 2px rgba(185, 39, 112, 0.2);
+      }
+    }
+  }
+}
+
+.password-input-wrapper {
+  position: relative;
+  // margin-bottom: 16px;
+  
+  input[type="password"] {
+    padding-right: 50px;
+    margin-bottom: 0 !important;
+  }
+
+  input[type="text"] {
+    padding-right: 50px;
+    margin-bottom: 0 !important;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    
+    .eye-icon {
+      width: 20px;
+      height: 20px;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+      
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  
+  .remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    input[type="checkbox"] {
+      width: 14px;
+      height: 14px;
+      border: 2px solid #727174;
+      border-radius: 2px;
+      accent-color: $brand-color;
+    }
+    
+    label {
+      font-size: 9px;
+      font-weight: 400;
+      color: #727174;
+      margin: 0;
+    }
+  }
+  
+  .forgot-password {
+    font-size: 9px;
+    font-weight: 700;
+    color: $brand-color;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Password requirements styling
+.password-requirements {
+  margin-bottom: 12px;
+  text-align: center;
+  
+  p {
+    margin: 0;
+    font-size: 10px;
+    font-weight: 400;
+    color: #6c757d;
+    font-style: italic;
+  }
+}
+
+// Signup specific styles
+.signup-options {
+  margin-bottom: 24px;
+  
+  .terms-agreement {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    
+    input[type="checkbox"] {
+      width: 14px;
+      height: 14px;
+      border: 2px solid #727174;
+      border-radius: 2px;
+      accent-color: $brand-color;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    
+    label {
+      font-size: 9px;
+      font-weight: 400;
+      color: #727174;
+      margin: 0;
+      line-height: 1.4;
+      
+      a {
+        color: $brand-color;
+        text-decoration: underline;
+        
+        &:hover {
+          color: $brand-color-hover;
+        }
+      }
+    }
+  }
+}
+
+// Password mismatch styling
+#confirm-password {
+  &.mismatch {
+    border-color: #e74c3c;
+    background-color: #ffeaea;
+  }
+  
+  &.match {
+    border-color: #27ae60;
+    background-color: #eafaf1;
+  }
+}
+
+.auth-btn {
+  width: 100%;
+  margin-bottom: 16px;
+  
+  &.disabled {
+    background-color: #727174;
+    color: white;
+    cursor: not-allowed;
+    
+    &:hover {
+      background-color: #727174;
+    }
+  }
+}
+
+.auth-link-container {
+  text-align: center;
+  margin-top: 16px;
+  
+  p {
+    margin: 0;
+    font-size: 9px;
+    font-weight: 400;
+    color: #727174;
+  }
+  
+  .signup-link,
+  .login-link {
+    color: #727174;
+    text-decoration: underline;
+    font-size: 12px;
+    font-weight: 700;
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
+
+// Success modal specific styling
+.success-content {
+  text-align: center;
+  
+  h2 {
+    color: #27ae60;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    margin-bottom: 24px;
+    color: #666;
+  }
+  
+  .auth-btn {
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    max-width: 90vw;
+    max-height: 90vh;
+    padding: 30px 20px;
+  }
+}
