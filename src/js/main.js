@@ -1026,6 +1026,73 @@ function initCatalogFilters() {
     console.log('Catalog filters initialized successfully');
 }
 
+// Fetch and inject partial header.html and footer.html
+async function initHeaderAndFooter() {
+    console.log('Initializing header and footer...');
+    
+    const header = document.getElementById('header');
+    const footer = document.getElementById('footer');
+    
+    if (!header || !footer) {
+        console.warn('Header or footer elements not found');
+        return;
+    }
+    
+    // Determine the correct path based on current page location
+    const currentPath = window.location.pathname;
+    const isInPagesDir = currentPath.includes('/pages/');
+    const componentsPath = isInPagesDir ? '../components/' : 'components/';
+    
+    console.log(`Current path: ${currentPath}, Components path: ${componentsPath}`);
+    
+    try {
+        // Load header
+        const headerResponse = await fetch(`${componentsPath}header.html`);
+        if (!headerResponse.ok) {
+            throw new Error(`Failed to load header: ${headerResponse.status}`);
+        }
+        let headerData = await headerResponse.text();
+        
+        // Fix paths in header content based on current page location
+        if (isInPagesDir) {
+            headerData = headerData.replace(/\.\.\/assets\//g, '../assets/')
+                                 .replace(/\.\.\/pages\//g, '../pages/')
+                                 .replace(/\.\.\/index\.html/g, '../index.html');
+        } else {
+            headerData = headerData.replace(/\.\.\/assets\//g, 'assets/')
+                                 .replace(/\.\.\/pages\//g, 'pages/')
+                                 .replace(/\.\.\/index\.html/g, 'index.html');
+        }
+        
+        header.innerHTML = headerData;
+        console.log('Header loaded successfully');
+        
+        // Load footer
+        const footerResponse = await fetch(`${componentsPath}footer.html`);
+        if (!footerResponse.ok) {
+            throw new Error(`Failed to load footer: ${footerResponse.status}`);
+        }
+        let footerData = await footerResponse.text();
+        
+        // Fix paths in footer content based on current page location
+        if (isInPagesDir) {
+            footerData = footerData.replace(/\.\.\/assets\//g, '../assets/');
+        } else {
+            footerData = footerData.replace(/\.\.\/assets\//g, 'assets/');
+        }
+        
+        footer.innerHTML = footerData;
+        console.log('Footer loaded successfully');
+        
+        // Re-initialize interactive elements after content injection
+        initHamburgerMenu();
+        initAuthModals();
+        
+    } catch (error) {
+        console.error('Error loading header/footer:', error);
+    }
+}
+
 // Initialize when ready
 ready(function() {
     console.log('DOM ready, initializing features...');
@@ -1038,4 +1105,5 @@ ready(function() {
     initContactForm();
     initCatalogPagination();
     initCatalogFilters();
+    initHeaderAndFooter();
 });
