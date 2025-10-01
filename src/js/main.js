@@ -934,6 +934,98 @@ function initCatalogPagination() {
     console.log('Catalog pagination initialized successfully');
 }
 
+// Catalog filters functionality
+function initCatalogFilters() {
+    console.log('Initializing catalog filters...');
+    
+    const filtersBtn = document.querySelector('.catalog-filters .btn');
+    const filtersContainer = document.querySelector('.catalog-filters-container');
+    const hideFiltersBtn = document.querySelector('.filter-controls .btn:last-child');
+    const clearFiltersBtn = document.querySelector('.filter-controls .btn:first-child');
+    
+    if (!filtersBtn || !filtersContainer) {
+        console.log('Catalog filters elements not found, skipping initialization');
+        return;
+    }
+    
+    // Function to toggle filters visibility
+    function toggleFilters() {
+        filtersContainer.classList.toggle('hidden');
+        const isVisible = !filtersContainer.classList.contains('hidden');
+        console.log('Filters container is now:', isVisible ? 'VISIBLE' : 'HIDDEN');
+    }
+    
+    // Function to hide filters
+    function hideFilters() {
+        filtersContainer.classList.add('hidden');
+        console.log('Filters container hidden');
+    }
+    
+    // Function to clear all filters
+    function clearAllFilters() {
+        // Clear size filter
+        const sizeSelect = document.getElementById('size');
+        if (sizeSelect) {
+            sizeSelect.value = 'all';
+            console.log('Size filter cleared');
+        }
+        
+        // Clear color filter
+        const colorSelect = document.getElementById('color');
+        if (colorSelect) {
+            colorSelect.value = 'all';
+            console.log('Color filter cleared');
+        }
+        
+        // Clear category filter
+        const categorySelect = document.getElementById('category');
+        if (categorySelect) {
+            categorySelect.value = 'all';
+            console.log('Category filter cleared');
+        }
+        
+        // Clear sales radio button
+        const salesRadio = document.getElementById('sales');
+        if (salesRadio) {
+            salesRadio.checked = false;
+            console.log('Sales filter cleared');
+        }
+        
+        // Clear sort dropdown
+        const sortSelect = document.getElementById('sort');
+        if (sortSelect) {
+            sortSelect.value = 'default';
+            console.log('Sort filter cleared');
+        }
+        
+        console.log('All filters cleared successfully');
+    }
+    
+    // Add click event listener to FILTERS button
+    filtersBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleFilters();
+    });
+    
+    // Add click event listener to HIDE FILTERS button (if it exists)
+    if (hideFiltersBtn) {
+        hideFiltersBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideFilters();
+        });
+    }
+    
+    // Add click event listener to CLEAR FILTERS button (if it exists)
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            clearAllFilters();
+        });
+    }
+    
+    console.log('Catalog filters initialized successfully');
+}
+
 // Initialize when ready
 ready(function() {
     console.log('DOM ready, initializing features...');
@@ -945,4 +1037,5 @@ ready(function() {
     initAuthModals();
     initContactForm();
     initCatalogPagination();
+    initCatalogFilters();
 });
