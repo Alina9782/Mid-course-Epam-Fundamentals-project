@@ -1,11 +1,11 @@
 header {
-  margin: 50px 100px 20px 100px;
+  margin: 50px 200px 20px 200px;
 
   & > hr {
     width: 100%;
     max-width: 1300px;
     height: 0;
-    margin: 0 auto;
+    // margin: 0 auto;
     border: 1px;
     border-top: 1px solid #727174;
     opacity: 0.2;
@@ -19,6 +19,7 @@ header {
   justify-content: space-between;
   flex-wrap: wrap;
   row-gap: 12px;
+  margin-bottom: 20px;
 
   .header-socials {
     flex: 1 1 0;
@@ -248,7 +249,7 @@ header {
 /* Responsive header rules */
 @media (max-width: 1023px) {
   header {
-    margin: 20px;
+    margin: 20px 50px 20px 50px;
   }
 
   .header-desktop {
@@ -264,5 +265,11 @@ header {
 
   .main-nav {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    margin: 20px;
   }
 }

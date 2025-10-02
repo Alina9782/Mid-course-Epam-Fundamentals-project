@@ -1093,6 +1093,52 @@ async function initHeaderAndFooter() {
     }
 }
 
+// Fetch and inject partial product-card.html
+async function initProductCard() {
+    console.log('Initializing product card...');
+    
+    const productCard = document.getElementById('product-card');
+    
+    if (!productCard) {
+        console.warn('Product card element not found');
+        return;
+    }
+    
+    // Determine the correct path based on current page location
+    const currentPath = window.location.pathname;
+    const isInPagesDir = currentPath.includes('/pages/');
+    const componentsPath = isInPagesDir ? '../components/' : 'components/';
+    
+    console.log(`Current path: ${currentPath}, Components path: ${componentsPath}`);
+    
+    try {
+        // Load product card
+        const productCardResponse = await fetch(`${componentsPath}product-card.html`);
+        if (!productCardResponse.ok) {
+            throw new Error(`Failed to load product card: ${productCardResponse.status}`);
+        }
+        let productCardData = await productCardResponse.text();
+        
+        // Fix paths in product card content based on current page location
+        if (isInPagesDir) {
+            productCardData = productCardData.replace(/\.\.\/assets\//g, '../assets/');
+        } else {
+            productCardData = productCardData.replace(/\.\.\/assets\//g, 'assets/');
+        }
+        
+        productCard.innerHTML = productCardData;
+        console.log('Product card loaded successfully');
+        
+        // Re-initialize interactive elements after content injection
+        initProductFeatures();
+        initProductTabs();
+        initRatingStars();
+        
+    } catch (error) {
+        console.error('Error loading product card:', error);
+    }
+}
+
 // Initialize when ready
 ready(function() {
     console.log('DOM ready, initializing features...');
@@ -1106,4 +1152,5 @@ ready(function() {
     initCatalogPagination();
     initCatalogFilters();
     initHeaderAndFooter();
+    initProductCard();
 });
