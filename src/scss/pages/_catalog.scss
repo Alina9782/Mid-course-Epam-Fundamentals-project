@@ -1,5 +1,3 @@
-// Catalog Page Styles
-
 // Main catalog layout
 .catalog-main {
   padding: 50px 200px;
@@ -16,7 +14,6 @@
   gap: 30px;
 }
 
-// Catalog header
 .catalog-header {
   display: flex;
   justify-content: space-between;
@@ -83,8 +80,7 @@
 }
 
 // Catalog filters section
-.catalog-filters-container {
-  
+.catalog-filters-container { 
   hr {
     border: none;
     height: 0;
@@ -153,55 +149,53 @@
 // Catalog container
 .catalog-container {
   flex: 1;
-}
 
-// Catalog products grid
-.catalog-products {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(550px, auto);
-  gap: 30px;
-}
+  .catalog-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(550px, auto);
+    gap: 30px;
 
-// Product card styling (matching selected products from index)
-.catalog-product {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  background-color: white;
-
-  img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      transition: box-shadow 0.3s ease;
-      
-      &:hover {
-          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    .catalog-product {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      background-color: white;
+    
+      img {
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+          transition: box-shadow 0.3s ease;
+          
+          &:hover {
+              box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+          }
       }
-  }
-
-  h4 {
-      font-weight: 700;
-      font-size: 19px;
-      color: #333;
-      margin: 20px 0 10px 0;
-      padding: 0 20px;
-  }
-
-  p {
-      font-weight: 400;
-      font-size: 19px;
-      color: #504E4A;
-      margin: 0 0 20px 0;
-  }
-
-  .btn {
-      margin-bottom: 20px;
+    
+      h4 {
+          font-weight: 700;
+          font-size: 19px;
+          color: #333;
+          margin: 20px 0 10px 0;
+          padding: 0 20px;
+      }
+    
+      p {
+          font-weight: 400;
+          font-size: 19px;
+          color: #504E4A;
+          margin: 0 0 20px 0;
+      }
+    
+      .btn {
+          margin-bottom: 20px;
+      }
+    }
   }
 }
 
@@ -284,136 +278,131 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-}
 
-// Search bar
-.search-bar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  
-  &.hidden {
-    display: none;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px 50px 10px 12px;
-    border: 2px solid #504E4A;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #504E4A;
+  .search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
     
-    &::placeholder {
+    &.hidden {
+      display: none;
+    }
+    
+    input {
+      width: 100%;
+      padding: 10px 50px 10px 12px;
+      border: 2px solid #504E4A;
+      border-radius: 4px;
+      font-size: 14px;
       color: #504E4A;
-    }
-    
-    &:focus {
-      outline: none;
-      border-color: $brand-color;
-    }
-  }
-  
-  button {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    background: none;
-    color: #504E4A;
-    border: none;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    
-    &:hover {
-      color: $brand-color;
-    }
-  }
-}
-
-// Top categories
-.top-categories {
-  h2 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  li {
-    overflow: hidden;
-    transition: box-shadow 0.3s ease;
-    
-    &:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-  }
-  
-  .category-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    
-    img {
-      max-width: 68px;
-      object-fit: cover;
-    }
-    
-    .category-info {
-      flex: 1;
       
-      h4 {
-        font-size: 15px;
-        font-weight: 400;
-        color: black;
-        margin: 0 0 5px 0;
-        line-height: 1.3;
+      &::placeholder {
+        color: #504E4A;
       }
+      
+      &:focus {
+        outline: none;
+        border-color: $brand-color;
+      }
+    }
+    
+    button {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background: none;
+      color: #504E4A;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      
+      &:hover {
+        color: $brand-color;
+      }
+    }
+  }
 
-      .product-stars {
-        display: flex;
-        gap: 2px;
+  .top-categories {
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    li {
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+      
+      &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+    }
+    
+    .category-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      
+      img {
+        max-width: 68px;
+        object-fit: cover;
+      }
+      
+      .category-info {
+        flex: 1;
         
-        .star {
-          font-size: 16px;
-          color: #ddd;
+        h4 {
+          font-size: 15px;
+          font-weight: 400;
+          color: black;
+          margin: 0 0 5px 0;
+          line-height: 1.3;
+        }
+  
+        .product-stars {
+          display: flex;
+          gap: 2px;
           
-          &.filled {
-            color: #ffd700;
+          .star {
+            font-size: 16px;
+            color: #ddd;
+            
+            &.filled {
+              color: #ffd700;
+            }
           }
         }
-      }
-      
-      p {
-        font-size: 15px;
-        font-weight: 400;
-        color: black;
-        margin-top: 5px;
-        margin-bottom: 0;
+        
+        p {
+          font-size: 15px;
+          font-weight: 400;
+          color: black;
+          margin-top: 5px;
+          margin-bottom: 0;
+        }
       }
     }
   }
 }
 
-// ========================================
-// MEDIA QUERIES
-// ========================================
-
+// Responsive design
 @media (max-width: 1200px) {
   .catalog-main {
     padding: 80px 100px;

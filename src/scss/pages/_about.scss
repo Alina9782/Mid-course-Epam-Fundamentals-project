@@ -1,4 +1,4 @@
-// About Us section styles
+// Head section styles
 .about-us-head-section {
   position: relative;
   background-image: url('../assets/img/images/about-us-background.png');
@@ -50,7 +50,7 @@
   }
 }
 
-// About Us Benefits section styles
+// Benefits section styles
 .about-us-benefits-section {
   padding: 60px 20px;
   margin: 0 200px;
@@ -113,7 +113,7 @@
   }
 }
 
-// About Us Arrivals section styles
+// Arrivals section styles
 .about-us-arrivals-section {
   display: flex;
   min-height: 500px;
@@ -173,105 +173,7 @@
   }
 }
 
-// Responsive styles for arrivals section
-@media (max-width: 1440px) {
-  .about-us-arrivals-section {
-    margin: 0 100px;
-    margin-bottom: 40px;
-  }
-  
-  .arrivals-content {
-    padding: 50px 30px;
-    
-    h3 {
-      font-size: clamp(32px, 4vw, 40px);
-    }
-  }
-}
-
-@media (max-width: 1024px) {
-  .about-us-arrivals-section {
-    flex-direction: column;
-    margin: 0 50px;
-    margin-bottom: 30px;
-    min-height: auto;
-  }
-  
-  .arrivals-content {
-    padding: 40px 30px;
-    order: 1;
-    
-    h3 {
-      font-size: clamp(28px, 5vw, 36px);
-      text-align: center;
-    }
-    
-    p {
-      text-align: center;
-    }
-    
-    .btn {
-      align-self: center;
-    }
-  }
-  
-  .arrivals-image {
-    order: 2;
-    min-height: 300px;
-    max-height: 400px;
-    
-    img {
-      min-height: 300px;
-      max-height: 400px;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .about-us-head-section {
-    max-height: 200px;
-    padding: 55px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0px;
-    
-    h2 {
-        font-size: 30px;
-        margin: 0;
-    }
-  }
-
-  .about-us-arrivals-section {
-    margin: 0 20px;
-    margin-bottom: 20px;
-  }
-  
-  .arrivals-content {
-    padding: 30px 20px;
-    
-    h3 {
-      font-size: clamp(24px, 6vw, 32px);
-    }
-    
-    p {
-      font-size: 16px;
-    }
-  }
-  
-  .arrivals-image {
-    min-height: 250px;
-    max-height: 300px;
-    
-    img {
-      min-height: 250px;
-      max-height: 300px;
-    }
-  }
-}
-
-// About Us Team section styles
+// Team section styles
 .about-us-team-section {
   padding: 80px 20px;
   text-align: center;
@@ -341,122 +243,6 @@
   }
 }
 
-// Responsive styles for team section
-@media (max-width: 1440px) {
-  .about-us-team-section {
-    margin: 0 50px;
-    margin-bottom: 40px;
-    padding: 60px 20px;
-    
-    h3 {
-      font-size: clamp(32px, 4vw, 40px);
-    }
-    
-    hr {
-      max-width: 300px;
-      margin-bottom: 40px;
-    }
-  }
-  
-  .team-members {
-    gap: 20px;
-  }
-  
-  .team-member-card {
-    min-width: 200px;
-    max-width: 250px;
-    
-    img {
-      width: 300px;
-      height: 250px;
-    }
-    
-    h4 {
-      font-size: 20px;
-    }
-  }
-}
-
-@media (max-width: 1024px) {
-  .about-us-team-section {
-    margin: 0 50px;
-    margin-bottom: 30px;
-    padding: 40px 20px;
-    
-    h3 {
-      font-size: clamp(28px, 5vw, 36px);
-    }
-    
-    hr {
-      max-width: 250px;
-      margin-bottom: 30px;
-    }
-  }
-  
-  .team-members {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-  }
-  
-  .team-member-card {
-    min-width: auto;
-    max-width: 300px;
-    width: 100%;
-    
-    img {
-      width: 250px;
-      height: 200px;
-    }
-    
-    h4 {
-      font-size: 18px;
-    }
-    
-    p {
-      font-size: 16px;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .about-us-team-section {
-    margin: 0 20px;
-    margin-bottom: 20px;
-    padding: 30px 15px;
-    
-    h3 {
-      font-size: clamp(24px, 6vw, 32px);
-    }
-    
-    hr {
-      max-width: 200px;
-      margin-bottom: 25px;
-    }
-  }
-  
-  .team-members {
-    gap: 25px;
-  }
-  
-  .team-member-card {
-    max-width: 280px;
-    
-    img {
-      width: 200px;
-      height: 160px;
-    }
-    
-    h4 {
-      font-size: 16px;
-    }
-    
-    p {
-      font-size: 14px;
-    }
-  }
-}
-
 // Banner section styles
 .banner-section {
   position: relative;
@@ -466,7 +252,7 @@
   background-repeat: no-repeat;
   width: calc(100% - 400px);
   max-width: 1300px;
-  margin: 0px 200px 200px 200px;
+  margin: 0px 200px 100px 200px;
   display: flex;
   min-height: 300px;
   aspect-ratio: 1300/370;
@@ -553,7 +339,54 @@
   }
 }
 
+// Responsive design
 @media (max-width: 1440px) {
+  .about-us-arrivals-section {
+    margin: 0 100px;
+    margin-bottom: 40px;
+  }
+  
+  .arrivals-content {
+    padding: 50px 30px;
+    
+    h3 {
+      font-size: clamp(32px, 4vw, 40px);
+    }
+  }
+
+  .about-us-team-section {
+    margin: 0 50px;
+    margin-bottom: 40px;
+    padding: 60px 20px;
+    
+    h3 {
+      font-size: clamp(32px, 4vw, 40px);
+    }
+    
+    hr {
+      max-width: 300px;
+      margin-bottom: 40px;
+    }
+  }
+  
+  .team-members {
+    gap: 20px;
+  }
+  
+  .team-member-card {
+    min-width: 200px;
+    max-width: 250px;
+    
+    img {
+      width: 300px;
+      height: 250px;
+    }
+    
+    h4 {
+      font-size: 20px;
+    }
+  }
+
   .banner-section {
     width: calc(100% - 200px);
     margin: 0px 100px 100px 100px;
@@ -562,6 +395,82 @@
 }
 
 @media (max-width: 1024px) {
+  .about-us-arrivals-section {
+    flex-direction: column;
+    margin: 0 50px;
+    margin-bottom: 30px;
+    min-height: auto;
+  }
+  
+  .arrivals-content {
+    padding: 40px 30px;
+    order: 1;
+    
+    h3 {
+      font-size: clamp(28px, 5vw, 36px);
+      text-align: center;
+    }
+    
+    p {
+      text-align: center;
+    }
+    
+    .btn {
+      align-self: center;
+    }
+  }
+  
+  .arrivals-image {
+    order: 2;
+    min-height: 300px;
+    max-height: 400px;
+    
+    img {
+      min-height: 300px;
+      max-height: 400px;
+    }
+  }
+
+  .about-us-team-section {
+    margin: 0 50px;
+    margin-bottom: 30px;
+    padding: 40px 20px;
+    
+    h3 {
+      font-size: clamp(28px, 5vw, 36px);
+    }
+    
+    hr {
+      max-width: 250px;
+      margin-bottom: 30px;
+    }
+  }
+  
+  .team-members {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .team-member-card {
+    min-width: auto;
+    max-width: 300px;
+    width: 100%;
+    
+    img {
+      width: 250px;
+      height: 200px;
+    }
+    
+    h4 {
+      font-size: 18px;
+    }
+    
+    p {
+      font-size: 16px;
+    }
+  }
+
   .about-us-benefits-section {
     margin: 0px 100px;
   }
@@ -595,6 +504,84 @@
 }
 
 @media (max-width: 768px) {
+  .about-us-head-section {
+    max-height: 200px;
+    padding: 55px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+    
+    h2 {
+        font-size: 30px;
+        margin: 0;
+    }
+  }
+
+  .about-us-arrivals-section {
+    margin: 0 20px;
+    margin-bottom: 20px;
+  }
+  
+  .arrivals-content {
+    padding: 30px 20px;
+    
+    h3 {
+      font-size: clamp(24px, 6vw, 32px);
+    }
+    
+    p {
+      font-size: 16px;
+    }
+  }
+  
+  .arrivals-image {
+    min-height: 250px;
+    max-height: 300px;
+    
+    img {
+      min-height: 250px;
+      max-height: 300px;
+    }
+  }
+
+  .about-us-team-section {
+    margin: 0 20px;
+    margin-bottom: 20px;
+    padding: 30px 15px;
+    
+    h3 {
+      font-size: clamp(24px, 6vw, 32px);
+    }
+    
+    hr {
+      max-width: 200px;
+      margin-bottom: 25px;
+    }
+  }
+  
+  .team-members {
+    gap: 25px;
+  }
+  
+  .team-member-card {
+    max-width: 280px;
+    
+    img {
+      width: 200px;
+      height: 160px;
+    }
+    
+    h4 {
+      font-size: 16px;
+    }
+    
+    p {
+      font-size: 14px;
+    }
+  }
+
   .about-us-benefits-section {
     margin: 0px 50px;
   }

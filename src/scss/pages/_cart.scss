@@ -32,17 +32,6 @@
         margin: auto;
     }
 }
-  
-@media (max-width: 1024px) {
-    .cart-head-section {
-        max-height: 180px;
-        
-        h2 {
-            font-size: 40px;
-            margin: auto;
-        }
-    }
-}
 
 // Cart items section styles
 .cart-items-section {
@@ -187,32 +176,6 @@
     max-width: 500px;
     width: 100%;
     
-    // Responsive margins and sizing - ordered from largest to smallest
-    // @media (min-width: 1600px) {
-    //     margin-right: min(15vw, 300px);
-    //     max-width: min(35vw, 600px);
-    // }
-    
-    // @media (min-width: 1400px) and (max-width: 1599px) {
-    //     margin-right: min(12vw, 200px);
-    //     max-width: min(32vw, 570px);
-    // }
-    
-    // @media (min-width: 1025px) and (max-width: 1399px) {
-    //     margin-right: 200px;
-    //     max-width: 570px;
-    // }
-    
-    // @media (max-width: 1024px) and (min-width: 769px) {
-    //     margin-right: 50px;
-    //     max-width: 400px;
-    // }
-    
-    // @media (max-width: 768px) {
-    //     margin-right: 20px;
-    //     max-width: 350px;
-    // }
-    
     .checkout-row {
         display: flex;
         justify-content: space-between;
@@ -283,6 +246,15 @@
 }
 
 @media (max-width: 1024px) {
+    .cart-head-section {
+        max-height: 180px;
+        
+        h2 {
+            font-size: 40px;
+            margin: auto;
+        }
+    }
+
     .cart-items-section {
         margin: 0 50px;
         
