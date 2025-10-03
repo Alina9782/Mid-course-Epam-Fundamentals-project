@@ -853,9 +853,14 @@ function initCatalogPagination() {
         return;
     }
     
+    if (catalogProducts.length === 0) {
+        console.log('No catalog products found, skipping pagination initialization');
+        return;
+    }
+    
     let currentPage = 1;
-    const productsPerPage = 12;
     const totalProducts = catalogProducts.length;
+    const productsPerPage = 12; // Always 12 products per page
     const totalPages = Math.ceil(totalProducts / productsPerPage);
     
     // Function to show/hide products based on current page
@@ -999,6 +1004,123 @@ function initCatalogFilters() {
         }
         
         console.log('All filters cleared successfully');
+        
+        // Re-apply filters (which will show all products)
+        applyFilters();
+    }
+    
+    // Function to apply filters to products
+    function applyFilters() {
+        if (!allProducts || allProducts.length === 0) {
+            console.log('No products loaded yet, skipping filter application');
+            return;
+        }
+        
+        // Get current filter values
+        const sizeFilter = document.getElementById('size')?.value || 'all';
+        const colorFilter = document.getElementById('color')?.value || 'all';
+        const categoryFilter = document.getElementById('category')?.value || 'all';
+        const salesFilter = document.getElementById('sales')?.checked || false;
+        const sortValue = document.getElementById('sort')?.value || 'default';
+        
+        console.log('Applying filters:', { sizeFilter, colorFilter, categoryFilter, salesFilter, sortValue });
+        
+        // Filter products based on selected criteria
+        let filteredProducts = allProducts.filter(product => {
+            // Size filter
+            if (sizeFilter !== 'all' && product.size.toLowerCase() !== sizeFilter.toLowerCase()) {
+                return false;
+            }
+            
+            // Color filter
+            if (colorFilter !== 'all' && product.color.toLowerCase() !== colorFilter.toLowerCase()) {
+                return false;
+            }
+            
+            // Category filter
+            if (categoryFilter !== 'all' && product.category !== categoryFilter) {
+                return false;
+            }
+            
+            // Sales filter
+            if (salesFilter && !product.salesStatus) {
+                return false;
+            }
+            
+            return true;
+        });
+        
+        console.log(`Filtered ${allProducts.length} products to ${filteredProducts.length} products`);
+        
+        // Sort the filtered products
+        const sortedProducts = sortProducts(filteredProducts, sortValue);
+        console.log(`Sorted ${sortedProducts.length} products by ${sortValue}`);
+        
+        // Update the displayed products
+        updateFilteredProducts(sortedProducts);
+    }
+    
+    // Function to update displayed products
+    function updateFilteredProducts(filteredProducts) {
+        const catalogProductsContainer = document.querySelector('.catalog-products');
+        
+        if (!catalogProductsContainer) {
+            console.warn('Catalog products container not found');
+            return;
+        }
+        
+        // Clear existing products
+        catalogProductsContainer.innerHTML = '';
+        
+        // Generate filtered product cards
+        const currentPath = window.location.pathname;
+        const isInPagesDir = currentPath.includes('/pages/');
+        
+        filteredProducts.forEach(product => {
+            const productCard = createProductCard(product, isInPagesDir);
+            catalogProductsContainer.appendChild(productCard);
+        });
+        
+        // Re-initialize pagination with filtered products
+        setTimeout(() => {
+            initCatalogPagination();
+        }, 100);
+        
+        console.log(`Updated display with ${filteredProducts.length} filtered and sorted products`);
+    }
+    
+    // Function to sort products based on selected criteria
+    function sortProducts(products, sortValue) {
+        if (!products || products.length === 0) {
+            return products;
+        }
+        
+        let sortedProducts = [...products]; // Create a copy to avoid mutating original array
+        
+        switch (sortValue) {
+            case 'popularity':
+                sortedProducts.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+                console.log('Sorted by popularity (high to low)');
+                break;
+                
+            case 'price-asc':
+                sortedProducts.sort((a, b) => (a.price || 0) - (b.price || 0));
+                console.log('Sorted by price (low to high)');
+                break;
+                
+            case 'price-desc':
+                sortedProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
+                console.log('Sorted by price (high to low)');
+                break;
+                
+            case 'default':
+            default:
+                // Keep original order (as they appear in JSON)
+                console.log('Using default sorting (original order)');
+                break;
+        }
+        
+        return sortedProducts;
     }
     
     // Add click event listener to FILTERS button
@@ -1021,6 +1143,29 @@ function initCatalogFilters() {
             e.preventDefault();
             clearAllFilters();
         });
+    }
+    
+    // Add event listeners to filter controls for real-time filtering
+    const sizeSelect = document.getElementById('size');
+    const colorSelect = document.getElementById('color');
+    const categorySelect = document.getElementById('category');
+    const salesRadio = document.getElementById('sales');
+    const sortSelect = document.getElementById('sort');
+    
+    if (sizeSelect) {
+        sizeSelect.addEventListener('change', applyFilters);
+    }
+    if (colorSelect) {
+        colorSelect.addEventListener('change', applyFilters);
+    }
+    if (categorySelect) {
+        categorySelect.addEventListener('change', applyFilters);
+    }
+    if (salesRadio) {
+        salesRadio.addEventListener('change', applyFilters);
+    }
+    if (sortSelect) {
+        sortSelect.addEventListener('change', applyFilters);
     }
     
     console.log('Catalog filters initialized successfully');
@@ -1093,6 +1238,482 @@ async function initHeaderAndFooter() {
     }
 }
 
+// Global variable to store loaded products
+let allProducts = [];
+
+// Load and populate catalog products from data.json
+async function initCatalogProducts() {
+    console.log('Loading catalog products...');
+    
+    const catalogProductsContainer = document.querySelector('.catalog-products');
+    
+    if (!catalogProductsContainer) {
+        console.warn('Catalog products container not found');
+        return;
+    }
+    
+    // Determine the correct path based on current page location
+    const currentPath = window.location.pathname;
+    const isInPagesDir = currentPath.includes('/pages/');
+    const dataPath = isInPagesDir ? '../assets/data.json' : 'assets/data.json';
+    
+    try {
+        // Load products data
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load products data: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        allProducts = data.data; // Store products globally
+        
+        // Clear existing products
+        catalogProductsContainer.innerHTML = '';
+        
+        // Generate product cards
+        allProducts.forEach(product => {
+            const productCard = createProductCard(product, isInPagesDir);
+            catalogProductsContainer.appendChild(productCard);
+        });
+        
+        console.log(`Loaded ${allProducts.length} products successfully`);
+        
+        // Re-initialize pagination after products are loaded
+        setTimeout(() => {
+            initCatalogPagination();
+        }, 100);
+        
+    } catch (error) {
+        console.error('Error loading catalog products:', error);
+    }
+}
+
+// Create individual product card element
+function createProductCard(product, isInPagesDir) {
+    const productDiv = document.createElement('div');
+    productDiv.className = 'catalog-product';
+    productDiv.dataset.productId = product.id; // Store product ID for future use
+    
+    // Add 'sale' class if salesStatus is true
+    if (product.salesStatus) {
+        productDiv.classList.add('sale');
+    }
+    
+    // Set correct asset path
+    const assetPath = isInPagesDir ? '../assets/' : 'assets/';
+    
+    productDiv.innerHTML = `
+        <img src="${assetPath}${product.imageUrl}" alt="${product.name}">
+        <h4>${product.name}</h4>
+        <p>$${product.price}</p>
+        <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+    `;
+    
+    // Add click event listener for Add to Cart button
+    const addToCartBtn = productDiv.querySelector('.add-to-cart-btn');
+    addToCartBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        addToCart(product);
+    });
+    
+    return productDiv;
+}
+
+// Add product to cart function
+function addToCart(product) {
+    console.log('Adding to cart:', product.name);
+    
+    // Get existing cart from localStorage or create new one
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Check if product already exists in cart
+    const existingItem = cart.find(item => item.id === product.id);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            imageUrl: product.imageUrl,
+            quantity: 1
+        });
+    }
+    
+    // Save updated cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Update cart counter in header
+    updateCartCounter();
+    
+    // Show success message (optional)
+    console.log(`${product.name} added to cart!`);
+}
+
+// Update cart counter in header
+function updateCartCounter() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    const cartCounters = document.querySelectorAll('.cart-counter');
+    cartCounters.forEach(counter => {
+        counter.textContent = totalItems;
+    });
+}
+
+// Initialize cart counter on page load
+function initCartCounter() {
+    // Wait for header to be loaded before updating counter
+    setTimeout(() => {
+        updateCartCounter();
+    }, 100);
+}
+
+// Load and populate luggage sets from data.json
+async function initLuggageSets() {
+    console.log('Loading luggage sets...');
+    
+    const topCategoriesContainer = document.querySelector('.top-categories ul');
+    
+    if (!topCategoriesContainer) {
+        console.warn('Top categories container not found');
+        return;
+    }
+    
+    // Determine the correct path based on current page location
+    const currentPath = window.location.pathname;
+    const isInPagesDir = currentPath.includes('/pages/');
+    const dataPath = isInPagesDir ? '../assets/data.json' : 'assets/data.json';
+    
+    try {
+        // Load products data
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load products data: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const allProducts = data.data;
+        
+        // Filter products by category "luggage sets"
+        const luggageSets = allProducts.filter(product => product.category === 'luggage sets');
+        
+        // Clear existing items
+        topCategoriesContainer.innerHTML = '';
+        
+        // Generate category items
+        luggageSets.forEach(product => {
+            const categoryItem = createCategoryItem(product, isInPagesDir);
+            topCategoriesContainer.appendChild(categoryItem);
+        });
+        
+        console.log(`Loaded ${luggageSets.length} luggage sets successfully`);
+        
+    } catch (error) {
+        console.error('Error loading luggage sets:', error);
+    }
+}
+
+// Create individual category item element
+function createCategoryItem(product, isInPagesDir) {
+    const li = document.createElement('li');
+    
+    // Set correct asset path
+    const assetPath = isInPagesDir ? '../assets/' : 'assets/';
+    
+    // Generate stars based on rating
+    const stars = generateStars(product.rating);
+    
+    li.innerHTML = `
+        <div class="category-item">
+            <img src="${assetPath}${product.imageUrl}" alt="${product.name}">
+            <div class="category-info">
+                <h4>${product.name}</h4>
+                <div class="product-stars">
+                    ${stars}
+                </div>
+                <p>$${product.price}</p>
+            </div>
+        </div>
+    `;
+    
+    return li;
+}
+
+// Generate star HTML based on rating
+function generateStars(rating) {
+    let starsHTML = '';
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    
+    // Add filled stars
+    for (let i = 0; i < fullStars; i++) {
+        starsHTML += '<span class="star filled">★</span>';
+    }
+    
+    // Add half star if needed
+    if (hasHalfStar) {
+        starsHTML += '<span class="star half">★</span>';
+    }
+    
+    // Add empty stars
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    for (let i = 0; i < emptyStars; i++) {
+        starsHTML += '<span class="star">★</span>';
+    }
+    
+    return starsHTML;
+}
+
+// Load and populate selected products from data.json
+async function initSelectedProducts() {
+    console.log('Loading selected products...');
+    
+    const selectedCardsContainer = document.querySelector('.selected-cards');
+    
+    if (!selectedCardsContainer) {
+        console.warn('Selected cards container not found');
+        return;
+    }
+    
+    // Determine the correct path based on current page location
+    const currentPath = window.location.pathname;
+    const isInPagesDir = currentPath.includes('/pages/');
+    const dataPath = isInPagesDir ? '../assets/data.json' : 'assets/data.json';
+    
+    try {
+        // Load products data
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load products data: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const allProducts = data.data;
+        
+        // Filter products that have "Selected Products" in their blocks
+        const selectedProducts = allProducts.filter(product => 
+            product.blocks && product.blocks.includes('Selected Products')
+        );
+        
+        // Limit to maximum 4 products
+        const limitedSelectedProducts = selectedProducts.slice(0, 4);
+        
+        // Clear existing items
+        selectedCardsContainer.innerHTML = '';
+        
+        // Generate selected cards
+        limitedSelectedProducts.forEach(product => {
+            const selectedCard = createSelectedCard(product, isInPagesDir);
+            selectedCardsContainer.appendChild(selectedCard);
+        });
+        
+        console.log(`Loaded ${limitedSelectedProducts.length} selected products successfully (showing max 4)`);
+        
+    } catch (error) {
+        console.error('Error loading selected products:', error);
+    }
+}
+
+// Create individual selected card element
+function createSelectedCard(product, isInPagesDir) {
+    const li = document.createElement('li');
+    li.className = 'selected-card';
+    
+    // Add 'sale' class if salesStatus is true
+    if (product.salesStatus) {
+        li.classList.add('sale');
+    }
+    
+    li.dataset.productId = product.id; // Store product ID for future use
+    
+    // Set correct asset path
+    const assetPath = isInPagesDir ? '../assets/' : 'assets/';
+    
+    li.innerHTML = `
+        <img src="${assetPath}${product.imageUrl}" alt="${product.name}">
+        <h4>${product.name}</h4>
+        <p>$${product.price}</p>
+        <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+    `;
+    
+    // Add click event listener for Add to Cart button
+    const addToCartBtn = li.querySelector('.add-to-cart-btn');
+    addToCartBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        addToCart(product);
+    });
+    
+    return li;
+}
+
+// Load and populate new arrivals from data.json
+async function initNewArrivals() {
+    console.log('Loading new arrivals...');
+    
+    const newArrivalsCardsContainer = document.querySelector('.new-arrivals-cards');
+    
+    if (!newArrivalsCardsContainer) {
+        console.warn('New arrivals cards container not found');
+        return;
+    }
+    
+    // Determine the correct path based on current page location
+    const currentPath = window.location.pathname;
+    const isInPagesDir = currentPath.includes('/pages/');
+    const dataPath = isInPagesDir ? '../assets/data.json' : 'assets/data.json';
+    
+    try {
+        // Load products data
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load products data: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const allProducts = data.data;
+        
+        // Filter products that have "New Products Arrival" in their blocks
+        const newArrivalsProducts = allProducts.filter(product => 
+            product.blocks && product.blocks.includes('New Products Arrival')
+        );
+        
+        // Limit to maximum 4 products
+        const limitedNewArrivals = newArrivalsProducts.slice(0, 4);
+        
+        // Clear existing items
+        newArrivalsCardsContainer.innerHTML = '';
+        
+        // Generate new arrivals cards
+        limitedNewArrivals.forEach(product => {
+            const newArrivalsCard = createNewArrivalsCard(product, isInPagesDir);
+            newArrivalsCardsContainer.appendChild(newArrivalsCard);
+        });
+        
+        console.log(`Loaded ${limitedNewArrivals.length} new arrivals successfully (showing max 4)`);
+        
+    } catch (error) {
+        console.error('Error loading new arrivals:', error);
+    }
+}
+
+// Create individual new arrivals card element
+function createNewArrivalsCard(product, isInPagesDir) {
+    const li = document.createElement('li');
+    li.className = 'new-arrivals-card';
+    
+    // Add 'sale' class if salesStatus is true
+    if (product.salesStatus) {
+        li.classList.add('sale');
+    }
+    
+    li.dataset.productId = product.id; // Store product ID for future use
+    
+    // Set correct asset path
+    const assetPath = isInPagesDir ? '../assets/' : 'assets/';
+    
+    li.innerHTML = `
+        <img src="${assetPath}${product.imageUrl}" alt="${product.name}">
+        <h4>${product.name}</h4>
+        <p>$${product.price}</p>
+        <button class="btn view-product-btn" data-product-id="${product.id}">View Product</button>
+    `;
+    
+    // Add click event listener for View Product button
+    const viewProductBtn = li.querySelector('.view-product-btn');
+    viewProductBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        // You can add navigation to product details page here
+        console.log('View product:', product.name);
+        // For now, just log - you can implement navigation later
+    });
+    
+    return li;
+}
+
+// Load and populate "You May Also Like" products from data.json
+async function initAlsoLikeProducts() {
+    console.log('Loading You May Also Like products...');
+    
+    const alsoLikeCardsContainer = document.querySelector('.also-like-cards');
+    
+    if (!alsoLikeCardsContainer) {
+        console.warn('Also like cards container not found');
+        return;
+    }
+    
+    // Determine the correct path based on current page location
+    const currentPath = window.location.pathname;
+    const isInPagesDir = currentPath.includes('/pages/');
+    const dataPath = isInPagesDir ? '../assets/data.json' : 'assets/data.json';
+    
+    try {
+        // Load products data
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load products data: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const allProducts = data.data;
+        
+        // Filter products that have "You May Also Like" in their blocks
+        const alsoLikeProducts = allProducts.filter(product => 
+            product.blocks && product.blocks.includes('You May Also Like')
+        );
+        
+        // Limit to maximum 4 products
+        const limitedAlsoLikeProducts = alsoLikeProducts.slice(0, 4);
+        
+        // Clear existing items
+        alsoLikeCardsContainer.innerHTML = '';
+        
+        // Generate also like cards
+        limitedAlsoLikeProducts.forEach(product => {
+            const alsoLikeCard = createAlsoLikeCard(product, isInPagesDir);
+            alsoLikeCardsContainer.appendChild(alsoLikeCard);
+        });
+        
+        console.log(`Loaded ${limitedAlsoLikeProducts.length} You May Also Like products successfully (showing max 4)`);
+        
+    } catch (error) {
+        console.error('Error loading You May Also Like products:', error);
+    }
+}
+
+// Create individual also like card element
+function createAlsoLikeCard(product, isInPagesDir) {
+    const li = document.createElement('li');
+    li.className = 'also-like-card';
+    
+    // Add 'sale' class if salesStatus is true
+    if (product.salesStatus) {
+        li.classList.add('sale');
+    }
+    
+    li.dataset.productId = product.id; // Store product ID for future use
+    
+    // Set correct asset path
+    const assetPath = isInPagesDir ? '../assets/' : 'assets/';
+    
+    li.innerHTML = `
+        <img src="${assetPath}${product.imageUrl}" alt="${product.name}">
+        <h4>${product.name}</h4>
+        <p>$${product.price}</p>
+        <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+    `;
+    
+    // Add click event listener for Add to Cart button
+    const addToCartBtn = li.querySelector('.add-to-cart-btn');
+    addToCartBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        addToCart(product);
+    });
+    
+    return li;
+}
+
 // Fetch and inject partial product-card.html
 async function initProductCard() {
     console.log('Initializing product card...');
@@ -1139,6 +1760,8 @@ async function initProductCard() {
     }
 }
 
+
+
 // Initialize when ready
 ready(function() {
     console.log('DOM ready, initializing features...');
@@ -1149,8 +1772,13 @@ ready(function() {
     initStyledPlaceholders();
     initAuthModals();
     initContactForm();
-    initCatalogPagination();
     initCatalogFilters();
     initHeaderAndFooter();
     initProductCard();
+    initCatalogProducts();
+    initLuggageSets();
+    initSelectedProducts();
+    initNewArrivals();
+    initAlsoLikeProducts();
+    initCartCounter();
 });
