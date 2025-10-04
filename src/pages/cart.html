@@ -152,34 +152,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><img src="../assets/img/images/products/suitcase-red.png" alt="Product Image"></td>
-                        <td>Nomad Haven</td>
-                        <td>$250</td>
-                        <td>
-                            <div class="quantity-controls">
-                                <button class="quantity-btn minus">-</button>
-                                <input type="number" id="quantity" value="1" min="1">
-                                <button class="quantity-btn plus">+</button>
-                            </div>
-                        </td>
-                        <td>$250</td>
-                        <td><button><img src="../assets/img/icons/bin-icon.svg" alt="Delete icon"></button></td>
-                    </tr>
-                    <tr>
-                        <td><img src="../assets/img/images/products/suitcase-red.png" alt="Product Image"></td>
-                        <td>Nomad Haven</td>
-                        <td>$250</td>
-                        <td>
-                            <div class="quantity-controls">
-                                <button class="quantity-btn minus">-</button>
-                                <input type="number" id="quantity" value="1" min="1">
-                                <button class="quantity-btn plus">+</button>
-                            </div>
-                        </td>
-                        <td>$250</td>
-                        <td><button><img src="../assets/img/icons/bin-icon.svg" alt="Delete icon"></button></td>
-                    </tr>
+                    <!-- Cart items will be injected here -->
                 </tbody>
                 <tfoot>
                     <tr>
@@ -193,22 +166,22 @@
         <section class="cart-checkout-section">
             <div class="checkout-row">
                 <h4>Sub Total</h4>
-                <p>$1000</p>
+                <p id="subTotal">$0</p>
             </div>
             <hr>
             <div class="checkout-row discount-row">
                 <h4>Discount</h4>
-                <p>$100</p>
+                <p id="discount">$0</p>
             </div>
             <hr class="discount-hr">
             <div class="checkout-row">
                 <h4>Shipping</h4>
-                <p>$30</p>
+                <p id="shipping">$100</p>
             </div>
             <hr>
             <div class="checkout-row total-row">
                 <h4>Total</h4>
-                <p>$930</p>
+                <p id="total">$0</p>
             </div>
             <hr>
             <button class="btn">CHECKOUT</button>

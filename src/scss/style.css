@@ -462,6 +462,43 @@ input:invalid:not(:placeholder-shown) {
   gap: 0;
   margin-bottom: 80px;
 }
+.product-container .product .product-description-header h2 {
+  font-weight: 700;
+  font-size: 30px;
+  color: #333;
+  margin-bottom: 15px;
+  font-family: inherit;
+}
+.product-container .product .product-description-header .product-reviews {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.product-container .product .product-description-header .product-reviews .product-stars {
+  display: flex;
+  gap: 2px;
+}
+.product-container .product .product-description-header .product-reviews .product-stars .star {
+  font-size: 18px;
+  color: #ddd;
+}
+.product-container .product .product-description-header .product-reviews .product-stars .star.filled {
+  color: #ffd700;
+}
+.product-container .product .product-description-header .product-reviews .reviews-count {
+  font-weight: 400;
+  font-size: 13px;
+  color: #504E4A;
+  font-family: inherit;
+}
+.product-container .product .product-description-header h3 {
+  font-weight: 700;
+  font-size: 24px;
+  color: black;
+  margin: 0;
+  font-family: inherit;
+}
 .product-container .product .product-images {
   flex: 1;
   display: flex;
@@ -923,13 +960,28 @@ input:invalid:not(:placeholder-shown) {
     padding: 60px 100px;
   }
 }
+@media (min-width: 1025px) {
+  .product-container .product .product-description-header.hidden {
+    display: none !important;
+  }
+  .product-container .product .product-description .product-description-header {
+    display: block !important;
+  }
+}
 @media (max-width: 1024px) {
   .product-container {
-    padding: 40px 50px;
+    padding: 10px 50px;
   }
   .product-container .product {
     flex-direction: column;
     gap: 30px;
+  }
+  .product-container .product .product-description-header.hidden {
+    display: block;
+    margin-bottom: 20px;
+  }
+  .product-container .product .product-description .product-description-header {
+    display: none;
   }
   .product-container .product .product-description {
     padding-left: 0;
@@ -937,7 +989,7 @@ input:invalid:not(:placeholder-shown) {
 }
 @media (max-width: 768px) {
   .product-container {
-    padding: 30px 20px;
+    padding: 0px 20px;
   }
   .product-container .product {
     margin-bottom: 0px;

@@ -6,6 +6,52 @@
         display: flex;
         gap: 0;
         margin-bottom: 80px;
+
+        .product-description-header {
+            h2 {
+                font-weight: 700;
+                font-size: 30px;
+                color: #333;
+                margin-bottom: 15px;
+                font-family: inherit;
+            }
+            
+            .product-reviews {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 15px;
+                
+                .product-stars {
+                    display: flex;
+                    gap: 2px;
+                    
+                    .star {
+                        font-size: 18px;
+                        color: #ddd;
+                        
+                        &.filled {
+                            color: #ffd700;
+                        }
+                    }
+                }
+                
+                .reviews-count {
+                    font-weight: 400;
+                    font-size: 13px;
+                    color: #504E4A;
+                    font-family: inherit;
+                }
+            }
+            
+            h3 {
+                font-weight: 700;
+                font-size: 24px;
+                color: black;
+                margin: 0;
+                font-family: inherit;
+            }
+        }
         
         .product-images {
             flex: 1;
@@ -571,13 +617,39 @@
     }
 }
 
+// Ensure proper header visibility above 1024px
+@media (min-width: 1025px) {
+    .product-container .product {
+        // Keep the hidden header hidden on larger screens
+        .product-description-header.hidden {
+            display: none !important;
+        }
+        
+        // Keep the header inside product-description visible on larger screens
+        .product-description .product-description-header {
+            display: block !important;
+        }
+    }
+}
+
 @media (max-width: 1024px) {
     .product-container {
-        padding: 40px 50px;
+        padding: 10px 50px;
         
         .product {
             flex-direction: column;
             gap: 30px;
+            
+            // Show the hidden header at the top
+            .product-description-header.hidden {
+                display: block;
+                margin-bottom: 20px;
+            }
+            
+            // Hide the header inside product-description
+            .product-description .product-description-header {
+                display: none;
+            }
             
             .product-description {
                 padding-left: 0;
@@ -588,7 +660,7 @@
 
 @media (max-width: 768px) {
     .product-container {
-        padding: 30px 20px;
+        padding: 0px 20px;
         
         .product {
             margin-bottom: 0px;

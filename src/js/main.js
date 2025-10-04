@@ -146,6 +146,95 @@ function initProductFeatures() {
         
         console.log('Thumbnail switching initialized');
     }
+    
+    // Add to Cart button functionality for product details page
+    const addToCartBtn = document.querySelector('.product-add-to-cart-item .btn');
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get current product data from the page
+            const productName = document.querySelector('.product-description-header h2')?.textContent;
+            const productPrice = document.querySelector('.product-description-header h3')?.textContent;
+            const productImage = document.querySelector('.product-images > img')?.src;
+            
+            if (!productName || !productPrice) {
+                console.error('Product data not found on page');
+                return;
+            }
+            
+            // Get quantity
+            const quantityInput = document.getElementById('quantity');
+            const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+            
+            // Extract price number from text (remove $ sign)
+            const price = parseFloat(productPrice.replace('$', ''));
+            
+            // Create product object
+            const product = {
+                id: 'PD_' + Date.now(), // Generate unique ID for product details
+                name: productName,
+                price: price,
+                imageUrl: productImage ? productImage.split('/').pop() : 'img/images/products/suitcase-red.png', // Extract filename
+                quantity: quantity
+            };
+            
+            // Add to cart with button feedback
+            addToCart(product, quantity, addToCartBtn);
+            
+            console.log('Product added to cart from details page:', product.name);
+        });
+        
+        console.log('Add to Cart button initialized for product details');
+    }
+    
+    // Submit button functionality for product review form
+    const submitBtn = document.querySelector('.product-reviews-form .btn');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get form elements
+            const reviewTextarea = document.querySelector('#text');
+            const nameInput = document.querySelector('.form-row input[type="text"]');
+            const emailInput = document.querySelector('.form-row input[type="email"]');
+            const saveInfoCheckbox = document.querySelector('#save-info');
+            
+            // Check if required fields are filled
+            if (!reviewTextarea.value.trim()) {
+                alert('Please enter your review');
+                reviewTextarea.focus();
+                return;
+            }
+            
+            if (!nameInput.value.trim()) {
+                alert('Please enter your name');
+                nameInput.focus();
+                return;
+            }
+            
+            if (!emailInput.value.trim() || !emailInput.checkValidity()) {
+                alert('Please enter a valid email address');
+                emailInput.focus();
+                return;
+            }
+            
+            // Show success feedback
+            showSubmitFeedback(submitBtn);
+            
+            // Clear form after successful submission
+            setTimeout(() => {
+                reviewTextarea.value = '';
+                nameInput.value = '';
+                emailInput.value = '';
+                saveInfoCheckbox.checked = false;
+            }, 2000);
+            
+            console.log('Review submitted successfully');
+        });
+        
+        console.log('Submit button initialized for product review form');
+    }
 }
 
 // Product details tabs functionality
@@ -1171,6 +1260,49 @@ function initCatalogFilters() {
     console.log('Catalog filters initialized successfully');
 }
 
+// Set active navigation state based on current page
+function setActiveNavigation(currentPath) {
+    console.log('Setting active navigation for path:', currentPath);
+    
+    // Remove active class from all navigation items
+    const allNavItems = document.querySelectorAll('.navItem');
+    allNavItems.forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Determine which navigation item should be active based on current path
+    let activeNavItem = null;
+    
+    if (currentPath.includes('/index.html') || currentPath.endsWith('/') || currentPath.endsWith('/src/')) {
+        // Home page
+        activeNavItem = document.querySelector('.navItem a[href*="index.html"]')?.closest('.navItem');
+    } else if (currentPath.includes('/catalog.html')) {
+        // Catalog page
+        activeNavItem = document.querySelector('.navItem a[href*="catalog.html"]')?.closest('.navItem');
+    } else if (currentPath.includes('/about.html')) {
+        // About page
+        activeNavItem = document.querySelector('.navItem a[href*="about.html"]')?.closest('.navItem');
+    } else if (currentPath.includes('/contact.html')) {
+        // Contact page
+        activeNavItem = document.querySelector('.navItem a[href*="contact.html"]')?.closest('.navItem');
+    } else if (currentPath.includes('/product-details-template.html')) {
+        // Product details page - could be considered part of catalog
+        activeNavItem = document.querySelector('.navItem a[href*="catalog.html"]')?.closest('.navItem');
+    } else if (currentPath.includes('/cart.html')) {
+        // Cart page - no specific nav item, could be considered part of catalog or stay unselected
+        // For now, we'll leave it unselected
+        console.log('Cart page - no active navigation item set');
+    }
+    
+    // Set the active class on the determined navigation item
+    if (activeNavItem) {
+        activeNavItem.classList.add('active');
+        console.log('Active navigation set to:', activeNavItem.querySelector('a').textContent.trim());
+    } else {
+        console.log('No matching navigation item found for current path');
+    }
+}
+
 // Fetch and inject partial header.html and footer.html
 async function initHeaderAndFooter() {
     console.log('Initializing header and footer...');
@@ -1211,6 +1343,9 @@ async function initHeaderAndFooter() {
         
         header.innerHTML = headerData;
         console.log('Header loaded successfully');
+        
+        // Set active navigation state after header is loaded
+        setActiveNavigation(currentPath);
         
         // Load footer
         const footerResponse = await fetch(`${componentsPath}footer.html`);
@@ -1303,8 +1438,8 @@ function createProductCard(product, isInPagesDir) {
     const assetPath = isInPagesDir ? '../assets/' : 'assets/';
     
     productDiv.innerHTML = `
-        <img src="${assetPath}${product.imageUrl}" alt="${product.name}">
-        <h4>${product.name}</h4>
+        <img src="${assetPath}${product.imageUrl}" alt="${product.name}" class="product-image" style="cursor: pointer;">
+        <h4 class="product-name" style="cursor: pointer;">${product.name}</h4>
         <p>$${product.price}</p>
         <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
     `;
@@ -1313,15 +1448,45 @@ function createProductCard(product, isInPagesDir) {
     const addToCartBtn = productDiv.querySelector('.add-to-cart-btn');
     addToCartBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        addToCart(product);
+        e.stopPropagation(); // Prevent event bubbling
+        addToCart(product, 1, addToCartBtn);
+    });
+    
+    // Add click event listeners for product name and image
+    const productImage = productDiv.querySelector('.product-image');
+    const productName = productDiv.querySelector('.product-name');
+    
+    productImage.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigateToProductDetails(product.id, isInPagesDir);
+    });
+    
+    productName.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigateToProductDetails(product.id, isInPagesDir);
     });
     
     return productDiv;
 }
 
+// Navigate to product details page
+function navigateToProductDetails(productId, isInPagesDir) {
+    console.log('Navigating to product details for ID:', productId);
+    
+    // Determine the correct path to product details page
+    const productDetailsPath = isInPagesDir ? 
+        `product-details-template.html?id=${productId}` : 
+        `pages/product-details-template.html?id=${productId}`;
+    
+    // Navigate to product details page
+    window.location.href = productDetailsPath;
+}
+
 // Add product to cart function
-function addToCart(product) {
-    console.log('Adding to cart:', product.name);
+function addToCart(product, quantity = 1, button = null) {
+    console.log('Adding to cart:', product.name, 'Quantity:', quantity);
     
     // Get existing cart from localStorage or create new one
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -1330,14 +1495,14 @@ function addToCart(product) {
     const existingItem = cart.find(item => item.id === product.id);
     
     if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += quantity;
     } else {
         cart.push({
             id: product.id,
             name: product.name,
             price: product.price,
             imageUrl: product.imageUrl,
-            quantity: 1
+            quantity: quantity
         });
     }
     
@@ -1347,8 +1512,57 @@ function addToCart(product) {
     // Update cart counter in header
     updateCartCounter();
     
+    // Show success feedback on button if provided
+    if (button) {
+        showAddToCartFeedback(button);
+    }
+    
     // Show success message (optional)
     console.log(`${product.name} added to cart!`);
+}
+
+// Show success feedback on add to cart button
+function showAddToCartFeedback(button) {
+    if (!button) return;
+    
+    const originalText = button.textContent;
+    const originalBgColor = button.style.backgroundColor;
+    
+    // Update button appearance
+    button.textContent = 'Added to Cart!';
+    button.style.backgroundColor = '#4CAF50';
+    button.style.color = 'white';
+    button.disabled = true;
+    
+    // Reset after 2 seconds
+    setTimeout(() => {
+        button.textContent = originalText;
+        button.style.backgroundColor = originalBgColor;
+        button.style.color = '';
+        button.disabled = false;
+    }, 2000);
+}
+
+// Show success feedback on submit button
+function showSubmitFeedback(button) {
+    if (!button) return;
+    
+    const originalText = button.textContent;
+    const originalBgColor = button.style.backgroundColor;
+    
+    // Update button appearance
+    button.textContent = 'Review Submitted!';
+    button.style.backgroundColor = '#4CAF50';
+    button.style.color = 'white';
+    button.disabled = true;
+    
+    // Reset after 2 seconds
+    setTimeout(() => {
+        button.textContent = originalText;
+        button.style.backgroundColor = originalBgColor;
+        button.style.color = '';
+        button.disabled = false;
+    }, 2000);
 }
 
 // Update cart counter in header
@@ -1368,6 +1582,299 @@ function initCartCounter() {
     setTimeout(() => {
         updateCartCounter();
     }, 100);
+}
+
+// Initialize cart page functionality
+function initCartPage() {
+    console.log('Initializing cart page...');
+    
+    const cartTableBody = document.querySelector('.cart-items-section tbody');
+    const cartTable = document.querySelector('.cart-items-section table');
+    const checkoutSection = document.querySelector('.cart-checkout-section');
+    
+    if (!cartTableBody || !cartTable) {
+        console.log('Cart elements not found, skipping cart initialization');
+        return;
+    }
+    
+    // Load cart items
+    loadCartItems();
+    
+    // Add event listeners for cart actions
+    initCartEventListeners();
+    
+    console.log('Cart page initialized successfully');
+}
+
+// Load and display cart items
+function loadCartItems() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartTableBody = document.querySelector('.cart-items-section tbody');
+    const cartTable = document.querySelector('.cart-items-section table');
+    const emptyCartMessage = document.querySelector('.empty-cart-message');
+    
+    if (!cartTableBody || !cartTable) {
+        return;
+    }
+    
+    // Clear existing content
+    cartTableBody.innerHTML = '';
+    
+    if (cart.length === 0) {
+        // Show empty cart message
+        showEmptyCart(cartTable, emptyCartMessage);
+        return;
+    }
+    
+    // Hide empty cart message if it exists
+    if (emptyCartMessage) {
+        emptyCartMessage.style.display = 'none';
+    }
+    
+    // Show the table
+    cartTable.style.display = 'table';
+    
+    // Determine asset path
+    const currentPath = window.location.pathname;
+    const isInPagesDir = currentPath.includes('/pages/');
+    const assetPath = isInPagesDir ? '../assets/' : 'assets/';
+    
+    // Create cart items
+    cart.forEach((item, index) => {
+        const row = createCartItemRow(item, index, assetPath);
+        cartTableBody.appendChild(row);
+    });
+    
+    // Update totals
+    updateCartTotals();
+    
+    console.log(`Loaded ${cart.length} cart items`);
+}
+
+// Create individual cart item row
+function createCartItemRow(item, index, assetPath) {
+    const row = document.createElement('tr');
+    row.dataset.productId = item.id;
+    row.dataset.index = index;
+    
+    const total = item.price * item.quantity;
+    
+    row.innerHTML = `
+        <td><img src="${assetPath}${item.imageUrl}" alt="${item.name}"></td>
+        <td>${item.name}</td>
+        <td>$${item.price}</td>
+        <td>
+            <div class="quantity-controls">
+                <button class="quantity-btn minus" data-index="${index}">-</button>
+                <input type="number" class="cart-quantity-input" value="${item.quantity}" min="1" data-index="${index}">
+                <button class="quantity-btn plus" data-index="${index}">+</button>
+            </div>
+        </td>
+        <td class="item-total">$${total}</td>
+        <td><button class="remove-item-btn" data-index="${index}"><img src="${assetPath}img/icons/bin-icon.svg" alt="Delete icon"></button></td>
+    `;
+    
+    return row;
+}
+
+// Show empty cart message
+function showEmptyCart(cartTable, emptyCartMessage) {
+    // Hide the table
+    cartTable.style.display = 'none';
+    
+    // Create or show empty cart message
+    let emptyMessage = emptyCartMessage;
+    if (!emptyMessage) {
+        emptyMessage = document.createElement('div');
+        emptyMessage.className = 'empty-cart-message';
+        emptyMessage.innerHTML = `
+            <div style="text-align: center; padding: 60px 20px;">
+                <h3>Your cart is empty</h3>
+                <p>There aren't any products in your cart. Use our catalog to choose your first product!</p>
+                <a href="catalog.html" class="btn" style="margin-top: 20px;">Browse Products</a>
+            </div>
+        `;
+        
+        // Insert after the table
+        cartTable.parentNode.insertBefore(emptyMessage, cartTable.nextSibling);
+    }
+    
+    emptyMessage.style.display = 'block';
+    
+    // Update totals to zero
+    updateCartTotals();
+}
+
+// Update cart totals
+function updateCartTotals() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    // Calculate discount (10% if subtotal >= $3000)
+    const discountThreshold = 3000;
+    const discountRate = 0.10; // 10%
+    const discount = subtotal >= discountThreshold ? subtotal * discountRate : 0;
+    
+    // Calculate shipping (assuming $100 flat rate)
+    const shipping = 100;
+    
+    // Calculate final total
+    const finalTotal = subtotal - discount + shipping;
+    
+    // Update subtotal
+    const subtotalElement = document.getElementById('subTotal');
+    if (subtotalElement) {
+        subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+    }
+    
+    // Update discount
+    const discountElement = document.getElementById('discount');
+    if (discountElement) {
+        discountElement.textContent = `-$${discount.toFixed(2)}`;
+        
+        // Show/hide discount row based on whether discount applies
+        const discountRow = document.querySelector('.discount-row');
+        const discountHr = document.querySelector('.discount-hr');
+        
+        if (discount > 0) {
+            discountRow.style.display = 'flex';
+            if (discountHr) discountHr.style.display = 'block';
+            console.log(`Discount applied: $${discount.toFixed(2)} (10% off)`);
+        } else {
+            discountRow.style.display = 'none';
+            if (discountHr) discountHr.style.display = 'none';
+        }
+    }
+    
+    // Update shipping
+    const shippingElement = document.getElementById('shipping');
+    if (shippingElement) {
+        shippingElement.textContent = `$${shipping.toFixed(2)}`;
+    }
+    
+    // Update final total
+    const totalElement = document.getElementById('total');
+    if (totalElement) {
+        totalElement.textContent = `$${finalTotal.toFixed(2)}`;
+    }
+    
+    console.log(`Cart totals updated - Subtotal: $${subtotal.toFixed(2)}, Discount: $${discount.toFixed(2)}, Shipping: $${shipping.toFixed(2)}, Total: $${finalTotal.toFixed(2)}`);
+}
+
+// Initialize cart event listeners
+function initCartEventListeners() {
+    // Quantity controls
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('quantity-btn')) {
+            e.preventDefault();
+            const index = parseInt(e.target.dataset.index);
+            const isPlus = e.target.classList.contains('plus');
+            
+            updateCartItemQuantity(index, isPlus ? 1 : -1);
+        }
+        
+        if (e.target.classList.contains('remove-item-btn')) {
+            e.preventDefault();
+            const index = parseInt(e.target.dataset.index);
+            removeCartItem(index);
+        }
+    });
+    
+    // Quantity input changes
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('cart-quantity-input')) {
+            const index = parseInt(e.target.dataset.index);
+            const newQuantity = parseInt(e.target.value) || 1;
+            
+            if (newQuantity < 1) {
+                e.target.value = 1;
+                return;
+            }
+            
+            setCartItemQuantity(index, newQuantity);
+        }
+    });
+    
+    // Clear cart button
+    const buttons = document.querySelectorAll('.cart-items-section .btn');
+    buttons.forEach(btn => {
+        if (btn.textContent.includes('CLEAR SHOPPING CART')) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                clearCart();
+            });
+        } else if (btn.textContent.includes('CONTINUE SHOPPING')) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'catalog.html';
+            });
+        }
+    });
+}
+
+// Update cart item quantity
+function updateCartItemQuantity(index, change) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    if (index >= 0 && index < cart.length) {
+        cart[index].quantity += change;
+        
+        if (cart[index].quantity <= 0) {
+            cart.splice(index, 1);
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCartItems();
+        updateCartCounter();
+        
+        console.log('Cart item quantity updated');
+    }
+}
+
+// Set cart item quantity
+function setCartItemQuantity(index, quantity) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    if (index >= 0 && index < cart.length) {
+        if (quantity <= 0) {
+            cart.splice(index, 1);
+        } else {
+            cart[index].quantity = quantity;
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCartItems();
+        updateCartCounter();
+        
+        console.log('Cart item quantity set to:', quantity);
+    }
+}
+
+// Remove cart item
+function removeCartItem(index) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    if (index >= 0 && index < cart.length) {
+        const removedItem = cart[index];
+        cart.splice(index, 1);
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCartItems();
+        updateCartCounter();
+        
+        console.log('Removed item from cart:', removedItem.name);
+    }
+}
+
+// Clear entire cart
+function clearCart() {
+    if (confirm('Are you sure you want to clear your cart?')) {
+        localStorage.removeItem('cart');
+        loadCartItems();
+        updateCartCounter();
+        
+        console.log('Cart cleared');
+    }
 }
 
 // Load and populate luggage sets from data.json
@@ -1427,9 +1934,9 @@ function createCategoryItem(product, isInPagesDir) {
     
     li.innerHTML = `
         <div class="category-item">
-            <img src="${assetPath}${product.imageUrl}" alt="${product.name}">
+            <img src="${assetPath}${product.imageUrl}" alt="${product.name}" class="product-image" style="cursor: pointer;">
             <div class="category-info">
-                <h4>${product.name}</h4>
+                <h4 class="product-name" style="cursor: pointer;">${product.name}</h4>
                 <div class="product-stars">
                     ${stars}
                 </div>
@@ -1437,6 +1944,26 @@ function createCategoryItem(product, isInPagesDir) {
             </div>
         </div>
     `;
+    
+    // Add click event listeners for product name and image
+    const productImage = li.querySelector('.product-image');
+    const productName = li.querySelector('.product-name');
+    
+    if (productImage) {
+        productImage.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navigateToProductDetails(product.id, isInPagesDir);
+        });
+    }
+    
+    if (productName) {
+        productName.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navigateToProductDetails(product.id, isInPagesDir);
+        });
+    }
     
     return li;
 }
@@ -1532,8 +2059,8 @@ function createSelectedCard(product, isInPagesDir) {
     const assetPath = isInPagesDir ? '../assets/' : 'assets/';
     
     li.innerHTML = `
-        <img src="${assetPath}${product.imageUrl}" alt="${product.name}">
-        <h4>${product.name}</h4>
+        <img src="${assetPath}${product.imageUrl}" alt="${product.name}" class="product-image" style="cursor: pointer;">
+        <h4 class="product-name" style="cursor: pointer;">${product.name}</h4>
         <p>$${product.price}</p>
         <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
     `;
@@ -1542,7 +2069,24 @@ function createSelectedCard(product, isInPagesDir) {
     const addToCartBtn = li.querySelector('.add-to-cart-btn');
     addToCartBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        addToCart(product);
+        e.stopPropagation(); // Prevent event bubbling
+        addToCart(product, 1, addToCartBtn);
+    });
+    
+    // Add click event listeners for product name and image
+    const productImage = li.querySelector('.product-image');
+    const productName = li.querySelector('.product-name');
+    
+    productImage.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigateToProductDetails(product.id, isInPagesDir);
+    });
+    
+    productName.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigateToProductDetails(product.id, isInPagesDir);
     });
     
     return li;
@@ -1614,8 +2158,8 @@ function createNewArrivalsCard(product, isInPagesDir) {
     const assetPath = isInPagesDir ? '../assets/' : 'assets/';
     
     li.innerHTML = `
-        <img src="${assetPath}${product.imageUrl}" alt="${product.name}">
-        <h4>${product.name}</h4>
+        <img src="${assetPath}${product.imageUrl}" alt="${product.name}" class="product-image" style="cursor: pointer;">
+        <h4 class="product-name" style="cursor: pointer;">${product.name}</h4>
         <p>$${product.price}</p>
         <button class="btn view-product-btn" data-product-id="${product.id}">View Product</button>
     `;
@@ -1624,9 +2168,24 @@ function createNewArrivalsCard(product, isInPagesDir) {
     const viewProductBtn = li.querySelector('.view-product-btn');
     viewProductBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        // You can add navigation to product details page here
-        console.log('View product:', product.name);
-        // For now, just log - you can implement navigation later
+        e.stopPropagation(); // Prevent event bubbling
+        navigateToProductDetails(product.id, isInPagesDir);
+    });
+    
+    // Add click event listeners for product name and image
+    const productImage = li.querySelector('.product-image');
+    const productName = li.querySelector('.product-name');
+    
+    productImage.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigateToProductDetails(product.id, isInPagesDir);
+    });
+    
+    productName.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigateToProductDetails(product.id, isInPagesDir);
     });
     
     return li;
@@ -1698,8 +2257,8 @@ function createAlsoLikeCard(product, isInPagesDir) {
     const assetPath = isInPagesDir ? '../assets/' : 'assets/';
     
     li.innerHTML = `
-        <img src="${assetPath}${product.imageUrl}" alt="${product.name}">
-        <h4>${product.name}</h4>
+        <img src="${assetPath}${product.imageUrl}" alt="${product.name}" class="product-image" style="cursor: pointer;">
+        <h4 class="product-name" style="cursor: pointer;">${product.name}</h4>
         <p>$${product.price}</p>
         <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
     `;
@@ -1708,7 +2267,24 @@ function createAlsoLikeCard(product, isInPagesDir) {
     const addToCartBtn = li.querySelector('.add-to-cart-btn');
     addToCartBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        addToCart(product);
+        e.stopPropagation(); // Prevent event bubbling
+        addToCart(product, 1, addToCartBtn);
+    });
+    
+    // Add click event listeners for product name and image
+    const productImage = li.querySelector('.product-image');
+    const productName = li.querySelector('.product-name');
+    
+    productImage.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigateToProductDetails(product.id, isInPagesDir);
+    });
+    
+    productName.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigateToProductDetails(product.id, isInPagesDir);
     });
     
     return li;
@@ -1762,6 +2338,278 @@ async function initProductCard() {
 
 
 
+// Load specific product data for product details page
+async function initProductDetails() {
+    console.log('Initializing product details...');
+    
+    // Get product ID from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    
+    if (!productId) {
+        console.warn('No product ID found in URL parameters');
+        return;
+    }
+    
+    console.log('Loading product details for ID:', productId);
+    
+    // Determine the correct path based on current page location
+    const currentPath = window.location.pathname;
+    const isInPagesDir = currentPath.includes('/pages/');
+    const dataPath = isInPagesDir ? '../assets/data.json' : 'assets/data.json';
+    
+    try {
+        // Load products data
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load products data: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const allProducts = data.data;
+        
+        // Find the specific product
+        const product = allProducts.find(p => p.id === productId);
+        
+        if (!product) {
+            console.error('Product not found with ID:', productId);
+            return;
+        }
+        
+        console.log('Found product:', product.name);
+        
+        // Update product details page with specific product data
+        updateProductDetailsPage(product, isInPagesDir);
+        
+        // Load also like products
+        initAlsoLikeProducts();
+        
+    } catch (error) {
+        console.error('Error loading product details:', error);
+    }
+}
+
+// Update product details page with specific product data
+function updateProductDetailsPage(product, isInPagesDir) {
+    console.log('Updating product details page for:', product.name);
+    
+    // Set correct asset path
+    const assetPath = isInPagesDir ? '../assets/' : 'assets/';
+    
+    // Update product name in header (if exists)
+    const productNameSubheader = document.querySelector('.product-name-subheader h2');
+    if (productNameSubheader) {
+        productNameSubheader.textContent = product.name;
+    }
+    
+    // Update product name in description header
+    const productDescriptionHeader = document.querySelector('.product-description-header h2');
+    if (productDescriptionHeader) {
+        productDescriptionHeader.textContent = product.name;
+    }
+    
+    // Update product images
+    const mainImage = document.querySelector('.product-images > img');
+    const thumbnails = document.querySelectorAll('.product-images-thumbnails img');
+    
+    if (mainImage) {
+        mainImage.src = `${assetPath}${product.imageUrl}`;
+        mainImage.alt = product.name;
+    }
+    
+    // Update thumbnails (use same image for all thumbnails for simplicity)
+    thumbnails.forEach(thumb => {
+        thumb.src = `${assetPath}${product.imageUrl}`;
+        thumb.alt = product.name;
+    });
+    
+    // Update price
+    const priceElement = document.querySelector('.product-description-header h3');
+    if (priceElement) {
+        priceElement.textContent = `$${product.price}`;
+    }
+    
+    // Update rating and reviews
+    const reviewsCount = document.querySelector('.reviews-count');
+    if (reviewsCount) {
+        // Generate a random review count for demo purposes
+        const reviewCount = Math.floor(Math.random() * 50) + 10;
+        reviewsCount.textContent = `(${reviewCount} reviews)`;
+    }
+    
+    // Update stars based on product rating
+    const stars = document.querySelectorAll('.product-stars .star');
+    if (stars.length > 0) {
+        const rating = Math.floor(product.rating);
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('filled');
+            } else {
+                star.classList.remove('filled');
+            }
+        });
+    }
+    
+    // Update product description based on category
+    const descriptionContent = document.querySelector('.product-description-content');
+    if (descriptionContent) {
+        let description = '';
+        
+        switch (product.category) {
+            case 'suitcases':
+                description = `
+                    <p>Experience the perfect blend of style and functionality with our ${product.name}. 
+                    Made with premium materials and designed for the modern traveler, this suitcase combines 
+                    durability with elegant design to make every journey comfortable and stylish.</p>
+                    <p>The ergonomic handle and smooth-rolling wheels ensure effortless mobility while the 
+                    spacious interior with multiple compartments keeps your belongings organized and secure. 
+                    Perfect for both business and leisure travel.</p>
+                `;
+                break;
+            case 'kids\' luggage':
+                description = `
+                    <p>Make travel fun for your little ones with our ${product.name}. 
+                    Designed specifically for children, this luggage features bright colors, 
+                    fun patterns, and kid-friendly functionality.</p>
+                    <p>Lightweight yet durable, it's perfect for family trips and helps teach 
+                    kids responsibility for their belongings. The smooth wheels and comfortable 
+                    handle make it easy for children to manage their own luggage.</p>
+                `;
+                break;
+            case 'luggage sets':
+                description = `
+                    <p>Complete your travel collection with our ${product.name}. 
+                    This comprehensive set includes multiple sizes to cover all your travel needs, 
+                    from weekend getaways to extended trips.</p>
+                    <p>Each piece is crafted with the same attention to detail and quality materials, 
+                    ensuring consistency in style and durability across your entire luggage collection.</p>
+                `;
+                break;
+            case 'carry-ons':
+                description = `
+                    <p>Travel light and smart with our ${product.name}. 
+                    Perfect for short trips or as your personal item on flights, 
+                    this carry-on maximizes space while meeting airline size requirements.</p>
+                    <p>Features multiple compartments for organization and a durable construction 
+                    that withstands the rigors of frequent travel.</p>
+                `;
+                break;
+            default:
+                description = `
+                    <p>Discover the perfect travel companion with our ${product.name}. 
+                    Carefully crafted with premium materials and innovative design features 
+                    to enhance your travel experience.</p>
+                    <p>Whether you're embarking on a business trip or a leisurely vacation, 
+                    this luggage delivers the reliability and style you need for every journey.</p>
+                `;
+        }
+        
+        descriptionContent.innerHTML = description;
+    }
+    
+    // Update size options based on product size
+    const sizeSelect = document.querySelector('.product-choose-form-item select[name="size"]');
+    if (sizeSelect && product.size) {
+        // Clear existing options
+        sizeSelect.innerHTML = '';
+        
+        // Add size options based on product category
+        let sizes = [];
+        if (product.category === 'luggage sets') {
+            sizes = ['S', 'M', 'L', 'XL'];
+        } else {
+            sizes = ['S', 'M', 'L', 'XL'];
+        }
+        
+        sizes.forEach(size => {
+            const option = document.createElement('option');
+            option.value = size;
+            option.textContent = size;
+            if (size === product.size) {
+                option.selected = true;
+            }
+            sizeSelect.appendChild(option);
+        });
+    }
+    
+    // Update color options
+    const colorSelect = document.querySelector('.product-choose-form-item select[name="color"]');
+    if (colorSelect && product.color) {
+        // Clear existing options
+        colorSelect.innerHTML = '';
+        
+        const colors = ['red', 'blue', 'green', 'black', 'grey', 'yellow', 'pink', 'white'];
+        colors.forEach(color => {
+            const option = document.createElement('option');
+            option.value = color;
+            option.textContent = color.charAt(0).toUpperCase() + color.slice(1);
+            if (color === product.color) {
+                option.selected = true;
+            }
+            colorSelect.appendChild(option);
+        });
+    }
+    
+    // Update category options
+    const categorySelect = document.querySelector('.product-choose-form-item select[name="category"]');
+    if (categorySelect && product.category) {
+        // Clear existing options
+        categorySelect.innerHTML = '';
+        
+        const categories = ['suitcases', 'kids\' luggage', 'carry-ons', 'luggage sets'];
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+            if (category === product.category) {
+                option.selected = true;
+            }
+            categorySelect.appendChild(option);
+        });
+    }
+    
+    console.log('Product details page updated successfully');
+}
+
+// Initialize catalog navigation buttons functionality
+function initCatalogNavigationButtons() {
+    console.log('Initializing catalog navigation buttons...');
+    
+    // Find all buttons that should navigate to catalog
+    const heroButton = document.querySelector('.hero-content .btn');
+    const aboutButton = document.querySelector('.arrivals-content .btn');
+    
+    // Function to handle catalog navigation
+    function navigateToCatalog(e) {
+        e.preventDefault();
+        
+        // Navigate to catalog page
+        const currentPath = window.location.pathname;
+        const isInPagesDir = currentPath.includes('/pages/');
+        const catalogPath = isInPagesDir ? 'catalog.html' : 'pages/catalog.html';
+        
+        window.location.href = catalogPath;
+        console.log('Navigating to catalog page');
+    }
+    
+    // Add event listeners to found buttons
+    if (heroButton) {
+        heroButton.addEventListener('click', navigateToCatalog);
+        console.log('Hero button initialized');
+    }
+    
+    if (aboutButton) {
+        aboutButton.addEventListener('click', navigateToCatalog);
+        console.log('About page button initialized');
+    }
+    
+    if (!heroButton && !aboutButton) {
+        console.log('No catalog navigation buttons found');
+    }
+    
+    console.log('Catalog navigation buttons initialized successfully');
+}
+
 // Initialize when ready
 ready(function() {
     console.log('DOM ready, initializing features...');
@@ -1780,5 +2628,8 @@ ready(function() {
     initSelectedProducts();
     initNewArrivals();
     initAlsoLikeProducts();
+    initProductDetails(); // Add this for product details page
+    initCartPage(); // Add cart page initialization
+    initCatalogNavigationButtons(); // Add catalog navigation buttons initialization
     initCartCounter();
 });
