@@ -36,8 +36,6 @@ via npm.
    cd project-template
    ```
 
-````
-
 2. **Install dependencies:**
 
    ```bash
