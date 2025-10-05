@@ -136,10 +136,17 @@
         <!-- Catalog Section -->
         <section class="catalog-section">
             <div class="search-bar hidden">
-                <input type="text" placeholder="Search">
-                <button type="submit">
-                    <img src="../assets/img/icons/search-icon.svg" alt="Search icon">
-                </button>
+                <div class="search-input-container">
+                    <input type="text" placeholder="Search" id="main-search-input">
+                    <button type="submit" id="main-search-btn">
+                        <img src="../assets/img/icons/search-icon.svg" alt="Search icon">
+                    </button>
+                </div>
+                <div class="search-dropdown" id="main-search-dropdown" style="display: none;">
+                    <div class="search-results" id="main-search-results">
+                        <!-- Search results will be populated here -->
+                    </div>
+                </div>
             </div>
 
             <div class="catalog-header">
@@ -154,6 +161,7 @@
                             <option value="popularity">Popularity</option>
                             <option value="price-asc">Price (asc)</option>
                             <option value="price-desc">Price (desc)</option>
+                            <option value="rating-desc">Rating (highest first)</option>
                         </select>
                     </div>
                 </div>
@@ -170,6 +178,8 @@
                             <option value="m">M</option>
                             <option value="l">L</option>
                             <option value="xl">XL</option>
+                            <option value="s-l">S-L</option>
+                            <option value="s,m,xl">S, M, XL</option>
                         </select>
                     </div>
                     <div class="catalog-filter">
@@ -225,10 +235,17 @@
         <!-- Catalog Aside -->
         <aside class="catalog-aside">
             <div class="search-bar">
-                <input type="text" placeholder="Search">
-                <button type="submit">
-                    <img src="../assets/img/icons/search-icon.svg" alt="Search icon">
-                </button>
+                <div class="search-input-container">
+                    <input type="text" placeholder="Search" id="aside-search-input">
+                    <button type="submit" id="aside-search-btn">
+                        <img src="../assets/img/icons/search-icon.svg" alt="Search icon">
+                    </button>
+                </div>
+                <div class="search-dropdown" id="aside-search-dropdown" style="display: none;">
+                    <div class="search-results" id="aside-search-results">
+                        <!-- Search results will be populated here -->
+                    </div>
+                </div>
             </div>
 
             <div class="top-categories">

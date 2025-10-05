@@ -76,7 +76,7 @@
           gap: 12px;
           min-width: 150px;
           flex: 1;
-        
+
           h4 {
             margin: 0 0 16px 0;
             font-weight: 700;
@@ -89,6 +89,15 @@
             font-weight: 400;
             font-size: clamp(12px, 2vw, 16px);
         
+            &:hover {
+              color: $brand-color;
+            }
+          }
+
+          a.about-us-link {
+            text-decoration: none;
+            color: black;
+
             &:hover {
               color: $brand-color;
             }
@@ -123,6 +132,16 @@
     min-width: 300px;
 
     .contact-section {
+      a {
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+          color: $brand-color;
+        }
+  
+      }
+
       h4 {
         margin: 0 0 16px 0;
         font-weight: 700;
