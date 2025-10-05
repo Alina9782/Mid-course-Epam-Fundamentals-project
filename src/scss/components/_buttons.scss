@@ -3,7 +3,7 @@
   display: inline-block;
   padding: 12px 24px;
   background-color: $brand-color;
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   text-wrap: nowrap;
   border: none;
@@ -16,7 +16,7 @@
   
   &:hover {
     background-color: $brand-color-hover;
-    color: white;
+    color: #ffffff;
   }
   
   &:focus {

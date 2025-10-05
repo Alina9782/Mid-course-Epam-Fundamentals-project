@@ -7,13 +7,18 @@
     "url": "https://autocode.git.epam.com/campus_javascript/capstone-project/project-template.git"
   },
   "license": "ISC",
-  "author": "",
+  "author": "Kotenko-Tymkiv Alina",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "sass src/scss/main.scss src/scss/style.css",
+    "sass:watch": "sass --watch src/scss/main.scss src/scss/style.css",
+    "serve": "lite-server",
+    "start": "concurrently \"npm run sass:watch\" \"npm run serve\""
   },
-  "dependencies": {
-    "sass": "^1.92.1"
+  "devDependencies": {
+    "sass": "^1.92.1",
+    "concurrently": "^8.2.2",
+    "lite-server": "^2.6.1"
   }
 }

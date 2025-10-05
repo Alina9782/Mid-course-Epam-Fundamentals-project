@@ -1,56 +1,107 @@
-# Project template
-# Project template
+# Project Template
 
 ## Description
 
-This project is a mid-course project of web development using JavaScript and Sass. It provides a basic structure for building scalable and maintainable web applications for selling any products. This web-application provides the information about suitcases shop, where you have the basic functions as add or delete something from the cart, choose a product, read the description and reviews as well as contact with a team or read about the shop. 
+This project is a mid-course web development project using **JavaScript** and
+**Sass**.  
+It provides a clean and scalable structure for building maintainable web
+applications for selling products.
+
+The demo project is a **suitcase shop**, where users can:
+
+- Browse products and read descriptions or reviews
+- Add or remove items from the cart
+- Contact the shop team
+- Learn more about the store
+
+---
 
 ## Prerequisites
 
+Make sure you have the following installed:
+
 - [Node.js](https://nodejs.org/) (v14 or higher recommended)
 - [npm](https://www.npmjs.com/) (comes with Node.js)
-- [sass](https://sass-lang.com/) (dart sass v1.86.3 or higher recommended)
+
+All other tools (Sass, lite-server, concurrently) are installed automatically
+via npm.
+
+---
 
 ## Setup
 
 1. **Clone the repository:**
+   ```bash
    git clone <repository-url>
-   cd project-template-ua
+   cd project-template
    ```
 
+````
+
 2. **Install dependencies:**
+
+   ```bash
    npm install
    ```
 
-3. **Compile Sass:**
-   - To compile Sass files to CSS, install:
-     npm install sass
-     ```
-   - To check Sass version, run:
-     sass --version
-     ```
-   - To compile Sass files to CSS, run:
-     npm run sass
+3. **Start the development server:**
 
-   - For automatic compilation on file changes, use:
-     sass -w src/scss/main.scss:src/scss/style.css
-     ```
+   ```bash
+   npm start
+   ```
 
-4. **Start the project:**
-   - If there is a development server, run:
-     npm start
-     ```
-   - Otherwise, open `index.html` in your browser or use a live server of your IDE.
+   This command will:
 
-## Scripts
+   * Automatically compile your Sass files to CSS
+   * Watch for changes in your Sass files
+   * Start a local development server using **lite-server**
 
-- `npm run sass` — Compiles Sass files once.
-- `npm run sass:watch` — Watches Sass files and recompiles on changes.
-- `npm start` — Starts the development server (if configured).
+4. **Open the app:**
+   Once the server starts, it will automatically open your project in the browser.
+   If it doesn’t, go to [http://localhost:3000](http://localhost:3000).
+
+---
+
+## Available Scripts
+
+| Command              | Description                                                             |
+| -------------------- | ----------------------------------------------------------------------- |
+| `npm run sass`       | Compiles Sass files once (`src/scss/main.scss` → `src/scss/style.css`). |
+| `npm run sass:watch` | Watches Sass files and recompiles automatically on changes.             |
+| `npm run serve`      | Starts the local development server using **lite-server**.              |
+| `npm start`          | Runs both `sass:watch` and `serve` concurrently.                        |
+
+---
 
 ## Folder Structure
 
-- `src/` — Source files (JavaScript, Sass, etc.)
-- `dist/` — Compiled output (CSS, JS, etc.)
+```
+project-template/
+├── node_modules/          # Installed dependencies
+├── src/
+│   ├── assets/            # Fonts, images, and data files
+│   ├── components/        # Reusable HTML components (header, footer, cards, etc.)
+│   ├── js/                # JavaScript source files
+│   ├── pages/             # HTML pages of the application
+│   ├── scss/              # Sass source files (abstracts, base, layouts, components, pages)
+│   └── index.html         # Main entry point
+├── .gitignore             # Files ignored by Git
+├── bs-config.json         # Lite-server configuration
+├── compile-catalog.bat    # Batch script for catalog compilation
+├── compile-scss.bat       # Batch script for Sass compilation
+├── package.json           # Project dependencies and scripts
+└── README.md              # Project documentation
+
+```
 
 ---
+
+## Notes
+
+* All dependencies are managed through **npm**, no global installations required.
+* The project uses **lite-server** for live reloading during development.
+* To build CSS manually, run `npm run sass`.
+* To automatically recompile Sass while developing, use `npm run sass:watch`.
+
+```
+````

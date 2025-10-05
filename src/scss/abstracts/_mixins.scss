@@ -1,0 +1,368 @@
+
+// Container padding mixin for consistent spacing
+@mixin container-padding($padding: 200px) {
+    padding: 0px $padding 80px $padding;
+    
+    @media (max-width: 1440px) {
+        padding: 0px ($padding / 2) 60px ($padding / 2);
+    }
+    
+    @media (max-width: 768px) {
+        padding: 0px 20px 40px 20px;
+    }
+}
+
+// Flexbox centering mixin
+@mixin flex-center($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: center;
+    justify-content: center;
+}
+
+// Flexbox space between mixin
+@mixin flex-space-between($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: space-between;
+    align-items: center;
+}
+
+// Grid layout mixin
+@mixin grid-layout($columns: 1fr 1fr, $gap: 30px) {
+    display: grid;
+    grid-template-columns: $columns;
+    gap: $gap;
+}
+
+// ==========================================================================
+// TYPOGRAPHY MIXINS
+// ==========================================================================
+
+// Section header mixin
+@mixin section-header($margin-bottom: 60px) {
+    text-align: center;
+    margin-bottom: $margin-bottom;
+    
+    h2 {
+        font-weight: 900;
+        font-size: clamp(28px, 4vw, 40px);
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    p {
+        font-weight: 400;
+        font-size: 18px;
+        color: #666;
+    }
+    
+    @media (max-width: 768px) {
+        margin-bottom: ($margin-bottom * 0.67);
+    }
+}
+
+// Product name styling mixin
+@mixin product-name($font-size: 19px, $margin-bottom: 10px) {
+    font-weight: 700;
+    font-size: $font-size;
+    color: #333;
+    margin: 20px 0 $margin-bottom 0;
+    padding: 0 20px;
+}
+
+// Product price styling mixin
+@mixin product-price($font-size: 19px, $color: #504E4A) {
+    font-weight: 400;
+    font-size: $font-size;
+    color: $color;
+    margin: 0 0 20px 0;
+}
+
+// ==========================================================================
+// CARD MIXINS
+// ==========================================================================
+
+// Basic card styling mixin
+@mixin card-base($min-height: 550px, $background: white) {
+    flex: 1;
+    min-height: $min-height;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: $background;
+}
+
+// Product card hover effects mixin
+@mixin product-card-hover($scale: 1.05, $shadow-intensity: 0.3) {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    
+    &:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, $shadow-intensity);
+        transform: scale($scale);
+    }
+}
+
+// Background overlay mixin for cards with images
+@mixin card-overlay($opacity: 0.4, $z-index: 1) {
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, $opacity);
+        border-radius: 8px;
+        z-index: $z-index;
+    }
+    
+    // Content on top of overlay
+    h4, p, .btn {
+        position: relative;
+        z-index: ($z-index + 1);
+        color: white;
+    }
+}
+
+// ==========================================================================
+// FORM MIXINS
+// ==========================================================================
+
+// Input field styling mixin
+@mixin input-field($padding: 12px 16px, $border-color: #E9E9ED, $focus-color: $brand-color) {
+    width: 100%;
+    padding: $padding;
+    border: 2px solid $border-color;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    color: #727174;
+    background-color: white;
+    cursor: pointer;
+    
+    &:focus {
+        outline: none;
+        border-color: $focus-color;
+    }
+    
+    &::placeholder {
+        color: #727174;
+    }
+}
+
+// Button styling mixin
+@mixin button-base($padding: 12px 24px, $font-size: 16px, $background: $brand-color, $color: white) {
+    display: inline-block;
+    padding: $padding;
+    background-color: $background;
+    color: $color;
+    text-decoration: none;
+    text-wrap: nowrap;
+    border: none;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: $font-size;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+        background-color: lighten($background, 8%);
+        color: $color;
+    }
+    
+    &:focus {
+        outline: 2px solid $background;
+        outline-offset: 2px;
+    }
+    
+    &:active {
+        background-color: darken($background, 5%);
+    }
+}
+
+// ==========================================================================
+// IMAGE MIXINS
+// ==========================================================================
+
+// Responsive image mixin
+@mixin responsive-image($object-fit: contain, $border-radius: 0) {
+    width: 100%;
+    height: auto;
+    object-fit: $object-fit;
+    border-radius: $border-radius;
+}
+
+// Avatar image mixin
+@mixin avatar-image($size: 80px) {
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+// ==========================================================================
+// ANIMATION MIXINS
+// ==========================================================================
+
+// Smooth transition mixin
+@mixin smooth-transition($properties: all, $duration: 0.3s, $easing: ease) {
+    transition: $properties $duration $easing;
+}
+
+// Hover scale mixin
+@mixin hover-scale($scale: 1.05, $duration: 0.3s) {
+    transition: transform $duration ease;
+    
+    &:hover {
+        transform: scale($scale);
+    }
+}
+
+// ==========================================================================
+// RESPONSIVE MIXINS
+// ==========================================================================
+
+// Mobile-first responsive mixin
+@mixin mobile-first($breakpoint) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+// Tablet responsive mixin
+@mixin tablet {
+    @media (max-width: 1024px) {
+        @content;
+    }
+}
+
+// Mobile responsive mixin
+@mixin mobile {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+// Desktop responsive mixin
+@mixin desktop {
+    @media (min-width: 1025px) {
+        @content;
+    }
+}
+
+// ==========================================================================
+// UTILITY MIXINS
+// ==========================================================================
+
+// Hidden class mixin
+@mixin hidden {
+    display: none;
+}
+
+// Visually hidden (for screen readers)
+@mixin visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+// Clearfix mixin
+@mixin clearfix {
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+// Box shadow mixin
+@mixin box-shadow($x: 0, $y: 4px, $blur: 15px, $spread: 0, $color: rgba(0, 0, 0, 0.1)) {
+    box-shadow: $x $y $blur $spread $color;
+}
+
+// ==========================================================================
+// SPECIFIC COMPONENT MIXINS
+// ==========================================================================
+
+// Star rating mixin
+@mixin star-rating($size: 18px, $gap: 2px) {
+    display: flex;
+    gap: $gap;
+    
+    .star {
+        font-size: $size;
+        color: #ddd;
+        
+        &.filled {
+            color: #ffd700;
+        }
+    }
+}
+
+// Sale badge mixin
+@mixin sale-badge($top: 15px, $left: 15px) {
+    position: relative;
+    
+    &::before {
+        content: 'SALE';
+        position: absolute;
+        top: $top;
+        left: $left;
+        background-color: $brand-color;
+        color: white;
+        padding: 10px;
+        font-size: 12px;
+        font-weight: 700;
+        z-index: 1;
+    }
+}
+
+// Tab navigation mixin
+@mixin tab-navigation($border-bottom-color: #E9E9ED) {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    border-bottom: 1px solid $border-bottom-color;
+    justify-content: center;
+    
+    li {
+        h3 {
+            font-weight: 700;
+            font-size: 17px;
+            color: #727174;
+            margin: 0;
+            padding: 15px 0;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-align: center;
+            
+            &:hover {
+                color: $brand-color;
+            }
+        }
+        
+        &.active {
+            h3 {
+                color: $brand-color;
+            }
+        }
+    }
+}
