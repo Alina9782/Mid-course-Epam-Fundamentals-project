@@ -1,37 +1,33 @@
 // Imports
 @import "abstracts/variables";
 @import "abstracts/mixins";
-
 @import "base/fonts";
 @import "base/reset";
-
 @import "components/buttons";
 @import "components/forms";
 @import "components/product-card";
-
 @import "layouts/header";
 @import "layouts/footer";
-
 @import "pages/about";
 @import "pages/cart";
 @import "pages/catalog";
 @import "pages/product-details";
 @import "pages/contact";
 
-//General structure
+// General structure
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: Montserrat, Arial, sans-serif;
     font-weight: 400; /* or 700, 900 */
     margin: 0;
     padding: 0;
     overflow-x: hidden;
 }
 
-//General structure specific classes
+// General structure specific classes
 .hidden {
     display: none;
 }
@@ -116,9 +112,9 @@ body {
     // Second section - overlay with shadow
     .hero-overlay-section {
         background-color: white;
-        margin: -100px 200px 100px 200px;
+        margin: -100px 200px 100px;
         padding: 0;
-        box-shadow: 0 15px 40px 5px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 15px 40px 5px rgb(0 0 0 / 20%);
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 60px;
@@ -129,7 +125,7 @@ body {
     
     // First part - avatar, text, and content
     .hero-profile {
-        padding: 40px 0px 0px 40px;
+        padding: 40px 0 0 40px;
         
         // Avatar and name/title in a row
         img {
@@ -191,11 +187,8 @@ body {
         &::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.4);
+            inset: 0;
+            background-color: rgb(0 0 0 / 40%);
             z-index: 1;
         }
         
@@ -234,7 +227,7 @@ body {
 
 /* Travel Container */
 .travel-container {
-    padding: 0px 200px 80px 200px;
+    padding: 0 200px 80px;
     
     .travel-header {
         text-align: center;
@@ -277,11 +270,8 @@ body {
         &::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.4);
+            inset: 0;
+            background-color: rgb(0 0 0 / 40%);
             border-radius: 8px;
             z-index: 1;
         }
@@ -328,7 +318,7 @@ body {
 
 /* Selected Container */
 .selected-container {
-    padding: 0px 200px 80px 200px;
+    padding: 0 200px 80px;
     
     .selected-header {
         text-align: center;
@@ -372,12 +362,12 @@ body {
                 width: 100%;
                 height: auto;
                 object-fit: contain;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 4px 20px rgb(0 0 0 / 20%);
                 transition: box-shadow 0.3s ease, transform 0.3s ease;
                 cursor: pointer;
                 
                 &:hover {
-                    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+                    box-shadow: 0 8px 30px rgb(0 0 0 / 30%);
                     transform: scale(1.05);
                 }
             }
@@ -386,7 +376,7 @@ body {
                 font-weight: 700;
                 font-size: 19px;
                 color: #333;
-                margin: 20px 0 10px 0;
+                margin: 20px 0 10px;
                 padding: 0 20px;
             }
             
@@ -394,7 +384,7 @@ body {
                 font-weight: 400;
                 font-size: 19px;
                 color: #504E4A;
-                margin: 0 0 20px 0;
+                margin: 0 0 20px;
             }
             
             .btn {
@@ -405,21 +395,21 @@ body {
 }
 
 // Responsive design
-@media (max-width: 1440px) {
+@media (width <= 1440px) {
     .hero-container {
         .hero-overlay-section {
-            margin: -100px 100px 100px 100px;
+            margin: -100px 100px 100px;
         }
     }
 
     .selected-container {
-        padding: 0px 100px 80px 100px;
+        padding: 0 100px 80px;
     }
 }
 
 /* New Arrivals Container */
 .new-arrivals-container {
-    padding: 0px 200px 80px 200px;
+    padding: 0 200px 80px;
     
     .new-arrivals-header {
         text-align: center;
@@ -463,12 +453,12 @@ body {
                 width: 100%;
                 height: auto;
                 object-fit: contain;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 4px 20px rgb(0 0 0 / 20%);
                 transition: box-shadow 0.3s ease, transform 0.3s ease;
                 cursor: pointer;
                 
                 &:hover {
-                    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+                    box-shadow: 0 8px 30px rgb(0 0 0 / 30%);
                     transform: scale(1.05);
                 }
             }
@@ -477,7 +467,7 @@ body {
                 font-weight: 700;
                 font-size: 19px;
                 color: #333;
-                margin: 20px 0 10px 0;
+                margin: 20px 0 10px;
                 padding: 0 20px;
             }
             
@@ -485,7 +475,7 @@ body {
                 font-weight: 400;
                 font-size: 19px;
                 color: #504E4A;
-                margin: 0 0 20px 0;
+                margin: 0 0 20px;
             }
             
             .btn {
@@ -497,7 +487,7 @@ body {
 
 /* Testimonials Container */
 .testimonials-container {
-    padding: 0px 200px 80px 200px;
+    padding: 0 200px 80px;
     
     .testimonials-header {
         text-align: center;
@@ -536,7 +526,7 @@ body {
             justify-content: center;
             padding: 40px 30px;
             background-color: white;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
             border-radius: 8px;
             min-height: 400px;
             
@@ -566,7 +556,7 @@ body {
     }
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
     .hero-container {
         .hero-main-section {
             grid-template-columns: 1fr;
@@ -581,7 +571,7 @@ body {
         }
         
         .hero-overlay-section {
-            margin: -50px 50px 50px 50px;
+            margin: -50px 50px 50px;
             grid-template-columns: 1fr;
             gap: 40px;
         }
@@ -592,7 +582,7 @@ body {
     }
     
     .travel-container {
-        padding: 0px 50px 60px 50px;
+        padding: 0 50px 60px;
         
         .travel-cards {
             display: grid;
@@ -606,7 +596,7 @@ body {
     }
     
     .selected-container {
-        padding: 0px 50px 60px 50px;
+        padding: 0 50px 60px;
         
         .selected-container-carousel {
             .selected-cards {
@@ -622,7 +612,7 @@ body {
     }
     
     .new-arrivals-container {
-        padding: 0px 50px 60px 50px;
+        padding: 0 50px 60px;
         
         .new-arrivals-container-carousel {
             .new-arrivals-cards {
@@ -638,7 +628,7 @@ body {
     }
     
     .testimonials-container {
-        padding: 0px 50px 60px 50px;
+        padding: 0 50px 60px;
         
         .testimonials-cards {
             ul {
@@ -655,7 +645,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .hero-container {
         .hero-main-section {
             padding: 40px 20px;
@@ -667,7 +657,7 @@ body {
         }
         
         .hero-overlay-section {
-            margin: -20px 20px 20px 20px;
+            margin: -20px 20px 20px;
             padding: 0;
         }
         
@@ -677,7 +667,7 @@ body {
     }
     
     .travel-container {
-        padding: 0px 20px 40px 20px;
+        padding: 0 20px 40px;
         
         .travel-header {
             margin-bottom: 40px;
@@ -696,7 +686,7 @@ body {
     }
     
     .selected-container {
-        padding: 0px 50px 50px 50px;
+        padding: 0 50px 50px;
         
         .selected-header {
             margin-bottom: 40px;
@@ -716,7 +706,7 @@ body {
     }
     
     .new-arrivals-container {
-        padding: 0px 50px 50px 50px;
+        padding: 0 50px 50px;
         
         .new-arrivals-header {
             margin-bottom: 40px;
@@ -736,7 +726,7 @@ body {
     }
     
     .testimonials-container {
-        padding: 0px 20px 40px 20px;
+        padding: 0 20px 40px;
         
         .testimonials-header {
             margin-bottom: 40px;

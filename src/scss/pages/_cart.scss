@@ -14,11 +14,8 @@
     &::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.4);
+      inset: 0;
+      background-color: rgb(0 0 0 / 40%);
       z-index: 1;
     }
     
@@ -82,7 +79,6 @@
                     text-align: center;
                     
                     img {
-                        // max-width: 116px;
                         max-height: 116px;
                         width: auto;
                         height: auto;
@@ -146,7 +142,6 @@
                 td {
                     padding: 20px 15px;
                     border: none;
-                    
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
@@ -166,10 +161,7 @@
 // Cart checkout section styles
 .cart-checkout-section {
     background-color: #504E4A;
-    margin-right: 200px;
-    margin-left: auto;
-    margin-top: -50px;
-    margin-bottom: 150px;
+    margin: -50px 200px 150px auto;
     padding: 30px 25px;
     position: relative;
     z-index: 10;
@@ -228,7 +220,7 @@
     }
 }
 
-@media (max-width: 1440px) {
+@media (width <= 1440px) {
     .cart-items-section {
         margin: 0 100px;
     }
@@ -239,13 +231,13 @@
     }
 }
 
-@media (max-width: 1125px) {
+@media (width <= 1125px) {
     .cart-checkout-section {
-        margin-top: 0px;
+        margin-top: 0;
     }
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
     .cart-head-section {
         max-height: 180px;
         
@@ -275,7 +267,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .cart-head-section {
         max-height: 150px;
         padding: 55px 20px;
@@ -339,10 +331,9 @@
             
             tfoot td {
                 padding: 12px 8px;
-                flex-direction: row;
+                flex-flow: row nowrap;
                 align-items: center;
                 gap: 8px;
-                flex-wrap: nowrap;
                 
                 .btn {
                     font-size: 10px;
@@ -354,7 +345,7 @@
     }
     
     .cart-checkout-section {
-        margin: 20px 10px 50px 10px; // Remove overlay, add proper spacing
+        margin: 20px 10px 50px; // Remove overlay, add proper spacing
         padding: 20px 15px;
         max-width: calc(100vw - 20px);
         width: 100%;

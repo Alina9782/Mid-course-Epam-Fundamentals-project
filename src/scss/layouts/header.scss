@@ -1,11 +1,10 @@
 header {
-  margin: 50px 200px 20px 200px;
+  margin: 50px 200px 20px;
 
   & > hr {
     width: 100%;
     max-width: 1300px;
     height: 0;
-    // margin: 0 auto;
     border: 1px;
     border-top: 1px solid #727174;
     opacity: 0.2;
@@ -168,8 +167,7 @@ header {
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
+        flex-flow: row nowrap !important;
         
         a {
           display: inline !important;
@@ -251,9 +249,9 @@ header {
 }
 
 /* Responsive header rules */
-@media (max-width: 1023px) {
+@media (width <= 1023px) {
   header {
-    margin: 20px 50px 20px 50px;
+    margin: 20px 50px;
   }
 
   .header-desktop {
@@ -272,7 +270,7 @@ header {
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   header {
     margin: 20px;
   }

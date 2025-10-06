@@ -119,7 +119,6 @@ export function initCartPage() {
     
     const cartTableBody = document.querySelector('.cart-items-section tbody');
     const cartTable = document.querySelector('.cart-items-section table');
-    const checkoutSection = document.querySelector('.cart-checkout-section');
     
     if (!cartTableBody || !cartTable) {
         console.log('Cart elements not found, skipping cart initialization');

@@ -13,11 +13,8 @@
     &::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.4);
+      inset: 0;
+      background-color: rgb(0 0 0 / 40%);
       z-index: 1;
     }
     
@@ -30,7 +27,6 @@
     h2 {
       font-weight: 700;
       font-size: 50px;
-      color: white;
       color: white;
       font-family: inherit;
       margin-bottom: 20px;
@@ -62,17 +58,17 @@
       justify-items: center;
       
       // Force 4 columns on large screens
-      @media (min-width: 1440px) {
+      @media (width >= 1440px) {
         grid-template-columns: repeat(4, 1fr);
       }
       
       // Force 2x2 grid on medium screens
-      @media (min-width: 768px) and (max-width: 1439px) {
+      @media (width >= 768px) and (width <= 1439px) {
         grid-template-columns: repeat(2, 1fr);
       }
       
       // Force single column on small screens
-      @media (max-width: 767px) {
+      @media (width <= 767px) {
         grid-template-columns: 1fr;
       }
     }
@@ -114,7 +110,7 @@
 .contact-us-form-section {
   display: flex;
   min-height: 500px;
-  margin: 0px 200px;
+  margin: 0 200px;
   margin-bottom: 100px;
 
   // Image block (left part)
@@ -148,8 +144,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0px 40px;
-    background-color: #ffffff;
+    padding: 0 40px;
+    background-color: #fff;
     
     h3 {
       font-weight: 900;
@@ -179,9 +175,9 @@
 }
 
 // Responsive design
-@media (max-width: 1440px) {
+@media (width <= 1440px) {
   .contact-us-form-section {
-    margin: 0px 100px;
+    margin: 0 100px;
     margin-bottom: 80px;
   }
   
@@ -196,7 +192,7 @@
   }
   
   .contact-us-form-content {
-    padding: 0px 30px;
+    padding: 0 30px;
     
     h3 {
       font-size: clamp(28px, 4vw, 40px);
@@ -204,14 +200,14 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
   .contact-us-info-section {
-    margin: 0px 100px;
+    margin: 0 100px;
   }
 
   .contact-us-form-section {
     flex-direction: column;
-    margin: 0px 50px;
+    margin: 0 50px;
     margin-bottom: 60px;
     min-height: auto;
   }
@@ -250,7 +246,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .contact-us-head-section {
     max-height: 200px;
     padding: 55px 20px;
@@ -258,7 +254,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     
     h2 {
         font-size: 30px;
@@ -267,11 +263,11 @@
   }
 
   .contact-us-info-section {
-    margin: 0px 50px;
+    margin: 0 50px;
   }
 
   .contact-us-form-section {
-    margin: 0px 20px;
+    margin: 0 20px;
     margin-bottom: 40px;
   }
   

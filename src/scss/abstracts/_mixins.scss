@@ -1,14 +1,14 @@
 
 // Container padding mixin for consistent spacing
 @mixin container-padding($padding: 200px) {
-    padding: 0px $padding 80px $padding;
+    padding: 0 $padding 80px;
     
-    @media (max-width: 1440px) {
-        padding: 0px ($padding / 2) 60px ($padding / 2);
+    @media (width <= 1440px) {
+        padding: 0 ($padding / 2) 60px;
     }
     
-    @media (max-width: 768px) {
-        padding: 0px 20px 40px 20px;
+    @media (width <= 768px) {
+        padding: 0 20px 40px;
     }
 }
 
@@ -57,7 +57,7 @@
         color: #666;
     }
     
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
         margin-bottom: ($margin-bottom * 0.67);
     }
 }
@@ -67,7 +67,7 @@
     font-weight: 700;
     font-size: $font-size;
     color: #333;
-    margin: 20px 0 $margin-bottom 0;
+    margin: 20px 0 $margin-bottom;
     padding: 0 20px;
 }
 
@@ -76,7 +76,7 @@
     font-weight: 400;
     font-size: $font-size;
     color: $color;
-    margin: 0 0 20px 0;
+    margin: 0 0 20px;
 }
 
 // ==========================================================================
@@ -113,10 +113,7 @@
     &::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        inset: 0;
         background-color: rgba(0, 0, 0, $opacity);
         border-radius: 8px;
         z-index: $z-index;
@@ -239,21 +236,21 @@
 
 // Tablet responsive mixin
 @mixin tablet {
-    @media (max-width: 1024px) {
+    @media (width <= 1024px) {
         @content;
     }
 }
 
 // Mobile responsive mixin
 @mixin mobile {
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
         @content;
     }
 }
 
 // Desktop responsive mixin
 @mixin desktop {
-    @media (min-width: 1025px) {
+    @media (width >= 1025px) {
         @content;
     }
 }

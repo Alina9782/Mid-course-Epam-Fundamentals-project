@@ -98,7 +98,6 @@
             justify-content: space-between;
             
             .product-description-header {
-                
                 h2 {
                     font-weight: 700;
                     font-size: 30px;
@@ -262,11 +261,11 @@
                             
                             &::-webkit-outer-spin-button,
                             &::-webkit-inner-spin-button {
-                                -webkit-appearance: none;
+                                appearance: none;
                                 margin: 0;
                             }
                             
-                            &[type=number] {
+                            &[type="number"] {
                                 appearance: textfield;
                             }
                         }
@@ -410,7 +409,7 @@
                             font-size: 17px;
                             color: #333;
                             margin-bottom: 10px;
-                            margin-top: 0px;
+                            margin-top: 0;
                             font-family: inherit;
                         }
                         
@@ -470,7 +469,7 @@
                             gap: 15px;
                             width: 100%;
                             box-sizing: border-box;
-                            margin-bottom: 0px;
+                            margin-bottom: 0;
                             
                             input {
                                 flex: 1;
@@ -611,14 +610,14 @@
 }
 
 // Responsive design
-@media (max-width: 1440px) {
+@media (width <= 1440px) {
     .product-container {
         padding: 60px 100px;
     }
 }
 
 // Ensure proper header visibility above 1024px
-@media (min-width: 1025px) {
+@media (width >= 1025px) {
     .product-container .product {
         // Keep the hidden header hidden on larger screens
         .product-description-header.hidden {
@@ -632,7 +631,7 @@
     }
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
     .product-container {
         padding: 10px 50px;
         
@@ -658,12 +657,12 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .product-container {
-        padding: 0px 20px;
+        padding: 0 20px;
         
         .product {
-            margin-bottom: 0px;
+            margin-bottom: 0;
 
             .product-description {
                 .product-description-header {
@@ -673,7 +672,7 @@
                 }
 
                 .product-choose-form {
-                    margin-bottom: 0px;
+                    margin-bottom: 0;
                 }
                 
             }

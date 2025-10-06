@@ -24,7 +24,7 @@
     }
     
     // Hide search bar above 768px breakpoint
-    @media (min-width: 769px) {
+    @media (width >= 769px) {
       display: none;
     }
     
@@ -83,7 +83,7 @@
       border: 2px solid #504E4A;
       border-top: none;
       border-radius: 0 0 4px 4px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
       z-index: 1000;
       max-height: 300px;
       overflow-y: auto;
@@ -298,11 +298,11 @@
     grid-auto-rows: minmax(550px, auto);
     gap: 30px;
 
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: 480px) {
+    @media (width <= 480px) {
       grid-template-columns: repeat(1, 1fr);
     }
 
@@ -319,11 +319,11 @@
           width: 100%;
           height: auto;
           object-fit: contain;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 20px rgb(0 0 0 / 20%);
           transition: box-shadow 0.3s ease, transform 0.3s ease;
           
           &:hover {
-              box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+              box-shadow: 0 8px 30px rgb(0 0 0 / 30%);
               transform: scale(1.05);
           }
       }
@@ -332,7 +332,7 @@
           font-weight: 700;
           font-size: 19px;
           color: #333;
-          margin: 20px 0 10px 0;
+          margin: 20px 0 10px;
           padding: 0 20px;
       }
     
@@ -340,7 +340,7 @@
           font-weight: 400;
           font-size: 19px;
           color: #504E4A;
-          margin: 0 0 20px 0;
+          margin: 0 0 20px;
       }
     
       .btn {
@@ -495,7 +495,7 @@
       border: 2px solid #504E4A;
       border-top: none;
       border-radius: 0 0 4px 4px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
       z-index: 1000;
       max-height: 300px;
       overflow-y: auto;
@@ -544,14 +544,14 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                margin-top: 0px;
+                margin-top: 0;
               }
               
               .search-result-price {
                 font-size: 13px;
                 font-weight: 500;
                 color: $brand-color;
-                margin-top: 0px;
+                margin-top: 0;
               }
             }
           }
@@ -590,7 +590,7 @@
       transition: box-shadow 0.3s ease;
       
       &:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
       }
     }
     
@@ -611,7 +611,7 @@
           font-size: 15px;
           font-weight: 400;
           color: black;
-          margin: 0 0 5px 0;
+          margin: 0 0 5px;
           line-height: 1.3;
         }
   
@@ -642,14 +642,14 @@
 }
 
 // Responsive design
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
   .catalog-main {
     padding: 80px 100px;
     gap: 30px;
   }
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
   .catalog-main {
     padding: 60px 50px;
     gap: 20px;
@@ -661,7 +661,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .catalog-main {
     padding: 40px 20px;
     flex-direction: column;

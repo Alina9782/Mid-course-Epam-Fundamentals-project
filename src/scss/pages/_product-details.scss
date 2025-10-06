@@ -1,6 +1,6 @@
 /* Also Like Container */
 .also-like-container {
-    padding: 0px 200px 80px 200px;
+    padding: 0 200px 80px;
     
     .also-like-header {
         text-align: center;
@@ -19,7 +19,7 @@
             border-top: 2px solid $brand-color;
             width: 100%;
             max-width: 400px;
-            margin: 0 auto 60px auto;
+            margin: 0 auto 60px;
           }
     }
     
@@ -47,12 +47,12 @@
                 width: 100%;
                 height: auto;
                 object-fit: contain;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 4px 20px rgb(0 0 0 / 20%);
                 transition: box-shadow 0.3s ease, transform 0.3s ease;
                 cursor: pointer;
                 
                 &:hover {
-                    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+                    box-shadow: 0 8px 30px rgb(0 0 0 / 30%);
                     transform: scale(1.05);
                 }
             }
@@ -61,7 +61,7 @@
                 font-weight: 700;
                 font-size: 19px;
                 color: #333;
-                margin: 20px 0 10px 0;
+                margin: 20px 0 10px;
                 padding: 0 20px;
             }
             
@@ -69,7 +69,7 @@
                 font-weight: 400;
                 font-size: 19px;
                 color: #504E4A;
-                margin: 0 0 20px 0;
+                margin: 0 0 20px;
             }
             
             .btn {
@@ -80,15 +80,15 @@
 }
 
 // Responsive design
-@media (max-width: 1440px) {    
+@media (width <= 1440px) {    
     .also-like-container {
-        padding: 0px 100px 80px 100px;
+        padding: 0 100px 80px;
     }
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
     .also-like-container {
-        padding: 0px 50px 60px 50px;
+        padding: 0 50px 60px;
         
         .also-like-container-carousel {
             .also-like-cards {
@@ -104,9 +104,9 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .also-like-container {
-        padding: 0px 50px 50px 50px;
+        padding: 0 50px 50px;
         
         .also-like-header {
             margin-bottom: 40px;
