@@ -265,7 +265,7 @@ function initCartEventListeners() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('quantity-btn')) {
             e.preventDefault();
-            const index = parseInt(e.target.dataset.index);
+            const index = Number.parseInt(e.target.dataset.index);
             const isPlus = e.target.classList.contains('plus');
             
             updateCartItemQuantity(index, isPlus ? 1 : -1);
@@ -275,7 +275,7 @@ function initCartEventListeners() {
         if (e.target.classList.contains('remove-item-btn') || e.target.closest('.remove-item-btn')) {
             e.preventDefault();
             const button = e.target.classList.contains('remove-item-btn') ? e.target : e.target.closest('.remove-item-btn');
-            const index = parseInt(button.dataset.index);
+            const index = Number.parseInt(button.dataset.index);
             removeCartItem(index);
         }
     });
@@ -283,8 +283,8 @@ function initCartEventListeners() {
     // Quantity input changes
     document.addEventListener('input', function(e) {
         if (e.target.classList.contains('cart-quantity-input')) {
-            const index = parseInt(e.target.dataset.index);
-            const newQuantity = parseInt(e.target.value);
+            const index = Number.parseInt(e.target.dataset.index);
+            const newQuantity = Number.parseInt(e.target.value);
             
             if (newQuantity >= 1) {
                 setCartItemQuantity(index, newQuantity);

@@ -95,19 +95,19 @@ function initProductFeatures() {
     
     if (quantityInput && plusBtn && minusBtn) {
         plusBtn.addEventListener('click', function() {
-            const currentValue = parseInt(quantityInput.value) || 1;
+            const currentValue = Number.parseInt(quantityInput.value) || 1;
             quantityInput.value = currentValue + 1;
         });
         
         minusBtn.addEventListener('click', function() {
-            const currentValue = parseInt(quantityInput.value) || 1;
+            const currentValue = Number.parseInt(quantityInput.value) || 1;
             if (currentValue > 1) {
                 quantityInput.value = currentValue - 1;
             }
         });
         
         quantityInput.addEventListener('input', function() {
-            const value = parseInt(this.value) || 1;
+            const value = Number.parseInt(this.value) || 1;
             if (value < 1) {
                 this.value = 1;
             }
@@ -150,7 +150,7 @@ function initProductFeatures() {
             
             // Get quantity
             const quantityInput = document.getElementById('quantity');
-            const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+            const quantity = quantityInput ? Number.parseInt(quantityInput.value) || 1 : 1;
             
             // Use the loaded product data with correct image path
             const product = {
@@ -279,7 +279,7 @@ function initRatingStars() {
     
     ratingStars.forEach((star) => {
         star.addEventListener('click', function() {
-            const rating = parseInt(this.getAttribute('data-rating'));
+            const rating = Number.parseInt(this.getAttribute('data-rating'));
             
             // Update all stars up to the clicked rating
             ratingStars.forEach((s, i) => {
@@ -293,7 +293,7 @@ function initRatingStars() {
         
         // Hover effect
         star.addEventListener('mouseenter', function() {
-            const rating = parseInt(this.getAttribute('data-rating'));
+            const rating = Number.parseInt(this.getAttribute('data-rating'));
             
             ratingStars.forEach((s, i) => {
                 if (i < rating) {
