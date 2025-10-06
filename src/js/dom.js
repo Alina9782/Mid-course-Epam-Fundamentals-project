@@ -3,8 +3,6 @@ let domInitialized = false;
 
 // Set active navigation state based on current page
 function setActiveNavigation(currentPath) {
-    console.log('🌐 Setting active navigation for path:', currentPath);
-    
     // Remove active class from all navigation items
     const allNavItems = document.querySelectorAll('.navItem');
     allNavItems.forEach(item => {
@@ -30,34 +28,29 @@ function setActiveNavigation(currentPath) {
         // Product details page - could be considered part of catalog
         activeNavItem = document.querySelector('.navItem a[href*="catalog.html"]')?.closest('.navItem');
     } else if (currentPath.includes('/cart.html')) {
-        // Cart page - no specific nav item, could be considered part of catalog or stay unselected
-        // For now, we'll leave it unselected
-        console.log('🌐 Cart page - no active navigation item set');
+
+        console.log('Cart page - no active navigation item set');
     }
     
     // Set the active class on the determined navigation item
     if (activeNavItem) {
         activeNavItem.classList.add('active');
-        console.log('🌐 Active navigation set to:', activeNavItem.querySelector('a').textContent.trim());
     } else {
-        console.log('🌐 No matching navigation item found for current path');
+        console.log('No matching navigation item found for current path');
     }
 }
 
 // Fetch and inject partial header.html and footer.html
 export async function initHeaderAndFooter() {
     if (domInitialized) {
-        console.log('🌐 Header and footer already initialized, skipping...');
         return;
     }
-    
-    console.log('🌐 Initializing header and footer...');
     
     const header = document.getElementById('header');
     const footer = document.getElementById('footer');
     
     if (!header || !footer) {
-        console.warn('🌐 Header or footer elements not found');
+        console.warn('Header or footer elements not found');
         return;
     }
     
@@ -65,8 +58,6 @@ export async function initHeaderAndFooter() {
     const currentPath = window.location.pathname;
     const isInPagesDir = currentPath.includes('/pages/');
     const componentsPath = isInPagesDir ? '../components/' : 'components/';
-    
-    console.log(`🌐 Current path: ${currentPath}, Components path: ${componentsPath}`);
     
     try {
         // Load header
@@ -88,7 +79,6 @@ export async function initHeaderAndFooter() {
         }
         
         header.innerHTML = headerData;
-        console.log('🌐 Header loaded successfully');
         
         // Set active navigation state after header is loaded
         setActiveNavigation(currentPath);
@@ -108,24 +98,19 @@ export async function initHeaderAndFooter() {
         }
         
         footer.innerHTML = footerData;
-        console.log('🌐 Footer loaded successfully');
-        
         domInitialized = true;
-        console.log('🌐 Header and footer initialized successfully');
         
     } catch (error) {
-        console.error('🌐 Error loading header/footer:', error);
+        console.error('Error loading header/footer:', error);
     }
 }
 
 // Fetch and inject partial product-card.html
 export async function initProductCard() {
-    console.log('🌐 Initializing product card...');
-    
     const productCard = document.getElementById('product-card');
     
     if (!productCard) {
-        console.warn('🌐 Product card element not found');
+        console.warn('Product card element not found');
         return;
     }
     
@@ -133,8 +118,6 @@ export async function initProductCard() {
     const currentPath = window.location.pathname;
     const isInPagesDir = currentPath.includes('/pages/');
     const componentsPath = isInPagesDir ? '../components/' : 'components/';
-    
-    console.log(`🌐 Current path: ${currentPath}, Components path: ${componentsPath}`);
     
     try {
         // Load product card
@@ -152,17 +135,15 @@ export async function initProductCard() {
         }
         
         productCard.innerHTML = productCardData;
-        console.log('🌐 Product card loaded successfully');
-        
         // Note: Re-initialization of product-specific functions will be handled by main.js
         
     } catch (error) {
-        console.error('🌐 Error loading product card:', error);
+        console.error('Error loading product card:', error);
     }
 }
 
 // Function to reset DOM initialization (useful for dynamic content)
 export function resetDOM() {
     domInitialized = false;
-    console.log('🌐 DOM reset - can be reinitialized');
+    console.log('DOM reset - can be reinitialized');
 }

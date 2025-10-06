@@ -9,11 +9,8 @@ let allProducts = [];
 // Load and populate catalog products from data.json
 export async function initCatalogProducts() {
     if (catalogInitialized) {
-        console.log('📦 Catalog products already initialized, skipping...');
         return;
     }
-    
-    console.log('📦 Loading catalog products...');
     
     const catalogProductsContainer = document.querySelector('.catalog-products');
     
@@ -32,8 +29,6 @@ export async function initCatalogProducts() {
         const data = await response.json();
         allProducts = data.data || [];
         
-        console.log(`Loaded ${allProducts.length} products from data.json`);
-        
         // Clear existing products
         catalogProductsContainer.innerHTML = '';
         
@@ -43,8 +38,6 @@ export async function initCatalogProducts() {
             catalogProductsContainer.appendChild(productCard);
         });
         
-        console.log('Product cards generated successfully');
-        
         // Re-initialize pagination after products are loaded
         setTimeout(() => {
             initCatalogPagination();
@@ -52,12 +45,10 @@ export async function initCatalogProducts() {
         
         // Initialize search functionality after products are loaded
         setTimeout(() => {
-            console.log('Initializing search functionality after catalog products loaded...');
             initSearchFunctionality();
         }, 200);
         
         catalogInitialized = true;
-        console.log('📦 Catalog products initialized successfully');
         
     } catch (error) {
         console.error('Error loading catalog products:', error);
@@ -65,9 +56,7 @@ export async function initCatalogProducts() {
 }
 
 // Create product card element
-export function createProductCard(product, isInPagesDir) {
-    console.log('📦 Creating product card for:', product.name);
-    
+function createProductCard(product, isInPagesDir) {
     const productDiv = document.createElement('div');
     productDiv.className = 'catalog-product';
     productDiv.dataset.productId = product.id; // Store product ID for future use
@@ -106,7 +95,6 @@ export function createProductCard(product, isInPagesDir) {
 
 // Navigate to product details page
 function navigateToProductDetails(product) {
-    console.log('🔗 Navigating to product details for:', product.name);
     const currentPath = window.location.pathname;
     const isInPagesDir = currentPath.includes('/pages/');
     const productDetailsPath = isInPagesDir ? `product-details-template.html?id=${product.id}` : `pages/product-details-template.html?id=${product.id}`;
@@ -117,8 +105,7 @@ function navigateToProductDetails(product) {
 
 
 // Catalog pagination functionality
-export function initCatalogPagination() {
-    console.log('📦 Initializing catalog pagination...');
+function initCatalogPagination() {
     
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -126,12 +113,10 @@ export function initCatalogPagination() {
     const catalogProducts = document.querySelectorAll('.catalog-product');
     
     if (!prevBtn || !nextBtn || paginationNumbers.length === 0) {
-        console.log('Catalog pagination elements not found, skipping initialization');
         return;
     }
     
     if (catalogProducts.length === 0) {
-        console.log('No catalog products found, skipping pagination initialization');
         return;
     }
     
@@ -215,47 +200,33 @@ export function initCatalogPagination() {
     // Show first page initially
     showPage(1);
     updatePaginationUI();
-    
-    console.log('📦 Catalog pagination initialized successfully');
 }
 
 // Catalog filters functionality
 export function initCatalogFilters() {
     if (filtersInitialized) {
-        console.log('📦 Catalog filters already initialized, skipping...');
         return;
     }
-    
-    console.log('📦 Initializing catalog filters...');
     
     const filtersBtn = document.querySelector('.catalog-filters .btn');
     const filtersContainer = document.querySelector('.catalog-filters-container');
     const hideFiltersBtn = document.querySelector('.filter-controls .btn:last-child');
     const clearFiltersBtn = document.querySelector('.filter-controls .btn:first-child');
     
-    console.log('📦 Filter elements found:', {
-        filtersBtn: !!filtersBtn,
-        filtersContainer: !!filtersContainer,
-        hideFiltersBtn: !!hideFiltersBtn,
-        clearFiltersBtn: !!clearFiltersBtn
-    });
     
     if (!filtersBtn || !filtersContainer) {
-        console.log('Catalog filters elements not found, skipping initialization');
         return;
     }
     
     // Toggle filters visibility
     filtersBtn.addEventListener('click', () => {
         filtersContainer.classList.toggle('hidden');
-        console.log('Filters toggled');
     });
     
     // Hide filters
     if (hideFiltersBtn) {
         hideFiltersBtn.addEventListener('click', () => {
             filtersContainer.classList.add('hidden');
-            console.log('Filters hidden');
         });
     }
     
@@ -274,6 +245,12 @@ export function initCatalogFilters() {
                 checkbox.checked = false;
             });
             
+            // Reset radio buttons
+            const radioButtons = filtersContainer.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => {
+                radio.checked = false;
+            });
+            
             // Reset sort dropdown
             const sortSelect = document.getElementById('sort');
             if (sortSelect) {
@@ -288,13 +265,13 @@ export function initCatalogFilters() {
             
             // Show all products
             updateFilteredProducts(allProducts);
-            console.log('All filters cleared');
         });
     }
     
     // Filter event listeners
     const filterSelects = filtersContainer.querySelectorAll('select');
     const filterCheckboxes = filtersContainer.querySelectorAll('input[type="checkbox"]');
+    const filterRadios = filtersContainer.querySelectorAll('input[type="radio"]');
     const sortSelect = document.getElementById('sort');
     
     filterSelects.forEach(select => {
@@ -305,9 +282,12 @@ export function initCatalogFilters() {
         checkbox.addEventListener('change', applyFilters);
     });
     
+    filterRadios.forEach(radio => {
+        radio.addEventListener('change', applyFilters);
+    });
+    
     if (sortSelect) {
-        sortSelect.addEventListener('change', (e) => {
-            console.log('📦 Sort dropdown changed to:', e.target.value);
+        sortSelect.addEventListener('change', () => {
             applyFilters();
         });
     } else {
@@ -315,17 +295,14 @@ export function initCatalogFilters() {
     }
     
     filtersInitialized = true;
-    console.log('📦 Catalog filters initialized successfully');
     
     // Function to apply all filters
     function applyFilters() {
-        console.log('Applying filters...');
-        
         // Get all filter values
         const categorySelect = document.getElementById('category');
         const colorSelect = document.getElementById('color');
         const sizeSelect = document.getElementById('size');
-        const salesCheckbox = document.getElementById('sales');
+        const salesRadio = document.getElementById('sales');
         const sortValue = sortSelect ? sortSelect.value : 'default';
         
         // Filter products
@@ -346,7 +323,7 @@ export function initCatalogFilters() {
             }
             
             // Sales filter
-            if (salesCheckbox && salesCheckbox.checked && !product.salesStatus) {
+            if (salesRadio && salesRadio.checked && !product.salesStatus) {
                 return false;
             }
             
@@ -354,9 +331,7 @@ export function initCatalogFilters() {
         });
         
         // Sort the filtered products
-        console.log(`📦 About to sort ${filteredProducts.length} products with sortValue: ${sortValue}`);
         const sortedProducts = sortProducts(filteredProducts, sortValue);
-        console.log(`📦 Sorted ${sortedProducts.length} products by ${sortValue}`);
         
         // Update displayed products
         updateFilteredProducts(sortedProducts);
@@ -387,14 +362,10 @@ export function initCatalogFilters() {
         setTimeout(() => {
             initCatalogPagination();
         }, 100);
-        
-        console.log(`Displayed ${filteredProducts.length} filtered products`);
     }
     
     // Function to sort products based on selected criteria
     function sortProducts(products, sortValue) {
-        console.log(`📦 Sorting ${products.length} products by: ${sortValue}`);
-        
         if (!products || products.length === 0) {
             return products;
         }
@@ -412,24 +383,18 @@ export function initCatalogFilters() {
                 return products; // Default order
         }
     }
-    
-    console.log('📦 Catalog filters initialized successfully');
 }
 
 // Search functionality
-export function initSearchFunctionality() {
+function initSearchFunctionality() {
     if (searchInitialized) {
-        console.log('📦 Search functionality already initialized, skipping...');
         return;
     }
-    
-    console.log('📦 Initializing search functionality...');
     
     const searchInputs = document.querySelectorAll('#main-search-input, #aside-search-input');
     const searchDropdowns = document.querySelectorAll('#main-search-dropdown, #aside-search-dropdown');
     
     if (searchInputs.length === 0) {
-        console.log('No search inputs found, skipping search initialization');
         return;
     }
     
@@ -514,12 +479,10 @@ export function initSearchFunctionality() {
     }
     
     searchInitialized = true;
-    console.log('📦 Search functionality initialized successfully');
 }
 
 // Initialize catalog navigation buttons functionality
 export function initCatalogNavigationButtons() {
-    console.log('📦 Initializing catalog navigation buttons...');
     
     // Find all buttons that should navigate to catalog
     const heroButton = document.querySelector('.hero-content .btn');
@@ -535,25 +498,21 @@ export function initCatalogNavigationButtons() {
         const catalogPath = isInPagesDir ? 'catalog.html' : 'pages/catalog.html';
         
         window.location.href = catalogPath;
-        console.log('Navigating to catalog page');
     }
     
     // Add event listeners to found buttons
     if (heroButton) {
         heroButton.addEventListener('click', navigateToCatalog);
-        console.log('Hero button initialized');
     }
     
     if (aboutButton) {
         aboutButton.addEventListener('click', navigateToCatalog);
-        console.log('About page button initialized');
     }
     
     if (!heroButton && !aboutButton) {
         console.log('No catalog navigation buttons found');
     }
     
-    console.log('📦 Catalog navigation buttons initialized successfully');
 }
 
 // Function to reset catalog initialization (useful for dynamic content)

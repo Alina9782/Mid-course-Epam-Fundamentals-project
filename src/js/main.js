@@ -1,19 +1,18 @@
 import { initAuthModals, resetAuthModals } from './modals.js';
-import { addToCart, showAddToCartFeedback, updateCartCounter, initCartCounter, initCartPage, resetCart } from './cart.js';
-import { initCatalogProducts, createProductCard, initCatalogPagination, initCatalogFilters, initSearchFunctionality, initCatalogNavigationButtons, resetCatalog } from './catalog.js';
-import { initHeaderAndFooter, initProductCard, resetDOM } from './dom.js';
+import { addToCart, updateCartCounter, initCartCounter, initCartPage, resetCart } from './cart.js';
+import { initCatalogProducts, initCatalogFilters, initCatalogNavigationButtons, resetCatalog } from './catalog.js';
+import { initHeaderAndFooter, initProductCard } from './dom.js';
+
+// Global variable to store current product data for product details page
+let currentProductData = null;
 
 // Navigate to product details page
 function navigateToProductDetails(productId, isInPagesDir) {
-    console.log('🔗 Navigating to product details for:', productId);
     const productDetailsPath = isInPagesDir ? `product-details-template.html?id=${productId}` : `pages/product-details-template.html?id=${productId}`;
     
     // Navigate to product details page
     window.location.href = productDetailsPath;
 }
-
-// Hamburger Menu Functionality
-console.log('JavaScript file loaded!');
 
 // Wait for DOM to be ready
 function ready(fn) {
@@ -26,13 +25,8 @@ function ready(fn) {
 
 // Initialize hamburger menu
 function initHamburgerMenu() {
-    console.log('Initializing hamburger menu...');
-    
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const mobileNav = document.getElementById('mobile-nav');
-    
-    console.log('Hamburger button found:', !!hamburgerBtn);
-    console.log('Mobile nav found:', !!mobileNav);
     
     if (!hamburgerBtn || !mobileNav) {
         console.error('Required elements not found!');
@@ -40,7 +34,6 @@ function initHamburgerMenu() {
     }
     
     const hamburgerIcon = hamburgerBtn.querySelector('img.hamburger-icon');
-    console.log('Hamburger icon found:', !!hamburgerIcon);
     
     if (!hamburgerIcon) {
         console.error('Hamburger icon not found!');
@@ -50,7 +43,6 @@ function initHamburgerMenu() {
     // Determine icon path based on current page
     const isSubPage = window.location.pathname.includes('/pages/');
     const iconPath = isSubPage ? '../assets/img/icons/' : 'assets/img/icons/';
-    console.log('Icon path:', iconPath);
     
     // Remove any existing event listeners
     const newBtn = hamburgerBtn.cloneNode(true);
@@ -61,21 +53,16 @@ function initHamburgerMenu() {
         e.preventDefault();
         e.stopPropagation();
         
-        console.log('Hamburger clicked!');
-        
         // Toggle menu
         mobileNav.classList.toggle('open');
         const isOpen = mobileNav.classList.contains('open');
-        console.log('Menu is now:', isOpen ? 'OPEN' : 'CLOSED');
         
         // Change icon
         const icon = newBtn.querySelector('img.hamburger-icon');
         if (isOpen) {
             icon.src = iconPath + 'hamburger-icon-pink.svg';
-            console.log('Changed to pink icon');
         } else {
             icon.src = iconPath + 'hamburger-icon-black.svg';
-            console.log('Changed to black icon');
         }
     });
     
@@ -86,7 +73,6 @@ function initHamburgerMenu() {
             mobileNav.classList.remove('open');
             const icon = newBtn.querySelector('img.hamburger-icon');
             icon.src = iconPath + 'hamburger-icon-black.svg';
-            console.log('Menu closed by link click');
         });
     });
     
@@ -96,17 +82,12 @@ function initHamburgerMenu() {
             mobileNav.classList.remove('open');
             const icon = newBtn.querySelector('img.hamburger-icon');
             icon.src = iconPath + 'hamburger-icon-black.svg';
-            console.log('Menu closed by outside click');
         }
     });
-    
-    console.log('Hamburger menu initialized successfully!');
 }
 
 // Product functionality
 function initProductFeatures() {
-    console.log('Initializing product features...');
-    
     // Quantity controls
     const quantityInput = document.getElementById('quantity');
     const plusBtn = document.querySelector('.quantity-btn.plus');
@@ -131,8 +112,6 @@ function initProductFeatures() {
                 this.value = 1;
             }
         });
-        
-        console.log('Quantity controls initialized');
     }
     
     // Thumbnail switching
@@ -140,16 +119,14 @@ function initProductFeatures() {
     const thumbnails = document.querySelectorAll('.product-images-thumbnails img');
     
     if (mainImage && thumbnails.length > 0) {
-        thumbnails.forEach((thumb, index) => {
+        thumbnails.forEach((thumb) => {
             thumb.addEventListener('click', function() {
                 // Update main image
                 mainImage.src = this.src;
                 
                 // Update active thumbnail
                 thumbnails.forEach(t => t.style.borderColor = 'transparent');
-                this.style.borderColor = '#E91E63'; // brand color
-                
-                console.log('Main image updated to thumbnail', index + 1);
+                this.style.borderColor = '#E91E63'; // brand color  
             });
         });
         
@@ -157,8 +134,6 @@ function initProductFeatures() {
         if (thumbnails[0]) {
             thumbnails[0].style.borderColor = '#E91E63';
         }
-        
-        console.log('Thumbnail switching initialized');
     }
     
     // Add to Cart button functionality for product details page
@@ -167,13 +142,9 @@ function initProductFeatures() {
         addToCartBtn.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Get current product data from the page
-            const productName = document.querySelector('.product-description-header h2')?.textContent;
-            const productPrice = document.querySelector('.product-description-header h3')?.textContent;
-            const productImage = document.querySelector('.product-images > img')?.src;
-            
-            if (!productName || !productPrice) {
-                console.error('Product data not found on page');
+            // Check if we have current product data loaded
+            if (!currentProductData) {
+                console.error('Product data not loaded yet');
                 return;
             }
             
@@ -181,25 +152,18 @@ function initProductFeatures() {
             const quantityInput = document.getElementById('quantity');
             const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
             
-            // Extract price number from text (remove $ sign)
-            const price = parseFloat(productPrice.replace('$', ''));
-            
-            // Create product object
+            // Use the loaded product data with correct image path
             const product = {
-                id: 'PD_' + Date.now(), // Generate unique ID for product details
-                name: productName,
-                price: price,
-                imageUrl: productImage ? productImage.split('/').pop() : 'img/images/products/suitcase-red.png', // Extract filename
+                id: currentProductData.id, // Use actual product ID for proper merging
+                name: currentProductData.name,
+                price: currentProductData.price,
+                imageUrl: currentProductData.imageUrl, // Use the correct relative path
                 quantity: quantity
             };
             
             // Add to cart with button feedback
-            addToCart(product, quantity, addToCartBtn);
-            
-            console.log('Product added to cart from details page:', product.name);
+            addToCart(product, quantity, addToCartBtn);            
         });
-        
-        console.log('Add to Cart button initialized for product details');
     }
     
     // Submit button functionality for product review form
@@ -243,24 +207,17 @@ function initProductFeatures() {
                 emailInput.value = '';
                 saveInfoCheckbox.checked = false;
             }, 2000);
-            
-            console.log('Review submitted successfully');
         });
-        
-        console.log('Submit button initialized for product review form');
     }
 }
 
 // Product details tabs functionality
 function initProductTabs() {
-    console.log('Initializing product tabs...');
-    
     const tabItems = document.querySelectorAll('.tab-item');
     const contentItems = document.querySelectorAll('.product-details-content-item');
     const tabIndicator = document.querySelector('.tab-indicator');
     
     if (tabItems.length === 0 || contentItems.length === 0) {
-        console.log('No tabs found, skipping tab initialization');
         return;
     }
     
@@ -303,8 +260,6 @@ function initProductTabs() {
             
             // Update tab indicator
             updateTabIndicator(this);
-            
-            console.log('Switched to tab:', targetTab);
         });
     });
     
@@ -312,22 +267,17 @@ function initProductTabs() {
     if (tabItems.length > 0) {
         updateTabIndicator(tabItems[0]);
     }
-    
-    console.log('Product tabs initialized successfully');
 }
 
 // Rating stars functionality
 function initRatingStars() {
-    console.log('Initializing rating stars...');
-    
     const ratingStars = document.querySelectorAll('.rating-star');
     
     if (ratingStars.length === 0) {
-        console.log('No rating stars found, skipping initialization');
         return;
     }
     
-    ratingStars.forEach((star, index) => {
+    ratingStars.forEach((star) => {
         star.addEventListener('click', function() {
             const rating = parseInt(this.getAttribute('data-rating'));
             
@@ -339,8 +289,6 @@ function initRatingStars() {
                     s.classList.remove('active');
                 }
             });
-            
-            console.log('Rating set to:', rating);
         });
         
         // Hover effect
@@ -369,18 +317,13 @@ function initRatingStars() {
             });
         });
     }
-    
-    console.log('Rating stars initialized successfully');
 }
 
 // Replace placeholder text with styled elements
 function initStyledPlaceholders() {
-    console.log('Initializing styled placeholders...');
-    
     const requiredInputs = document.querySelectorAll('input.required-field, textarea.required-field');
     
     if (requiredInputs.length === 0) {
-        console.log('No required fields found, skipping placeholder styling');
         return;
     }
     
@@ -455,26 +398,15 @@ function initStyledPlaceholders() {
         input.addEventListener('focus', updatePlaceholder);
         input.addEventListener('blur', updatePlaceholder);
     });
-    
-    console.log('Styled placeholders initialized successfully');
 }
 
 
 // Contact Form functionality
 function initContactForm() {
-    console.log('Initializing contact form...');
-    
     const contactForm = document.querySelector('.contact-us-form-content form');
     const sendMessageBtn = document.getElementById('sendMessageBtn');
     const successSendMessageModal = document.getElementById('successSendMessageModal');
     const successSendMessageOkBtn = document.getElementById('successSendMessageOkBtn');
-    
-    console.log('Found elements:', {
-        contactForm: !!contactForm,
-        sendMessageBtn: !!sendMessageBtn,
-        successSendMessageModal: !!successSendMessageModal,
-        successSendMessageOkBtn: !!successSendMessageOkBtn
-    });
     
     if (!contactForm || !sendMessageBtn || !successSendMessageModal || !successSendMessageOkBtn) {
         console.log('Contact form elements not found, skipping initialization');
@@ -491,21 +423,17 @@ function initContactForm() {
     function closeSuccessModal() {
         successSendMessageModal.classList.remove('active');
         document.body.style.overflow = '';
-        console.log('Success send message modal closed');
     }
     
     // Function to open success modal
     function openSuccessModal() {
         successSendMessageModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        console.log('Success send message modal opened');
     }
     
     // Contact form submission handler
     contactForm.addEventListener('submit', function(e) {
-        console.log('Form submission event triggered!');
         e.preventDefault();
-        console.log('Default form submission prevented');
         
         // Get form inputs
         const nameInput = document.getElementById('name');
@@ -513,29 +441,14 @@ function initContactForm() {
         const subjectInput = document.getElementById('subject');
         const messageInput = document.getElementById('message');
         
-        console.log('Form inputs found:', {
-            nameInput: !!nameInput,
-            emailInput: !!emailInput,
-            subjectInput: !!subjectInput,
-            messageInput: !!messageInput
-        });
-        
         // Check if all required fields are valid
         const isNameValid = nameInput.checkValidity();
         const isEmailValid = emailInput.checkValidity();
         const isSubjectValid = subjectInput.checkValidity();
         const isMessageValid = messageInput.checkValidity();
         
-        console.log('Form validation status:', {
-            isNameValid,
-            isEmailValid,
-            isSubjectValid,
-            isMessageValid
-        });
-        
         if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
             // Simulate successful message sending
-            console.log('Message sent successfully');
             openSuccessModal();
             
             // Reset form
@@ -570,7 +483,6 @@ function initContactForm() {
     
     // Backup: Direct button click handler
     sendMessageBtn.addEventListener('click', function(e) {
-        console.log('Send button clicked directly!');
         e.preventDefault();
         e.stopPropagation();
         
@@ -586,15 +498,7 @@ function initContactForm() {
         const isSubjectValid = subjectInput.checkValidity();
         const isMessageValid = messageInput.checkValidity();
         
-        console.log('Button click validation status:', {
-            isNameValid,
-            isEmailValid,
-            isSubjectValid,
-            isMessageValid
-        });
-        
         if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
-            console.log('Message sent successfully via button click');
             openSuccessModal();
             contactForm.reset();
         } else {
@@ -606,8 +510,6 @@ function initContactForm() {
             else if (!isMessageValid) messageInput.focus();
         }
     });
-    
-    console.log('Contact form initialized successfully');
 }
 
 // Set active navigation state based on current page
@@ -637,8 +539,6 @@ function showSubmitFeedback(button) {
 
 // Load and populate luggage sets from data.json
 async function initLuggageSets() {
-    console.log('Loading luggage sets...');
-    
     const topCategoriesContainer = document.querySelector('.top-categories ul');
     
     if (!topCategoriesContainer) {
@@ -672,9 +572,6 @@ async function initLuggageSets() {
             const categoryItem = createCategoryItem(product, isInPagesDir);
             topCategoriesContainer.appendChild(categoryItem);
         });
-        
-        console.log(`Loaded ${luggageSets.length} luggage sets successfully`);
-        
     } catch (error) {
         console.error('Error loading luggage sets:', error);
     }
@@ -753,8 +650,6 @@ function generateStars(rating) {
 
 // Load and populate selected products from data.json
 async function initSelectedProducts() {
-    console.log('Loading selected products...');
-    
     const selectedCardsContainer = document.querySelector('.selected-cards');
     
     if (!selectedCardsContainer) {
@@ -793,9 +688,6 @@ async function initSelectedProducts() {
             const selectedCard = createSelectedCard(product, isInPagesDir);
             selectedCardsContainer.appendChild(selectedCard);
         });
-        
-        console.log(`Loaded ${limitedSelectedProducts.length} selected products successfully (showing max 4)`);
-        
     } catch (error) {
         console.error('Error loading selected products:', error);
     }
@@ -852,8 +744,6 @@ function createSelectedCard(product, isInPagesDir) {
 
 // Load and populate new arrivals from data.json
 async function initNewArrivals() {
-    console.log('Loading new arrivals...');
-    
     const newArrivalsCardsContainer = document.querySelector('.new-arrivals-cards');
     
     if (!newArrivalsCardsContainer) {
@@ -892,9 +782,6 @@ async function initNewArrivals() {
             const newArrivalsCard = createNewArrivalsCard(product, isInPagesDir);
             newArrivalsCardsContainer.appendChild(newArrivalsCard);
         });
-        
-        console.log(`Loaded ${limitedNewArrivals.length} new arrivals successfully (showing max 4)`);
-        
     } catch (error) {
         console.error('Error loading new arrivals:', error);
     }
@@ -951,8 +838,6 @@ function createNewArrivalsCard(product, isInPagesDir) {
 
 // Load and populate "You May Also Like" products from data.json
 async function initAlsoLikeProducts() {
-    console.log('Loading You May Also Like products...');
-    
     const alsoLikeCardsContainer = document.querySelector('.also-like-cards');
     
     if (!alsoLikeCardsContainer) {
@@ -991,9 +876,6 @@ async function initAlsoLikeProducts() {
             const alsoLikeCard = createAlsoLikeCard(product, isInPagesDir);
             alsoLikeCardsContainer.appendChild(alsoLikeCard);
         });
-        
-        console.log(`Loaded ${limitedAlsoLikeProducts.length} You May Also Like products successfully (showing max 4)`);
-        
     } catch (error) {
         console.error('Error loading You May Also Like products:', error);
     }
@@ -1051,8 +933,6 @@ function createAlsoLikeCard(product, isInPagesDir) {
 
 // Load specific product data for product details page
 async function initProductDetails() {
-    console.log('Initializing product details...');
-    
     // Get product ID from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
@@ -1061,8 +941,6 @@ async function initProductDetails() {
         console.warn('No product ID found in URL parameters');
         return;
     }
-    
-    console.log('Loading product details for ID:', productId);
     
     // Determine the correct path based on current page location
     const currentPath = window.location.pathname;
@@ -1087,8 +965,6 @@ async function initProductDetails() {
             return;
         }
         
-        console.log('Found product:', product.name);
-        
         // Update product details page with specific product data
         updateProductDetailsPage(product, isInPagesDir);
         
@@ -1102,7 +978,8 @@ async function initProductDetails() {
 
 // Update product details page with specific product data
 function updateProductDetailsPage(product, isInPagesDir) {
-    console.log('Updating product details page for:', product.name);
+    // Store current product data globally for addToCart function
+    currentProductData = product;
     
     // Set correct asset path
     const assetPath = isInPagesDir ? '../assets/' : 'assets/';
@@ -1275,8 +1152,6 @@ function updateProductDetailsPage(product, isInPagesDir) {
             categorySelect.appendChild(option);
         });
     }
-    
-    console.log('Product details page updated successfully');
 }
 
 // Initialize when ready

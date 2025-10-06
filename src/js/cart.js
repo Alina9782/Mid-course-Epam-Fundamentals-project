@@ -3,8 +3,6 @@ let cartInitialized = false;
 
 // Add product to cart function
 export function addToCart(product, quantity = 1, button = null) {
-    console.log('🛒 Cart module: Adding to cart:', product.name, 'Quantity:', quantity);
-    
     // Get existing cart from localStorage or create new one
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     
@@ -33,13 +31,10 @@ export function addToCart(product, quantity = 1, button = null) {
     if (button) {
         showAddToCartFeedback(button);
     }
-    
-    // Show success message (optional)
-    console.log(`${product.name} added to cart!`);
 }
 
 // Show success feedback on add to cart button
-export function showAddToCartFeedback(button) {
+function showAddToCartFeedback(button) {
     if (!button) return;
     
     const originalText = button.textContent;
@@ -65,7 +60,6 @@ export function showAddToCartFeedback(button) {
 
 // Update cart counter in header
 export function updateCartCounter() {
-    console.log('🛒 Cart module: Updating cart counter...');
     try {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
@@ -81,8 +75,6 @@ export function updateCartCounter() {
                 counter.style.display = 'none';
             }
         });
-        
-        console.log('Cart counter updated to:', totalItems, 'items');
     } catch (error) {
         console.error('Error updating cart counter:', error);
         // Fallback: set counter to 0 and hide it
@@ -96,7 +88,6 @@ export function updateCartCounter() {
 
 // Initialize cart counter on page load
 export function initCartCounter() {
-    console.log('🛒 Cart module: Initializing cart counter...');
     // Wait for header to be loaded before updating counter
     setTimeout(() => {
         updateCartCounter();
@@ -111,17 +102,13 @@ export function initCartCounter() {
 // Initialize cart page functionality
 export function initCartPage() {
     if (cartInitialized) {
-        console.log('🛒 Cart page already initialized, skipping...');
         return;
     }
-    
-    console.log('🛒 Initializing cart page...');
     
     const cartTableBody = document.querySelector('.cart-items-section tbody');
     const cartTable = document.querySelector('.cart-items-section table');
     
     if (!cartTableBody || !cartTable) {
-        console.log('Cart elements not found, skipping cart initialization');
         return;
     }
     
@@ -132,7 +119,6 @@ export function initCartPage() {
     initCartEventListeners();
     
     cartInitialized = true;
-    console.log('Cart page initialized successfully');
 }
 
 // Load and display cart items
@@ -174,9 +160,7 @@ function loadCartItems() {
     });
     
     // Update totals
-    updateCartTotals();
-    
-    console.log(`Loaded ${cart.length} cart items`);
+    updateCartTotals();   
 }
 
 // Create individual cart item row
@@ -249,8 +233,8 @@ function updateCartTotals() {
     const discountRate = 0.1;
     const discount = subtotal >= discountThreshold ? subtotal * discountRate : 0;
     
-    // Calculate shipping (always $100)
-    const shipping = 100;
+    // Calculate shipping ($100 if cart has items, $0 if empty)
+    const shipping = cart.length > 0 ? 100 : 0;
     
     // Calculate final total
     const finalTotal = subtotal - discount + shipping;
@@ -273,8 +257,6 @@ function updateCartTotals() {
         discountRow.style.display = discount > 0 ? 'flex' : 'none';
         if (discountHr) discountHr.style.display = discount > 0 ? 'block' : 'none';
     }
-    
-    console.log(`🛒 Cart totals updated - Subtotal: $${subtotal.toFixed(2)}, Discount: $${discount.toFixed(2)}, Shipping: $${shipping.toFixed(2)}, Total: $${finalTotal.toFixed(2)}`);
 }
 
 // Initialize cart event listeners
@@ -289,9 +271,11 @@ function initCartEventListeners() {
             updateCartItemQuantity(index, isPlus ? 1 : -1);
         }
         
-        if (e.target.classList.contains('remove-item-btn')) {
+        // Check if click is on remove button or the image inside it
+        if (e.target.classList.contains('remove-item-btn') || e.target.closest('.remove-item-btn')) {
             e.preventDefault();
-            const index = parseInt(e.target.dataset.index);
+            const button = e.target.classList.contains('remove-item-btn') ? e.target : e.target.closest('.remove-item-btn');
+            const index = parseInt(button.dataset.index);
             removeCartItem(index);
         }
     });
@@ -348,8 +332,6 @@ function updateCartItemQuantity(index, change) {
         localStorage.setItem('cart', JSON.stringify(cart));
         loadCartItems();
         updateCartCounter();
-        
-        console.log(`Updated quantity for item at index ${index}`);
     }
 }
 
@@ -367,8 +349,6 @@ function setCartItemQuantity(index, quantity) {
         localStorage.setItem('cart', JSON.stringify(cart));
         loadCartItems();
         updateCartCounter();
-        
-        console.log(`Set quantity to ${quantity} for item at index ${index}`);
     }
 }
 
@@ -377,14 +357,13 @@ function removeCartItem(index) {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     
     if (index >= 0 && index < cart.length) {
-        const removedItem = cart[index];
         cart.splice(index, 1);
         
         localStorage.setItem('cart', JSON.stringify(cart));
         loadCartItems();
         updateCartCounter();
-        
-        console.log(`Removed ${removedItem.name} from cart`);
+    } else {
+        console.error('🛒 Invalid index for removal:', index, 'Cart length:', cart.length);
     }
 }
 
@@ -394,8 +373,6 @@ function clearCart() {
         localStorage.removeItem('cart');
         loadCartItems();
         updateCartCounter();
-        
-        console.log('Cart cleared');
     }
 }
 
@@ -410,12 +387,9 @@ function processCheckout() {
     
     // Show success message (you can customize this)
     alert('Thank you for your purchase! Your order has been processed.');
-    
-    console.log('Checkout processed successfully');
 }
 
 // Function to reset cart initialization (useful for dynamic content)
 export function resetCart() {
     cartInitialized = false;
-    console.log('Cart reset - can be reinitialized');
 }

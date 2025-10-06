@@ -2,12 +2,9 @@
 let authModalsInitialized = false;
 
 export function initAuthModals() {
-    if (authModalsInitialized) {
-        console.log('Auth modals already initialized, skipping...');
+    if (authModalsInitialized) {    
         return;
     }
-    
-    console.log('Initializing auth modals...');
     
     const loginModal = document.getElementById('loginModal');
     const signupModal = document.getElementById('signupModal');
@@ -45,7 +42,6 @@ export function initAuthModals() {
         closeAllModals();
         loginModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        console.log('Login modal opened');
     }
     
     // Function to open signup modal
@@ -53,7 +49,6 @@ export function initAuthModals() {
         closeAllModals();
         signupModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        console.log('Signup modal opened');
     }
     
     // Function to open forgot password modal
@@ -61,7 +56,6 @@ export function initAuthModals() {
         closeAllModals();
         forgotPasswordModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        console.log('Forgot password modal opened');
     }
     
     // Function to open success modal
@@ -69,7 +63,6 @@ export function initAuthModals() {
         closeAllModals();
         successModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        console.log('Success modal opened');
     }
     
     // Function to open success login modal
@@ -77,7 +70,6 @@ export function initAuthModals() {
         closeAllModals();
         successLogInModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        console.log('Success login modal opened');
     }
     
     // Function to open reset password modal
@@ -85,7 +77,6 @@ export function initAuthModals() {
         closeAllModals();
         resetPasswordModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        console.log('Reset password modal opened');
     }
     
     // Add click event listeners to user icons (opens login)
@@ -128,12 +119,6 @@ export function initAuthModals() {
         const passwordToggle = document.getElementById('passwordToggle');
         const loginPasswordInput = document.getElementById('login-password');
         
-        console.log('Attempting to initialize password toggle:', {
-            passwordToggle: !!passwordToggle,
-            loginPasswordInput: !!loginPasswordInput,
-            iconPath: iconPath
-        });
-        
         if (passwordToggle && loginPasswordInput) {
             // Remove any existing event listeners
             const newPasswordToggle = passwordToggle.cloneNode(true);
@@ -142,8 +127,6 @@ export function initAuthModals() {
             newPasswordToggle.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                
-                console.log('Password toggle clicked!');
                 
                 const eyeIcon = this.querySelector('.eye-icon');
                 
@@ -159,7 +142,6 @@ export function initAuthModals() {
                     loginPasswordInput.type = 'text';
                     eyeIcon.src = iconPath + 'eye-closed-icon.svg';
                     eyeIcon.alt = 'Hide password';
-                    console.log('Password shown');
                 } else {
                     // Restore the original pattern
                     const originalPattern = loginPasswordInput.getAttribute('data-original-pattern');
@@ -169,11 +151,8 @@ export function initAuthModals() {
                     loginPasswordInput.type = 'password';
                     eyeIcon.src = iconPath + 'eye-opened-icon.svg';
                     eyeIcon.alt = 'Show password';
-                    console.log('Password hidden');
                 }
             });
-            
-            console.log('Password toggle initialized successfully');
         } else {
             console.error('Password toggle elements not found');
         }
@@ -200,16 +179,6 @@ export function initAuthModals() {
         const isPasswordMatch = password.value === confirmPassword.value && confirmPassword.value.length > 0;
         const isTermsChecked = terms.checked;
         
-        console.log('Validation status:', {
-            isEmailValid,
-            isPasswordValid,
-            isPasswordMatch,
-            isTermsChecked,
-            emailValue: email.value,
-            passwordValue: password.value,
-            confirmPasswordValue: confirmPassword.value
-        });
-        
         // Visual feedback for password match/mismatch
         if (confirmPassword.value.length > 0) {
             if (password.value === confirmPassword.value) {
@@ -224,12 +193,10 @@ export function initAuthModals() {
         }
         
         if (isEmailValid && isPasswordValid && isPasswordMatch && isTermsChecked) {
-            console.log('All validations passed - enabling button');
             signupBtn.classList.remove('disabled');
             signupBtn.style.backgroundColor = '';
             signupBtn.style.cursor = 'pointer';
         } else {
-            console.log('Validation failed - disabling button');
             signupBtn.classList.add('disabled');
             signupBtn.style.backgroundColor = '#727174';
             signupBtn.style.cursor = 'not-allowed';
@@ -267,7 +234,6 @@ export function initAuthModals() {
                 password.value === confirmPassword.value && terms.checked) {
                 
                 // Simulate successful signup
-                console.log('Signup successful');
                 openSuccessModal();
                 
                 // Reset form
@@ -290,7 +256,6 @@ export function initAuthModals() {
             if (email.checkValidity() && password.checkValidity()) {
                 
                 // Simulate successful login
-                console.log('Login successful');
                 openSuccessLogInModal();
                 
                 // Reset form
@@ -304,7 +269,6 @@ export function initAuthModals() {
     if (successSignupOkBtn) {
         successSignupOkBtn.addEventListener('click', function() {
             closeAllModals();
-            console.log('Success signup modal closed');
         });
     }
     
@@ -313,7 +277,6 @@ export function initAuthModals() {
     if (successLoginOkBtn) {
         successLoginOkBtn.addEventListener('click', function() {
             closeAllModals();
-            console.log('Success login modal closed');
         });
     }
     
@@ -329,7 +292,6 @@ export function initAuthModals() {
             if (email.checkValidity()) {
                 
                 // Simulate successful password reset request
-                console.log('Password reset request successful');
                 openResetPasswordModal();
                 
                 // Reset form
@@ -343,7 +305,6 @@ export function initAuthModals() {
     if (resetPasswordOkBtn) {
         resetPasswordOkBtn.addEventListener('click', function() {
             closeAllModals();
-            console.log('Reset password modal closed');
         });
     }
     
@@ -357,7 +318,6 @@ export function initAuthModals() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && (loginModal.classList.contains('active') || signupModal.classList.contains('active') || forgotPasswordModal.classList.contains('active') || successModal.classList.contains('active') || successLogInModal.classList.contains('active') || resetPasswordModal.classList.contains('active'))) {
             closeAllModals();
-            console.log('Auth modal closed by Escape key');
         }
     });
     
@@ -367,11 +327,9 @@ export function initAuthModals() {
     // Mark as initialized
     authModalsInitialized = true;
     
-    console.log('Auth modals initialized successfully');
 }
 
 // Function to reset initialization flag (useful for dynamic content)
 export function resetAuthModals() {
     authModalsInitialized = false;
-    console.log('Auth modals reset - can be reinitialized');
 }
