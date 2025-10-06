@@ -11,6 +11,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "build": "sass src/scss/main.scss src/scss/style.css",
     "sass": "sass src/scss/main.scss src/scss/style.css",
     "sass:watch": "sass -w src/scss/main.scss:src/scss/style.css",
     "lint": "eslint src/js//*.js && stylelint src/scss//*.scss",
