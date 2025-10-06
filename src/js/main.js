@@ -1099,12 +1099,7 @@ function updateProductDetailsPage(product, isInPagesDir) {
         sizeSelect.innerHTML = '';
         
         // Add size options based on product category
-        let sizes = [];
-        if (product.category === 'luggage sets') {
-            sizes = ['S', 'M', 'L', 'XL'];
-        } else {
-            sizes = ['S', 'M', 'L', 'XL'];
-        }
+        let sizes = ['S', 'M', 'L', 'XL'];
         
         sizes.forEach(size => {
             const option = document.createElement('option');
