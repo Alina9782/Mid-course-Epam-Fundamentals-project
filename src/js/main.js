@@ -674,8 +674,8 @@ async function initSelectedProducts() {
         
         // Filter products that have "Selected Products" in their blocks
         const selectedProducts = allProducts.filter(product => 
-            product.blocks && product.blocks.includes('Selected Products')
-        );
+            product.blocks?.includes('Selected Products')
+        );        
         
         // Limit to maximum 4 products
         const limitedSelectedProducts = selectedProducts.slice(0, 4);
@@ -768,8 +768,9 @@ async function initNewArrivals() {
         
         // Filter products that have "New Products Arrival" in their blocks
         const newArrivalsProducts = allProducts.filter(product => 
-            product.blocks && product.blocks.includes('New Products Arrival')
+            product.blocks?.includes('New Products Arrival')
         );
+        
         
         // Limit to maximum 4 products
         const limitedNewArrivals = newArrivalsProducts.slice(0, 4);
@@ -862,8 +863,9 @@ async function initAlsoLikeProducts() {
         
         // Filter products that have "You May Also Like" in their blocks
         const alsoLikeProducts = allProducts.filter(product => 
-            product.blocks && product.blocks.includes('You May Also Like')
+            product.blocks?.includes('You May Also Like')
         );
+        
         
         // Limit to maximum 4 products
         const limitedAlsoLikeProducts = alsoLikeProducts.slice(0, 4);

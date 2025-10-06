@@ -323,9 +323,7 @@ export function initCatalogFilters() {
             }
             
             // Sales filter
-            if (salesRadio && salesRadio.checked && !product.salesStatus) {
-                return false;
-            }
+            if (salesRadio?.checked && !product.salesStatus) return false;
             
             return true;
         });

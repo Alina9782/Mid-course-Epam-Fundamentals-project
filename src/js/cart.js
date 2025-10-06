@@ -310,12 +310,12 @@ function initCartEventListeners() {
     
     // Checkout button
     const checkoutBtn = document.querySelector('.cart-checkout-section .btn');
-    if (checkoutBtn && checkoutBtn.textContent.includes('CHECKOUT')) {
+    if (checkoutBtn?.textContent.includes('CHECKOUT')) {
         checkoutBtn.addEventListener('click', function(e) {
             e.preventDefault();
             processCheckout();
         });
-    }
+    }    
 }
 
 // Update cart item quantity
