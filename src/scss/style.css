@@ -1324,7 +1324,6 @@ header > hr {
   gap: clamp(30px, 8vw, 60px);
   flex-wrap: wrap;
   /* Footer Left */
-  /* Footer Right */
 }
 .footer-info .footer-left {
   flex: 1;
@@ -1377,6 +1376,9 @@ header > hr {
   font-weight: 400;
   font-size: clamp(12px, 2vw, 16px);
   line-height: 1.6;
+}
+.footer-info {
+  /* Footer Right */
 }
 .footer-info .footer-right {
   flex: 1;

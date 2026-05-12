@@ -10,6 +10,9 @@
   "author": "Kotenko-Tymkiv Alina",
   "type": "commonjs",
   "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "sass src/scss/main.scss src/scss/style.css",
     "sass": "sass src/scss/main.scss src/scss/style.css",
