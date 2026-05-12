@@ -1,4 +1,5 @@
 node_modules
 .vercel
+public
 
 # Keep package-lock.json tracked for reproducible Vercel installs.
