@@ -17,13 +17,13 @@
     "build": "sass src/scss/main.scss src/scss/style.css",
     "sass": "sass src/scss/main.scss src/scss/style.css",
     "sass:watch": "sass -w src/scss/main.scss:src/scss/style.css",
-    "lint": "eslint src/js//*.js && stylelint src/scss//*.scss",
-    "lint:js": "eslint src/js//*.js",
-    "lint:scss": "stylelint src/scss//*.scss"
+    "lint": "eslint src/js && stylelint \"src/scss/**/*.scss\"",
+    "lint:js": "eslint src/js",
+    "lint:scss": "stylelint \"src/scss/**/*.scss\""
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
-    "eslint": "^8.57.1",
+    "eslint": "^9.22.0",
     "globals": "^16.4.0",
     "sass": "^1.92.1",
     "stylelint": "^16.25.0",
